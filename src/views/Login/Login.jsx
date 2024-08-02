@@ -3,6 +3,7 @@ import { CInputs } from '../../components/CInputs/CInputs'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../Services/auth.services'
+import { jwtDecode } from 'jwt-decode'
 
 export const Login = () => {
 
@@ -38,7 +39,16 @@ export const Login = () => {
         } else {
             const response = await login(credentials)
             setPasswordChart(false)
+            console.log(response)
             if (response.success) {
+                const tokenDecoded = jwtDecode(response.data)
+                const passport = {
+                    token: response.data,
+                    tokenData: tokenDecoded
+                }
+
+                localStorage.setItem('passport', JSON.stringify(passport))
+
                 navigate("/profile")
             } else {
                 setInvalidAccesMessage(true)
