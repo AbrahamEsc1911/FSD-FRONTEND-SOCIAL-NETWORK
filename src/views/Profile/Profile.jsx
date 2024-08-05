@@ -56,17 +56,19 @@ export const Profile = () => {
             <p>id: {userData._id}</p>
             <p>email: {userData.createdAt}</p>
             <p>followers: {userData.followers.length}</p>
-            <p>posts: {
+            <div>posts: {
             userData.posts.map((posts) => {
                 return (
                     <div key={posts._id}>
                         <div>post: {posts.post_message}</div>
                         <div>createdAt: {posts.updatedAt}</div>
+                        <div>likes: {posts.likes.length}</div>
+                        <div>Comments: {posts.comments.length}</div>
                         <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts}/>
                     </div>
                 )
             })
-            }</p>
+            }</div>
             <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
         </>
     )
