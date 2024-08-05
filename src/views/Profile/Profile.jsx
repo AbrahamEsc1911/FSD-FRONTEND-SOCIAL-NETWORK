@@ -29,6 +29,12 @@ export const Profile = () => {
         }
     )
 
+    const [newComment, setNewComment] = useState(
+        {
+            comment: ""
+        }
+    )
+
     const navigate = useNavigate()
     const [editProfileData, setEditProfileData] = useState(false)
     const [wargingMessage, setWargingMessage] = useState(false)
@@ -55,12 +61,6 @@ export const Profile = () => {
         }
 
     }, [])
-
-    const likeThisPosts = async (e) => {
-        const postId = e.target.name
-        const response = await likeDislike(token, postId)
-        console.log(response)
-    }
 
     const editProfile = () => {
         setEditProfileData(!editProfileData)
@@ -113,7 +113,7 @@ export const Profile = () => {
 
         } else {
             const result = await updateProfile(token, userUpdate)
-            if(result.success) {
+            if (result.success) {
                 setEditProfileData(false)
                 setErrorUpdatingUser(false)
                 const userUpdated = await userProfile(token)
@@ -124,6 +124,29 @@ export const Profile = () => {
             }
         }
     }
+
+    const likeThisPosts = async (e) => {
+        const postId = e.target.name
+        await likeDislike(token, postId)
+        const userUpdated = await userProfile(token)
+        setUserData(userUpdated.data)
+        
+    }
+
+    const addComments = (e) => {
+        setNewComment(prevState => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.value
+            })
+        )
+    }
+
+    const sendComment = async (e) => {
+        const postId = e.target.name
+        const response = await newComments(token, postId, newComment)
+    }
+
 
     return (
         <>
@@ -148,6 +171,8 @@ export const Profile = () => {
                             <div>likes: {posts.likes.length}</div>
                             <div>Comments: {posts.comments.length}</div>
                             <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
+                            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250}/>
+                            <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
                         </div>
                     )
                 })
