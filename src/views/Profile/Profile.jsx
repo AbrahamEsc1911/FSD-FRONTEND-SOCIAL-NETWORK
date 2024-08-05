@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { userProfile } from '../../Services/user.services'
+import { updateProfile, userProfile } from '../../Services/user.services'
 import { useNavigate } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
@@ -22,8 +22,18 @@ export const Profile = () => {
         }
     )
 
+    const [userUpdate, setUserUpdate] = useState(
+        {
+            name: "",
+            email: ""
+        }
+    )
+
     const navigate = useNavigate()
     const [editProfileData, setEditProfileData] = useState(false)
+    const [wargingMessage, setWargingMessage] = useState(false)
+    const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
 
@@ -49,26 +59,86 @@ export const Profile = () => {
     const likeThisPosts = async (e) => {
         const postId = e.target.name
         const response = await likeDislike(token, postId)
+        console.log(response)
     }
 
     const editProfile = () => {
         setEditProfileData(!editProfileData)
+        setWargingMessage(false)
+        setErrorUpdatingUser(!errorMessage)
     }
 
-    const dataUpdate = () => {
+    const handleNewData = (e) => {
+        setUserUpdate(prevState => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.value
+            })
+        )
+    }
 
+    const saveChangesButton = async () => {
+
+        if (userUpdate.name.length === 0 && userUpdate.email.length === 0) {
+            return setWargingMessage(true)
+        } else {
+            setWargingMessage(false)
+        }
+
+        if (userUpdate.name.length === 0) {
+            const { name, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+
+        } else if (userUpdate.email.length === 0) {
+            const { email, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+
+        } else {
+            const result = await updateProfile(token, userUpdate)
+            if(result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+        }
     }
 
     return (
         <>
             <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
-            <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={dataUpdate} />
+            <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
             <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
-            <CInputs type="email" name="email" placeholder="email" className={editProfileData ? "" : "hidden-content"} onChange={dataUpdate} />
+            <CInputs type="email" name="email" placeholder="email" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
+            <p className={wargingMessage ? "" : "hidden-content"}>name or email required</p>
+            <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
             <p>id: {userData._id}</p>
             <p>desde: {userData.createdAt}</p>
             <p>followers: {userData.followers.length}</p>
-            <CInputs type="button" value="Edit profile" onClick={editProfile} />
+            <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
+            <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
+            <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
             <div>posts: {
                 userData.posts.map((posts) => {
                     return (
@@ -82,7 +152,7 @@ export const Profile = () => {
                     )
                 })
             }</div>
-            <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
+
         </>
     )
 }
