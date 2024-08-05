@@ -1,14 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const PassportContext = createContext()
 
-export const PassportProvider = ({children}) => {
+export const PassportProvider = ({ children }) => {
 
-   const [passport, setPassport] = useState(null)
+    const [passport, setPassport] = useState(null)
 
-   return <PassportContext.Provider value={{passport, setPassport}} >
+    useEffect(() => {
+        const passport = JSON.parse(localStorage.getItem("passport"))
 
-    {children}
+        if (passport) {
+            setPassport(passport)
+        }
 
-   </PassportContext.Provider>
+    }, [])
+
+    return <PassportContext.Provider value={{ passport, setPassport }} >
+
+        {children}
+
+    </PassportContext.Provider>
 }

@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PassportContext } from '../../Context/Passport/PassportContext'
 
 export const Profile = () => {
+
+    const {passport} = useContext(PassportContext)
+    console.log(passport)
 
     const [userData, setUserData] = useState(
         {
