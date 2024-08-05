@@ -4,16 +4,7 @@ export const PassportContext = createContext()
 
 export const PassportProvider = ({ children }) => {
 
-    const [passport, setPassport] = useState(null)
-
-    useEffect(() => {
-        const passport = JSON.parse(localStorage.getItem("passport"))
-
-        if (passport) {
-            setPassport(passport)
-        }
-
-    }, [])
+    const [passport, setPassport] = useState(JSON.parse(localStorage.getItem("passport")) || null)
 
     return <PassportContext.Provider value={{ passport, setPassport }} >
 
