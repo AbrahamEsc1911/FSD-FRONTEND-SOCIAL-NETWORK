@@ -177,19 +177,35 @@ export const Profile = () => {
             <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
             <div>POSTS: {
                 userData.posts.map((posts) => {
-                    return (
-                        <div key={posts._id}>
-                            <div> <img id='profile-photo' src={userData.profile} alt="foto perfil"/></div>
-                            <div>{userData.name}</div>
-                            <div>post: {posts.post_message}</div>
-                            <div>createdAt: {posts.createdAt}</div>
-                            <div>likes: {posts.likes.length}</div>
-                            <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
-                            <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
-                            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-                            <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
-                        </div>
-                    )
+                    if (posts.likes.includes(userData._id)) {
+                        return (
+                            <div key={posts._id}>
+                                <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
+                                <div>{userData.name}</div>
+                                <div>post: {posts.post_message}</div>
+                                <div>createdAt: {posts.createdAt}</div>
+                                <div>likes: {posts.likes.length}</div>
+                                <CInputs type="button" value="Dislike" name={posts._id} onClick={likeThisPosts} />
+                                <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
+                                <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
+                                <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div key={posts._id}>
+                                <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
+                                <div>{userData.name}</div>
+                                <div>post: {posts.post_message}</div>
+                                <div>createdAt: {posts.createdAt}</div>
+                                <div>likes: {posts.likes.length}</div>
+                                <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
+                                <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
+                                <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
+                                <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
+                            </div>
+                        )
+                    }
                 })
             }</div>
 
