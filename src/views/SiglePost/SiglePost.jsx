@@ -35,7 +35,7 @@ export const SiglePost = () => {
 
     const likeThisPosts = async (e) => {
         const postId = e.target.name
-        if(token){
+        if (token) {
             await likeDislike(token, postId)
             const res = await getPostById(id)
             setPost(res.data)
@@ -58,8 +58,8 @@ export const SiglePost = () => {
                         <div key={comments._id}>
                             <div>{comments.user.name}</div>
                             <div><img src={comments.user.profile} alt="user-profile" /></div>
-                           <div>{comments.message}</div>
-                           <div>{comments.createdAt}</div>
+                            <div>{comments.message}</div>
+                            <div>{comments.createdAt}</div>
                         </div>
                     )
                 })

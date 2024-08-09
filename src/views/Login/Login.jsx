@@ -1,15 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../Services/auth.services'
 import { jwtDecode } from 'jwt-decode'
-import { PassportContext } from '../../Context/Passport/PassportContext'
 
 export const Login = () => {
-
-    const {setPassport} = useContext(PassportContext)
-
     const [credentials, setCredentials] = useState(
         {
             email: "",
@@ -51,7 +47,6 @@ export const Login = () => {
                 }
 
                 localStorage.setItem('passport', JSON.stringify(passport))
-                setPassport(passport)
 
                 navigate("/profile")
             } else {

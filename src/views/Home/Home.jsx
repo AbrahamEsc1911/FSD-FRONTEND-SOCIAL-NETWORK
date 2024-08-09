@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import { CInputs } from '../../components/CInputs/CInputs'
 import { useNavigate } from 'react-router-dom'
-import { PassportContext } from '../../Context/Passport/PassportContext'
 
 export const Home = () => {
 
-    const { passport } = useContext(PassportContext)
+    const passport = JSON.parse(localStorage.getItem("passport"))
+    let token = null
+    if (passport) { token = passport.token }
 
     const navigate = useNavigate()
 
