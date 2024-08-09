@@ -5,7 +5,6 @@ import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
 import { likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
-import { PostContext } from '../../Context/postContext/postContext'
 
 export const Profile = () => {
 
@@ -42,7 +41,6 @@ export const Profile = () => {
     const [wargingMessage, setWargingMessage] = useState(false)
     const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const {setPostId} = useContext(PostContext)
 
     useEffect(() => {
 
@@ -159,8 +157,7 @@ export const Profile = () => {
 
     const postById = async (e) => {
         const id = e.target.name
-        setPostId(id)
-        navigate(`./post/${id}`)
+        navigate(`/post/${id}`)
     }
 
     return (

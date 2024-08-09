@@ -11,3 +11,14 @@ export const likeDislike = async (token, postId) => {
 
     return await response.json()
 }
+
+export const getPostById = async (postId) => {
+    const response = await fetch(`${URL}/${postId}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+        }
+    })
+
+    return await response.json()
+}
