@@ -42,8 +42,7 @@ export const Profile = () => {
     const [wargingMessage, setWargingMessage] = useState(false)
     const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const {postId, setPostId} = useContext(PostContext)
-    useContext
+    const {setPostId} = useContext(PostContext)
 
     useEffect(() => {
 
@@ -161,6 +160,7 @@ export const Profile = () => {
     const postById = async (e) => {
         const id = e.target.name
         setPostId(id)
+        navigate(`./post/${id}`)
     }
 
     return (
