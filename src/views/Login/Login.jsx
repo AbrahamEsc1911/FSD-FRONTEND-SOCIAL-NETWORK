@@ -1,9 +1,10 @@
-import React, {useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../Services/auth.services'
 import { jwtDecode } from 'jwt-decode'
+import { PostContext } from '../../Context/postContext/postContex'
 
 export const Login = () => {
     const [credentials, setCredentials] = useState(
@@ -17,6 +18,7 @@ export const Login = () => {
     const [invalidAccesMessage, setInvalidAccesMessage] = useState(false)
     const [passwordChart, setPasswordChart] = useState(false)
     const navigate = useNavigate()
+    const { postId } = useContext(PostContext)
 
     const handleChangeLog = (e) => {
         setCredentials(prevState => (
@@ -45,10 +47,13 @@ export const Login = () => {
                     token: response.data,
                     tokenData: tokenDecoded
                 }
-
                 localStorage.setItem('passport', JSON.stringify(passport))
+                if (postId !== null) {
+                    navigate(`/post/${postId}`)
+                } else {
+                    navigate("/profile")
+                }
 
-                navigate("/profile")
             } else {
                 setInvalidAccesMessage(true)
             }
