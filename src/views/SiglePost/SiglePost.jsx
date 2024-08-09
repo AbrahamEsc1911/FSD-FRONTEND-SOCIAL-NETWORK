@@ -3,6 +3,7 @@ import { getPostById, likeDislike } from '../../Services/posts.services'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import { PostContext } from '../../Context/postContext/postContex'
+import { newComments } from '../../Services/comments.services'
 
 export const SiglePost = () => {
 
@@ -21,8 +22,15 @@ export const SiglePost = () => {
             _id: ""
         }
     )
+
+    const [newComment, setNewComment] = useState(
+        {
+            comment: ""
+        }
+    )
+
     const navigate = useNavigate()
-    const {setPostId} = useContext(PostContext)
+    const { setPostId } = useContext(PostContext)
 
     useEffect(() => {
 
@@ -47,6 +55,26 @@ export const SiglePost = () => {
         }
     }
 
+    const addComments = (e) => {
+        setNewComment(prevState => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.value
+            })
+        )
+    }
+
+    const sendComment = async (e) => {
+        const postId = e.target.name
+        const response = await newComments(token, postId, newComment)
+        if (response.success) {
+            const res = await getPostById(id)
+            setPost(res.data)
+        } else {
+            console.log("error creating a new comment")
+        }
+    }
+
     return (
         <>
             <p>{post.user.name}</p>
@@ -55,6 +83,8 @@ export const SiglePost = () => {
             <p>likes: {post.likes.length}</p>
             <p>comentarios: {post.comments.length}</p>
             <CInputs type="button" value="like" name={post._id} onClick={likeThisPosts} />
+            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
+            <CInputs type="button" value="send" name={post._id} onClick={sendComment} />
             <div> Comentarios:
                 {post.comments.map((comments) => {
                     return (
