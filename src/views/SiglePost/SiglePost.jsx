@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getPostById, likeDislike } from '../../Services/posts.services'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
+import { PostContext } from '../../Context/postContext/postContex'
 
 export const SiglePost = () => {
 
@@ -21,6 +22,7 @@ export const SiglePost = () => {
         }
     )
     const navigate = useNavigate()
+    const {setPostId} = useContext(PostContext)
 
     useEffect(() => {
 
@@ -40,6 +42,7 @@ export const SiglePost = () => {
             const res = await getPostById(id)
             setPost(res.data)
         } else {
+            setPostId(id)
             navigate('/login')
         }
     }
