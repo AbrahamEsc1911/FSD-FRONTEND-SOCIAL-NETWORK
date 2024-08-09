@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { updateProfile, userProfile } from '../../Services/user.services'
 import { useNavigate } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
 import { likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
+import { PostContext } from '../../Context/postContext/postContext'
 
 export const Profile = () => {
 
@@ -41,6 +42,8 @@ export const Profile = () => {
     const [wargingMessage, setWargingMessage] = useState(false)
     const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    const {postId, setPostId} = useContext(PostContext)
+    useContext
 
     useEffect(() => {
 
@@ -157,7 +160,7 @@ export const Profile = () => {
 
     const postById = async (e) => {
         const id = e.target.name
-        console.log(`esto dando click en el id ${id}`)
+        setPostId(id)
     }
 
     return (
