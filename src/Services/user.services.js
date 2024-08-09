@@ -32,3 +32,19 @@ export const updateProfile = async (token, data) => {
         console.log("error updating user" + error)
     }
 }
+
+export const getUserById = async (id) => {
+    try {
+        const response = await fetch(`${URL}/profile/${id}`,{
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+            }
+        })
+
+        return await response.json()
+
+    } catch (error) {
+        console.log("error updating user" + error)
+    }
+}
