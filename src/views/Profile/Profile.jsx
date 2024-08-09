@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
 import { likeDislike } from '../../Services/posts.services'
+import { newComments } from '../../Services/comments.services'
 
 export const Profile = () => {
 
@@ -130,7 +131,6 @@ export const Profile = () => {
         await likeDislike(token, postId)
         const userUpdated = await userProfile(token)
         setUserData(userUpdated.data)
-        
     }
 
     const addComments = (e) => {
@@ -145,11 +145,19 @@ export const Profile = () => {
     const sendComment = async (e) => {
         const postId = e.target.name
         const response = await newComments(token, postId, newComment)
+        if (response.success) {
+            const userUpdated = await userProfile(token)
+            setUserData(userUpdated.data)
+            console.log(response)
+        } else {
+            console.log("error creating a new comment")
+        }
     }
 
 
     return (
         <>
+            <p className={editProfileData ? "hidden-content" : ""}>profile: {userData.profile}</p>
             <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
             <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
             <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
@@ -162,16 +170,18 @@ export const Profile = () => {
             <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
             <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
             <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
-            <div>posts: {
+            <div>POSTS: {
                 userData.posts.map((posts) => {
                     return (
                         <div key={posts._id}>
+                            <div>{userData.profile}</div>
+                            <div>{userData.name}</div>
                             <div>post: {posts.post_message}</div>
-                            <div>createdAt: {posts.updatedAt}</div>
+                            <div>createdAt: {posts.createdAt}</div>
                             <div>likes: {posts.likes.length}</div>
                             <div>Comments: {posts.comments.length}</div>
                             <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
-                            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250}/>
+                            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
                             <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
                         </div>
                     )
