@@ -16,8 +16,8 @@ export const userProfile = async (token) => {
 }
 
 export const updateProfile = async (token, data) => {
-    try { 
-        const response = await fetch (`${URL}/profile`, {
+    try {
+        const response = await fetch(`${URL}/profile`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
@@ -25,7 +25,7 @@ export const updateProfile = async (token, data) => {
             },
             body: JSON.stringify(data)
         })
-        
+
         return await response.json()
 
     } catch (error) {
@@ -35,7 +35,7 @@ export const updateProfile = async (token, data) => {
 
 export const getUserById = async (id) => {
     try {
-        const response = await fetch(`${URL}/profile/${id}`,{
+        const response = await fetch(`${URL}/profile/${id}`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
@@ -47,4 +47,16 @@ export const getUserById = async (id) => {
     } catch (error) {
         console.log("error updating user" + error)
     }
+}
+
+export const followUser = async (token, id) => {
+    const response = await fetch(`${URL}/follow/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    return await response.json()
 }
