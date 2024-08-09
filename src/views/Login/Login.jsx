@@ -20,8 +20,8 @@ export const Login = () => {
     const [invalidAccesMessage, setInvalidAccesMessage] = useState(false)
     const [passwordChart, setPasswordChart] = useState(false)
     const navigate = useNavigate()
-    const { postId } = useContext(PostContext)
-    const { navigationPath } = useContext(AnyUserContex)
+    const { postId, setPostId } = useContext(PostContext)
+    const { navigationPath, setNavigationPath } = useContext(AnyUserContex)
 
     const handleChangeLog = (e) => {
         setCredentials(prevState => (
@@ -53,8 +53,11 @@ export const Login = () => {
                 localStorage.setItem('passport', JSON.stringify(passport))
                 if (postId !== null) {
                     navigate(`/post/${postId}`)
+                    setPostId(null)
+
                 } else if(navigationPath !== null) {
                     navigate(`/user/${navigationPath}`)
+                    setNavigationPath(null)
                 }
                  else {
                     navigate("/profile")

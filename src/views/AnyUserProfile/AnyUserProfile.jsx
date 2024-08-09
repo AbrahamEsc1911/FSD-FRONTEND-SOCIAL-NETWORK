@@ -13,7 +13,7 @@ export const AnyUserProfile = () => {
 
     const { id } = useParams()
     const navigate = useNavigate()
-    const {setNavigationPath} = useContext(AnyUserContex)
+    const { setNavigationPath } = useContext(AnyUserContex)
     const [userData, setUserData] = useState(
         {
             _id: "",
@@ -27,10 +27,10 @@ export const AnyUserProfile = () => {
     )
 
     useEffect(() => {
-      
+
         const bringUser = async () => {
             const res = await getUserById(id)
-            if(res.success){
+            if (res.success) {
                 setUserData(res.data)
             }
             //TODO AGREGAR REDIRECCION A 404 SI EL RESPONSE ES FALSE
@@ -38,30 +38,30 @@ export const AnyUserProfile = () => {
         bringUser()
 
     }, [])
-    
+
     const followUnfollow = async (e) => {
         const id = e.target.name
-        if(passport){
+        if (passport) {
             await followUser(token, id)
             const res = await getUserById(id)
             setUserData(res.data)
         } else {
             setNavigationPath(id)
             navigate('/login')
-            //Usar context para guardar el link en un state para que cuando se logee vuelva aca
+
         }
-        
+
     }
-    
-  return (
-    <>
-    <div>name: {userData.profile}</div>
-    <div>name: {userData.name}</div>
-    <div>Email: {userData.email}</div>
-    <div>followers: {userData.followers.length}</div>
-    <div>following: {userData.following.length}</div>
-    <CInputs type="button" value={userData.followers.includes(userId) ? "Unfollow" : "Follow"} name={userData._id} onClick={followUnfollow}/>
-    
-    </>
-  )
+
+    return (
+        <>
+            <div>name: {userData.profile}</div>
+            <div>name: {userData.name}</div>
+            <div>Email: {userData.email}</div>
+            <div>followers: {userData.followers.length}</div>
+            <div>following: {userData.following.length}</div>
+            <CInputs type="button" value={userData.followers.includes(userId) ? "Unfollow" : "Follow"} name={userData._id} onClick={followUnfollow} />
+
+        </>
+    )
 }
