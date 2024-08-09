@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '../../Services/auth.services'
 import { jwtDecode } from 'jwt-decode'
 import { PostContext } from '../../Context/postContext/postContex'
+import { AnyUserContex} from '../../Context/AnyUserProfileContext/anyUserProfileContext'
+
 
 export const Login = () => {
     const [credentials, setCredentials] = useState(
@@ -19,6 +21,7 @@ export const Login = () => {
     const [passwordChart, setPasswordChart] = useState(false)
     const navigate = useNavigate()
     const { postId } = useContext(PostContext)
+    const { navigationPath } = useContext(AnyUserContex)
 
     const handleChangeLog = (e) => {
         setCredentials(prevState => (
@@ -50,7 +53,10 @@ export const Login = () => {
                 localStorage.setItem('passport', JSON.stringify(passport))
                 if (postId !== null) {
                     navigate(`/post/${postId}`)
-                } else {
+                } else if(navigationPath !== null) {
+                    navigate(`/user/${navigationPath}`)
+                }
+                 else {
                     navigate("/profile")
                 }
 
