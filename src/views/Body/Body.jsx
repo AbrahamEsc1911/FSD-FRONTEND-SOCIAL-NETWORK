@@ -5,6 +5,7 @@ import { Home } from '../Home/Home'
 import { Login } from '../Login/Login'
 import { Profile } from '../Profile/Profile'
 import { SiglePost } from '../SiglePost/SiglePost'
+import { Timeline } from '../Timeline/Timeline'
 
 export const Body = () => {
   return (
@@ -15,6 +16,7 @@ export const Body = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/post/:id' element={<SiglePost />} />
+        <Route path='/timeline' element={<Timeline />} />
     </Routes>
     </>
   )

@@ -20,7 +20,7 @@ export const Home = () => {
 
     useEffect(() => {
         if (passport) {
-            navigate("/profile")
+            navigate("/timeline")
         }
     }, [passport])
 
