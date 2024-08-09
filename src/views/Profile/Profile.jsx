@@ -128,7 +128,8 @@ export const Profile = () => {
 
     const likeThisPosts = async (e) => {
         const postId = e.target.name
-        await likeDislike(token, postId)
+        const response = await likeDislike(token, postId)
+        console.log(response)
         const userUpdated = await userProfile(token)
         setUserData(userUpdated.data)
     }
@@ -154,10 +155,14 @@ export const Profile = () => {
         }
     }
 
+    const postById = async (e) => {
+        const id = e.target.name
+        console.log(`esto dando click en el id ${id}`)
+    }
 
     return (
         <>
-            <p className={editProfileData ? "hidden-content" : ""}>profile: {userData.profile}</p>
+            <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
             <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
             <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
             <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
@@ -174,13 +179,13 @@ export const Profile = () => {
                 userData.posts.map((posts) => {
                     return (
                         <div key={posts._id}>
-                            <div>{userData.profile}</div>
+                            <div> <img id='profile-photo' src={userData.profile} alt="foto perfil"/></div>
                             <div>{userData.name}</div>
                             <div>post: {posts.post_message}</div>
                             <div>createdAt: {posts.createdAt}</div>
                             <div>likes: {posts.likes.length}</div>
-                            <div>Comments: {posts.comments.length}</div>
                             <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
+                            <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
                             <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
                             <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
                         </div>

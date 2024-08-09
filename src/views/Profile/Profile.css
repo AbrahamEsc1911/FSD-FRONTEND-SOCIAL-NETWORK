@@ -1,3 +1,7 @@
 .hidden-content {
     display: none;
 }
+
+#profile-photo {
+    height: 5rem;
+}
