@@ -9,7 +9,11 @@ export const SiglePost = () => {
 
     const passport = JSON.parse(localStorage.getItem("passport"))
     let token = null
-    if (passport) { token = passport.token }
+    let userId = null
+    if (passport) {
+        token = passport.token
+        userId = passport.tokenData.id
+    }
 
     const { id } = useParams()
     const [post, setPost] = useState(
@@ -31,6 +35,7 @@ export const SiglePost = () => {
 
     const navigate = useNavigate()
     const { setPostId } = useContext(PostContext)
+    const [like, setLike] = useState(false)
 
     useEffect(() => {
 
@@ -49,6 +54,7 @@ export const SiglePost = () => {
             await likeDislike(token, postId)
             const res = await getPostById(id)
             setPost(res.data)
+          
         } else {
             setPostId(id)
             navigate('/login')
@@ -70,6 +76,7 @@ export const SiglePost = () => {
         if (response.success) {
             const res = await getPostById(id)
             setPost(res.data)
+           
         } else {
             console.log("error creating a new comment")
         }
@@ -82,7 +89,8 @@ export const SiglePost = () => {
             <p>{post.createdAt}</p>
             <p>likes: {post.likes.length}</p>
             <p>comentarios: {post.comments.length}</p>
-            <CInputs type="button" value="like" name={post._id} onClick={likeThisPosts} />
+            <div></div>
+            <CInputs type="button" value={post.likes.includes(userId) ? "Dislike" : "like"} name={post._id} onClick={likeThisPosts} />
             <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
             <CInputs type="button" value="send" name={post._id} onClick={sendComment} />
             <div> Comentarios:

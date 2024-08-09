@@ -149,7 +149,6 @@ export const Profile = () => {
         if (response.success) {
             const userUpdated = await userProfile(token)
             setUserData(userUpdated.data)
-            console.log(response)
         } else {
             console.log("error creating a new comment")
         }
