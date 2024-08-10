@@ -61,7 +61,6 @@ export const AnyUserProfile = () => {
             <div>followers: {userData.followers.length}</div>
             <div>following: {userData.following.length}</div>
             <CInputs type="button" value={userData.followers.includes(userId) ? "Unfollow" : "Follow"} name={userData._id} onClick={followUnfollow} />
-
         </>
     )
 }
