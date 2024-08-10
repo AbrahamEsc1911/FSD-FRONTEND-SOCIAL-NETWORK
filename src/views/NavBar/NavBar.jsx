@@ -16,7 +16,7 @@ export const NavBar = () => {
     <>
     <CNavigation path="/" content="home" />
     <CNavigation path="/profile" content="profile" />
-    <CNavigation path="/" content="home" />
+    <CNavigation path="/newpost" content="new post" />
     <CInputs type="button" value="logout" onClick={logout}/>
     </>
   )
