@@ -35,7 +35,6 @@ export const SiglePost = () => {
 
     const navigate = useNavigate()
     const { setPostId } = useContext(PostContext)
-    const [like, setLike] = useState(false)
 
     useEffect(() => {
 

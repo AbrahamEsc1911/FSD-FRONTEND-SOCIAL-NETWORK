@@ -3,7 +3,7 @@ import { updateProfile, userProfile } from '../../Services/user.services'
 import { useNavigate } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
-import { likeDislike } from '../../Services/posts.services'
+import { createPost, likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
 
 export const Profile = () => {
@@ -20,6 +20,11 @@ export const Profile = () => {
             createdAt: "",
             posts: [],
             followers: []
+        }
+    )
+    const [newPost, setNewPost] = useState(
+        {
+            message: ""
         }
     )
 
@@ -62,6 +67,23 @@ export const Profile = () => {
         }
 
     }, [])
+
+    const handleMessage = (e) => {
+        setNewPost(prevState => (
+            {
+                ...prevState,
+                [e.target.name]: e.target.value
+            })
+        )
+    }
+
+    const sendPosts = async () => {
+        const res = await createPost(token, newPost)
+        if(res.success){
+            const userUpdated = await userProfile(token)
+            setUserData(userUpdated.data)
+        }
+    }
 
     const editProfile = () => {
         setEditProfileData(!editProfileData)
@@ -161,6 +183,11 @@ export const Profile = () => {
 
     return (
         <>
+        <div>
+            <CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} />
+            <CInputs type="button" value="send" name="message" onClick={sendPosts} />
+        </div>
+
             <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
             <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
             <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />

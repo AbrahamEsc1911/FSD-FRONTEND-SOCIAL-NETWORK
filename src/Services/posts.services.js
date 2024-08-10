@@ -39,3 +39,16 @@ export const timeline = async (token) => {
         console.error("error retriving posts")
     }
 }
+
+export const createPost = async (token, data) => {
+    const response = await fetch(`${URL}`, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+
+    return await response.json()
+}
