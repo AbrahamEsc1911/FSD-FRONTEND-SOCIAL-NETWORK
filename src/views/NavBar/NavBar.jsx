@@ -4,6 +4,7 @@ import { CInputs } from '../../components/CInputs/CInputs'
 import { useNavigate } from 'react-router-dom'
 import { NewPostContext } from '../../Context/NewPostContext/NewPostContext'
 import { createPost } from '../../Services/posts.services'
+import './NavBar.css'
 
 export const NavBar = () => {
 
@@ -12,7 +13,9 @@ export const NavBar = () => {
     if (passport) { token = passport.token }
 
   const navigate = useNavigate()
-  const { setNewPostPop } = useContext(NewPostContext)
+  const [errorPostMessage, setErrorPostMessage] = useState(false)
+  const [errorEmptyPost, setErrorEmptyPost] = useState(false)
+  const { newPostPop,setNewPostPop } = useContext(NewPostContext)
   const [newPost, setNewPost] = useState(
     {
       message: ""
@@ -33,8 +36,19 @@ export const NavBar = () => {
   }
 
   const sendPosts = async () => {
-    await createPost(token, newPost)
-    setNewPostPop(false)
+    if(newPost.message.length > 0){
+      const res = await createPost(token, newPost)
+      if(res.success){
+      setNewPostPop(false)
+      setErrorPostMessage(false)
+      setErrorEmptyPost(false)
+    } else {
+      setErrorPostMessage(true)
+    }
+    } else {
+      setErrorEmptyPost(true)
+    }
+    
   }
 
   const logout = () => {
@@ -44,9 +58,11 @@ export const NavBar = () => {
 
   return (
     <>
-      <div>
+      <div className={newPostPop ? "" : "hidden-content"}>
         <CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} />
         <CInputs type="button" value="send" name="message" onClick={sendPosts} />
+        <div className={errorPostMessage ? "" : "hidden-content"}>Error creating a new posts, try again later</div>
+        <div className={errorEmptyPost ? "" : "hidden-content"}>new post coulnt be empty</div>
       </div>
 
       <CNavigation path="/" content="home" />
