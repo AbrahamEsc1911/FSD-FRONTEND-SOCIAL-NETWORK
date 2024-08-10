@@ -3,8 +3,9 @@ import { updateProfile, userProfile } from '../../Services/user.services'
 import { useNavigate } from 'react-router-dom'
 import { CInputs } from '../../components/CInputs/CInputs'
 import './Profile.css'
-import { createPost, likeDislike } from '../../Services/posts.services'
+import { likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
+import { NewPostContext } from '../../Context/NewPostContext/NewPostContext'
 
 export const Profile = () => {
 
@@ -20,11 +21,6 @@ export const Profile = () => {
             createdAt: "",
             posts: [],
             followers: []
-        }
-    )
-    const [newPost, setNewPost] = useState(
-        {
-            message: ""
         }
     )
 
@@ -46,6 +42,7 @@ export const Profile = () => {
     const [wargingMessage, setWargingMessage] = useState(false)
     const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    const {newPostPop} = useContext(NewPostContext)
 
     useEffect(() => {
 
@@ -66,24 +63,7 @@ export const Profile = () => {
             navigate("/login")
         }
 
-    }, [])
-
-    const handleMessage = (e) => {
-        setNewPost(prevState => (
-            {
-                ...prevState,
-                [e.target.name]: e.target.value
-            })
-        )
-    }
-
-    const sendPosts = async () => {
-        const res = await createPost(token, newPost)
-        if(res.success){
-            const userUpdated = await userProfile(token)
-            setUserData(userUpdated.data)
-        }
-    }
+    }, [newPostPop])
 
     const editProfile = () => {
         setEditProfileData(!editProfileData)
@@ -183,10 +163,6 @@ export const Profile = () => {
 
     return (
         <>
-        <div>
-            <CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} />
-            <CInputs type="button" value="send" name="message" onClick={sendPosts} />
-        </div>
 
             <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
             <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>

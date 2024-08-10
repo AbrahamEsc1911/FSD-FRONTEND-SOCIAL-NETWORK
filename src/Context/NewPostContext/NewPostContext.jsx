@@ -4,9 +4,9 @@ export const NewPostContext = createContext()
 
 export const NewPostProvider = ({children}) => {
 
-const [newPost, setNewPost] = useState(false)
+const [newPostPop, setNewPostPop] = useState(false)
 
-return <NewPostContext.Provider value={{newPost, setNewPost}}>
+return <NewPostContext.Provider value={{newPostPop, setNewPostPop}}>
 
     {children}
 
