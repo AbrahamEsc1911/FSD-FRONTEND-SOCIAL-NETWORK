@@ -15,7 +15,7 @@ export const NavBar = () => {
   const navigate = useNavigate()
   const [errorPostMessage, setErrorPostMessage] = useState(false)
   const [errorEmptyPost, setErrorEmptyPost] = useState(false)
-  const { newPostPop, setNewPostPop } = useContext(NewPostContext)
+  const {newPostPop, setNewPostPop} = useContext(NewPostContext)
   const [newPost, setNewPost] = useState(
     {
       message: ""
@@ -32,7 +32,7 @@ export const NavBar = () => {
   }
 
   const newPostPopUp = () => {
-    setNewPostPop(true)
+    setNewPostPop(!newPostPop)
   }
 
   const sendPosts = async () => {
@@ -54,7 +54,7 @@ export const NavBar = () => {
   const logout = () => {
     localStorage.removeItem("passport")
     navigate("/login")
-    setNewPostPop(false)
+
   }
 
   return (
@@ -95,16 +95,16 @@ export const NavBar = () => {
       </div>
 
 
-      <div className={newPostPop ? "" : "hidden-content"}>
-        <CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} />
-        <CInputs type="button" value="send" name="message" onClick={sendPosts} />
-        <div className={errorPostMessage ? "" : "hidden-content"}>Error creating a new posts, try again later</div>
-        <div className={errorEmptyPost ? "" : "hidden-content"}>new post coulnt be empty</div>
-      </div>
-
-
-
-
+      {newPostPop && (
+        <div className="overlay">
+          <div><CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} /></div>
+          <div><CInputs type="button" value="send" name="message" onClick={sendPosts} /></div>
+          <div className={errorPostMessage ? "" : "hidden-content"}>Error creating a new posts, try again later</div>
+          <div className={errorEmptyPost ? "" : "hidden-content"}>new post coulnt be empty</div>
+          <div><input type="button" value="Close" onClick={newPostPopUp}/></div>
+        </div>
+      )
+      }
 
 
     </>
