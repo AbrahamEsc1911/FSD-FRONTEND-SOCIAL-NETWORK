@@ -76,11 +76,11 @@ export const NavBar = () => {
             <CNavigation path="/profile" content="Profile" />
           </div>
         </div>
-        <div className='nav-bar-block-items'>
-          <div className='nav-bar-icon-special'>
+        <div className='nav-bar-block-items-special'>
+          <div className='nav-bar-icon'>
             <img src="./images/post.svg" alt="post-icon" className='nav-bar-icon-content' />
           </div>
-          <div className='nav-bar-text'>
+          <div className='nav-bar-text-special'>
             <div onClick={newPostPopUp}>New Post</div>
           </div>
         </div>
@@ -89,7 +89,7 @@ export const NavBar = () => {
             <img src="./images/logout.svg" alt="logout-icon" className='nav-bar-icon-content' />
           </div>
           <div className='nav-bar-text'>
-            <CInputs type="button" value="Logout" onClick={logout} />
+            <p onClick={logout}>Logout</p>
           </div>
         </div>
       </div>
@@ -105,8 +105,6 @@ export const NavBar = () => {
         </div>
       )
       }
-
-
     </>
   )
 }
