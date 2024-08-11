@@ -9,13 +9,13 @@ import './NavBar.css'
 export const NavBar = () => {
 
   const passport = JSON.parse(localStorage.getItem("passport"))
-    let token = null
-    if (passport) { token = passport.token }
+  let token = null
+  if (passport) { token = passport.token }
 
   const navigate = useNavigate()
   const [errorPostMessage, setErrorPostMessage] = useState(false)
   const [errorEmptyPost, setErrorEmptyPost] = useState(false)
-  const { newPostPop,setNewPostPop } = useContext(NewPostContext)
+  const { newPostPop, setNewPostPop } = useContext(NewPostContext)
   const [newPost, setNewPost] = useState(
     {
       message: ""
@@ -36,28 +36,65 @@ export const NavBar = () => {
   }
 
   const sendPosts = async () => {
-    if(newPost.message.length > 0){
+    if (newPost.message.length > 0) {
       const res = await createPost(token, newPost)
-      if(res.success){
-      setNewPostPop(false)
-      setErrorPostMessage(false)
-      setErrorEmptyPost(false)
-    } else {
-      setErrorPostMessage(true)
-    }
+      if (res.success) {
+        setNewPostPop(false)
+        setErrorPostMessage(false)
+        setErrorEmptyPost(false)
+      } else {
+        setErrorPostMessage(true)
+      }
     } else {
       setErrorEmptyPost(true)
     }
-    
+
   }
 
   const logout = () => {
     localStorage.removeItem("passport")
     navigate("/login")
+    setNewPostPop(false)
   }
 
   return (
     <>
+      <div className='nav-bar-block'>
+        <div className='nav-bar-block-items'>
+          <div className='nav-bar-icon'>
+            <img src="./images/home.svg" alt="home-icon" className='nav-bar-icon-content' />
+          </div>
+          <div className='nav-bar-text'>
+            <CNavigation path="/" content="home" />
+          </div>
+        </div>
+        <div className='nav-bar-block-items'>
+          <div className='nav-bar-icon'>
+            <img src="./images/profile.svg" alt="profile-icon" className='nav-bar-icon-content' />
+          </div>
+          <div className='nav-bar-text'>
+            <CNavigation path="/profile" content="Profile" />
+          </div>
+        </div>
+        <div className='nav-bar-block-items'>
+          <div className='nav-bar-icon-special'>
+            <img src="./images/post.svg" alt="post-icon" className='nav-bar-icon-content' />
+          </div>
+          <div className='nav-bar-text'>
+            <div onClick={newPostPopUp}>New Post</div>
+          </div>
+        </div>
+        <div className='nav-bar-block-items'>
+          <div className='nav-bar-icon'>
+            <img src="./images/logout.svg" alt="logout-icon" className='nav-bar-icon-content' />
+          </div>
+          <div className='nav-bar-text'>
+            <CInputs type="button" value="Logout" onClick={logout} />
+          </div>
+        </div>
+      </div>
+
+
       <div className={newPostPop ? "" : "hidden-content"}>
         <CInputs type="text" placeholder="New Post" name="message" onChange={handleMessage} maxLength={250} />
         <CInputs type="button" value="send" name="message" onClick={sendPosts} />
@@ -65,10 +102,11 @@ export const NavBar = () => {
         <div className={errorEmptyPost ? "" : "hidden-content"}>new post coulnt be empty</div>
       </div>
 
-      <CNavigation path="/" content="home" />
-      <CNavigation path="/profile" content="profile" />
-      <div onClick={newPostPopUp}>New Post</div>
-      <CInputs type="button" value="logout" onClick={logout} />
+
+
+
+
+
     </>
   )
 }

@@ -1,3 +1,61 @@
 .hidden-content {
     display: none;
 }
+
+.nav-bar-block {
+
+    /* TODO AJUSTAR LA ALTURA AL 100 */
+    height: 37rem;
+    width: 10rem;
+    background-color: white;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-bar-block-items {
+    width: 8rem;
+    height: 2.5rem;
+
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-color: #EFEFEF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar-icon-special {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-color: #3461FB;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar-icon-content {
+    width: 1.2rem;
+}
+
+.nav-bar-text {
+    padding-left: 0.7rem;
+}

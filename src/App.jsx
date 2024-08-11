@@ -8,9 +8,15 @@ function App() {
 
   return (
     <>
-      <NavBar />
-      <Body />
-      <Footer />
+      <div className="app-container">
+        <div className="navbar-container">
+          <NavBar />
+        </div>
+        <div className="content-container">
+          <Body />
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }
