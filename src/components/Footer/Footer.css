@@ -1,9 +1,11 @@
 #footer-text-center {
-    width: 100vw;
+    width: 100%;
     height: auto;
 
     padding-top: 3rem;
     padding-bottom: 3rem;
+
+    margin: 0;
 
     display: flex;
     justify-content: center;
