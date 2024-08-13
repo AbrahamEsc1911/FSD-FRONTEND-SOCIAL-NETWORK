@@ -59,9 +59,16 @@
     margin: 0;
 }
 
+.text-gray{
+    color: darkgray;
+}
+
 .block-three {
     height: 7rem;
     width: 19rem;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
     display: flex;
     justify-content: center;

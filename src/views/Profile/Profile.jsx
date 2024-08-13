@@ -8,6 +8,7 @@ import { newComments } from '../../Services/comments.services'
 import { NewPostContext } from '../../Context/NewPostContext/NewPostContext'
 import { CBlockContent } from '../../components/CBlockContent/CBlockContent'
 import { CSectionOneProfile } from '../../components/CSectionOneProfile/CSectionOneProfile'
+import { CSectionTwoProfile } from '../../components/CSectionTwoProfile/CSectionTwoProfile'
 
 export const Profile = () => {
 
@@ -23,7 +24,10 @@ export const Profile = () => {
             createdAt: "",
             posts: [],
             followers: [],
-            following: []
+            following: [],
+            phone: 'phone',
+            city: 'city',
+            born: 'born'
         }
     )
 
@@ -166,19 +170,28 @@ export const Profile = () => {
 
     return (
         <>
-        
+
             <CBlockContent content={
                 (
-                    <CSectionOneProfile 
-                    profile={userData.profile}
-                    name={userData.name}
-                    email={userData.email}
-                    posts={userData.posts.length}
-                    followers={userData.followers.length}
-                    following={userData.following.length}
-                    />
+                    <div>
+                        <CSectionOneProfile
+                            profile={userData.profile}
+                            name={userData.name}
+                            email={userData.email}
+                            posts={userData.posts.length}
+                            followers={userData.followers.length}
+                            following={userData.following.length}
+                        />
+                        <CSectionTwoProfile
+                            bornDate={userData.born}
+                            phone={userData.phone}
+                            city={userData.city}
+                            value={editProfileData ? "Cancel" : "Edit profile"}
+                            onClick={editProfile}
+                        />
+                    </div>
                 )
-            }/>
+            } />
 
             <CBlockContent content={
                 (

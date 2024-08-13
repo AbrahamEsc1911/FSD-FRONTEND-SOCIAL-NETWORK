@@ -1,7 +1,7 @@
 import React from 'react'
 import './CSectionOneProfile.css'
 
-export const CSectionOneProfile = ({portada, profile, name, email, posts, followers, following}) => {
+export const CSectionOneProfile = ({ portada, profile, name, email, posts, followers, following}) => {
     return (
         <>
             <div className='section-one-profile'>
@@ -16,7 +16,7 @@ export const CSectionOneProfile = ({portada, profile, name, email, posts, follow
                         <h4 className='profile-txt-no-margin'>
                             {name}
                         </h4>
-                        <p className='profile-txt-no-margin'>
+                        <p className='profile-txt-no-margin text-gray'>
                             {email}
                         </p>
                     </div>
@@ -26,19 +26,19 @@ export const CSectionOneProfile = ({portada, profile, name, email, posts, follow
                         <h1 className='profile-txt-no-margin'>
                             {posts}
                         </h1>
-                        <p className='profile-txt-no-margin'>Posts</p>
+                        <p className='profile-txt-no-margin text-gray'>Posts</p>
                     </div>
                     <div className='profile-follows-data'>
                         <h1 className='profile-txt-no-margin'>
                             {followers}
                         </h1>
-                        <p className='profile-txt-no-margin'>Followers</p>
+                        <p className='profile-txt-no-margin text-gray'>Followers</p>
                     </div>
                     <div className='profile-follows-data'>
                         <h1 className='profile-txt-no-margin'>
                             {following}
                         </h1>
-                        <p className='profile-txt-no-margin'>Following</p>
+                        <p className='profile-txt-no-margin text-gray'>Following</p>
                     </div>
                 </div>
                 <div className='block-four'></div>
