@@ -10,7 +10,7 @@ export const CSectionOneProfile = ({portada, profile, name, email, posts, follow
                 </div>
                 <div className='block-two'>
                     <div className='element-profile-photo'>
-                        {/* <img src={profile} alt={`profile-${name}`} /> */}
+                        {<img src={profile} alt={`profile-${name}`} />}
                     </div>
                     <div className='element-basic-description'>
                         <h4 className='profile-txt-no-margin'>

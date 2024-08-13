@@ -23,7 +23,7 @@ export const Profile = () => {
             createdAt: "",
             posts: [],
             followers: [],
-            followings: []
+            following: []
         }
     )
 
@@ -54,7 +54,7 @@ export const Profile = () => {
             const bringprofile = async () => {
 
                 const response = await userProfile(token)
-
+                console.log(response)
                 if (response) {
                     setUserData(response.data)
                 }
@@ -166,32 +166,6 @@ export const Profile = () => {
 
     return (
         <>
-            {/* <div className='section-one-profile'>
-                <div className='block-one'></div>
-                <div className='block-two'>
-                    <div className='element-profile-photo'></div>
-                    <div className='element-basic-description'>
-                        <h4 className='profile-txt-no-margin'>Carlos Andrade</h4>
-                        <p className='profile-txt-no-margin'>carlos@carlos.com</p>
-                    </div>
-                </div>
-                <div className='block-three'>
-                    <div className='profile-follows-data'>
-                        <h1 className='profile-txt-no-margin'>23</h1>
-                        <p className='profile-txt-no-margin'>Posts</p>
-                    </div>
-                    <div className='profile-follows-data'>
-                        <h1 className='profile-txt-no-margin'>23</h1>
-                        <p className='profile-txt-no-margin'>Posts</p>
-                    </div>
-                    <div className='profile-follows-data'>
-                        <h1 className='profile-txt-no-margin'>23</h1>
-                        <p className='profile-txt-no-margin'>Posts</p>
-                    </div>
-                </div>
-                <div className='block-four'></div>
-            </div> */}
-
         
             <CBlockContent content={
                 (
@@ -201,6 +175,7 @@ export const Profile = () => {
                     email={userData.email}
                     posts={userData.posts.length}
                     followers={userData.followers.length}
+                    following={userData.following.length}
                     />
                 )
             }/>
