@@ -174,45 +174,35 @@ export const Profile = () => {
             <CBlockContent content={
                 (
                     <div>
-                        <CSectionOneProfile
-                            profile={userData.profile}
-                            name={userData.name}
-                            email={userData.email}
-                            posts={userData.posts.length}
-                            followers={userData.followers.length}
-                            following={userData.following.length}
-                        />
-                        <CSectionTwoProfile
-                            bornDate={userData.born}
-                            phone={userData.phone}
-                            city={userData.city}
-                            value={editProfileData ? "Cancel" : "Edit profile"}
-                            onClick={editProfile}
-                        />
+                        <div>
+                            <CSectionOneProfile
+                                profile={userData.profile}
+                                name={userData.name}
+                                email={userData.email}
+                                posts={userData.posts.length}
+                                followers={userData.followers.length}
+                                following={userData.following.length}
+                            />
+                        </div>
+                        <div>
+                            {!editProfileData && <CSectionTwoProfile
+                                bornDate={userData.born}
+                                phone={userData.phone}
+                                city={userData.city}
+                                value={editProfileData ? "Cancel" : "Edit profile"}
+                                onClick={editProfile}
+                            />} {
+                                editProfileData && <div>
+                                    <CInputs type="text" name="name" placeholder="name" onChange={handleNewData} />
+                                    <CInputs type="email" name="email" placeholder="email" onChange={handleNewData} />
+                                    <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
+                                    <CInputs type="button" value="guardar" onClick={saveChangesButton} />
+                                </div>
+                            }
+                        </div>
                     </div>
                 )
             } />
-
-            <CBlockContent content={
-                (
-                    <div>
-                        <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
-                        <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
-                        <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
-                        <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
-                        <CInputs type="email" name="email" placeholder="email" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
-                        <p className={wargingMessage ? "" : "hidden-content"}>name or email required</p>
-                        <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
-                        <p>id: {userData._id}</p>
-                        <p>desde: {userData.createdAt}</p>
-                        <p>followers: {userData.followers.length}</p>
-                        <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
-                        <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
-                        <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
-                    </div>
-                )
-            } />
-
 
             <CBlockContent content={
                 (
