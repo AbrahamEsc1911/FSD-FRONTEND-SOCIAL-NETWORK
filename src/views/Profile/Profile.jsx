@@ -34,7 +34,9 @@ export const Profile = () => {
     const [userUpdate, setUserUpdate] = useState(
         {
             name: "",
-            email: ""
+            email: "",
+            phone: "",
+            city: ""
         }
     )
 
@@ -89,7 +91,7 @@ export const Profile = () => {
 
     const saveChangesButton = async () => {
 
-        if (userUpdate.name.length === 0 && userUpdate.email.length === 0) {
+        if (userUpdate.name.length === 0 && userUpdate.email.length === 0 && userUpdate.city.length === 0 && userUpdate.phone.length === 0) {
             return setWargingMessage(true)
         } else {
             setWargingMessage(false)
@@ -192,11 +194,30 @@ export const Profile = () => {
                                 value={editProfileData ? "Cancel" : "Edit profile"}
                                 onClick={editProfile}
                             />} {
-                                editProfileData && <div>
-                                    <CInputs type="text" name="name" placeholder="name" onChange={handleNewData} />
-                                    <CInputs type="email" name="email" placeholder="email" onChange={handleNewData} />
-                                    <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
-                                    <CInputs type="button" value="guardar" onClick={saveChangesButton} />
+                                editProfileData && <div className='edit-profile-form'>
+                                    <div className='profile-form-content'>
+                                        <div>
+                                            <CInputs type="text" name="name" placeholder="Name" className='input-text-main' onChange={handleNewData} />
+                                        </div>
+                                        <div>
+                                            <CInputs type="email" name="email" placeholder="Email" className='input-text-main' onChange={handleNewData} />
+                                        </div>
+                                        <div>
+                                            <CInputs type="email" name="phone" placeholder="Phone" className='input-text-main' onChange={handleNewData} />
+                                        </div>
+                                        <div>
+                                            <CInputs type="email" name="city" placeholder="City" className='input-text-main' onChange={handleNewData} />
+                                        </div>
+                                        <div>
+                                           <p className={wargingMessage ? "" : "hidden-content"}>Nothin to update</p>
+                                           <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
+                                        </div>
+                                        <div>
+                                            <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
+                                            <CInputs type="button" value="guardar" onClick={saveChangesButton} />
+                                        </div>
+                                    </div>
+
                                 </div>
                             }
                         </div>
