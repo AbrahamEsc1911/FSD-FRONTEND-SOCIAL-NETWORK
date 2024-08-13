@@ -7,6 +7,7 @@ import { likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
 import { NewPostContext } from '../../Context/NewPostContext/NewPostContext'
 import { CBlockContent } from '../../components/CBlockContent/CBlockContent'
+import { CSectionOneProfile } from '../../components/CSectionOneProfile/CSectionOneProfile'
 
 export const Profile = () => {
 
@@ -21,7 +22,8 @@ export const Profile = () => {
             email: "",
             createdAt: "",
             posts: [],
-            followers: []
+            followers: [],
+            followings: []
         }
     )
 
@@ -164,6 +166,45 @@ export const Profile = () => {
 
     return (
         <>
+            {/* <div className='section-one-profile'>
+                <div className='block-one'></div>
+                <div className='block-two'>
+                    <div className='element-profile-photo'></div>
+                    <div className='element-basic-description'>
+                        <h4 className='profile-txt-no-margin'>Carlos Andrade</h4>
+                        <p className='profile-txt-no-margin'>carlos@carlos.com</p>
+                    </div>
+                </div>
+                <div className='block-three'>
+                    <div className='profile-follows-data'>
+                        <h1 className='profile-txt-no-margin'>23</h1>
+                        <p className='profile-txt-no-margin'>Posts</p>
+                    </div>
+                    <div className='profile-follows-data'>
+                        <h1 className='profile-txt-no-margin'>23</h1>
+                        <p className='profile-txt-no-margin'>Posts</p>
+                    </div>
+                    <div className='profile-follows-data'>
+                        <h1 className='profile-txt-no-margin'>23</h1>
+                        <p className='profile-txt-no-margin'>Posts</p>
+                    </div>
+                </div>
+                <div className='block-four'></div>
+            </div> */}
+
+        
+            <CBlockContent content={
+                (
+                    <CSectionOneProfile 
+                    profile={userData.profile}
+                    name={userData.name}
+                    email={userData.email}
+                    posts={userData.posts.length}
+                    followers={userData.followers.length}
+                    />
+                )
+            }/>
+
             <CBlockContent content={
                 (
                     <div>
@@ -221,7 +262,7 @@ export const Profile = () => {
                         })
                     }</div>
                 )
-            }/>
+            } />
         </>
     )
 }

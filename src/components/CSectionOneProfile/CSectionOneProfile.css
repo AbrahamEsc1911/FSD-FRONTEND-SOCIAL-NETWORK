@@ -1,43 +1,43 @@
-.hidden-content {
-    display: none;
-}
-
-#profile-photo {
-    height: 5rem;
-}
-
-/* SECTION-ONE-PROFILE */
-/* 
-.section-one-profile{
+.section-one-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.block-one{
+.block-one {
     height: 8rem;
     width: 19rem;
 
     background-color: aquamarine;
 
+    overflow: hidden;
+    position: relative;
+
     border-radius: 2rem;
 }
 
-.block-two{
+.block-one img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block-two {
     height: 3.5rem;
     width: 19rem;
 
     display: flex;
     align-items: flex-end;
 
-    position: relative;
+    overflow: hidden;
 }
 
-.element-profile-photo{
+.element-profile-photo {
     margin-left: 0.5rem;
     width: 6rem;
     height: 6rem;
 
+    overflow: hidden;
     position: absolute;
     z-index: 100;
 
@@ -46,7 +46,13 @@
     background-color: brown;
 }
 
-.element-basic-description{
+.element-profile-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.element-basic-description {
     margin-left: 7rem;
     width: 12rem;
     height: 3.5rem;
@@ -55,11 +61,11 @@
     flex-direction: column;
 }
 
-.profile-txt-no-margin{
+.profile-txt-no-margin {
     margin: 0;
 }
 
-.block-three{
+.block-three {
     height: 7rem;
     width: 19rem;
 
@@ -68,7 +74,7 @@
     align-items: center;
 }
 
-.profile-follows-data{
+.profile-follows-data {
     width: 6rem;
     height: 4rem;
 
@@ -78,9 +84,9 @@
     align-items: center;
 }
 
-.block-four{
+.block-four {
     height: 0.1rem;
     width: 17rem;
 
     background-color: rgb(220, 220, 220);
-} */
+}
