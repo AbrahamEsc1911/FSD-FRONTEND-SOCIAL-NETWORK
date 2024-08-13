@@ -6,6 +6,7 @@ import './Profile.css'
 import { likeDislike } from '../../Services/posts.services'
 import { newComments } from '../../Services/comments.services'
 import { NewPostContext } from '../../Context/NewPostContext/NewPostContext'
+import { CBlockContent } from '../../components/CBlockContent/CBlockContent'
 
 export const Profile = () => {
 
@@ -42,7 +43,7 @@ export const Profile = () => {
     const [wargingMessage, setWargingMessage] = useState(false)
     const [errorUpdatingUser, setErrorUpdatingUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const {newPostPop} = useContext(NewPostContext)
+    const { newPostPop } = useContext(NewPostContext)
 
     useEffect(() => {
 
@@ -163,54 +164,64 @@ export const Profile = () => {
 
     return (
         <>
+            <CBlockContent content={
+                (
+                    <div>
+                        <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
+                        <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
+                        <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
+                        <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
+                        <CInputs type="email" name="email" placeholder="email" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
+                        <p className={wargingMessage ? "" : "hidden-content"}>name or email required</p>
+                        <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
+                        <p>id: {userData._id}</p>
+                        <p>desde: {userData.createdAt}</p>
+                        <p>followers: {userData.followers.length}</p>
+                        <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
+                        <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
+                        <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
+                    </div>
+                )
+            } />
 
-            <img id='profile-photo' className={editProfileData ? "hidden-content" : ""} src={userData.profile} alt='profile-photo' />
-            <p className={editProfileData ? "hidden-content" : ""}>nombre: {userData.name}</p>
-            <CInputs type="text" name="name" placeholder="name" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
-            <p className={editProfileData ? "hidden-content" : ""}>email: {userData.email}</p>
-            <CInputs type="email" name="email" placeholder="email" className={editProfileData ? "" : "hidden-content"} onChange={handleNewData} />
-            <p className={wargingMessage ? "" : "hidden-content"}>name or email required</p>
-            <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
-            <p>id: {userData._id}</p>
-            <p>desde: {userData.createdAt}</p>
-            <p>followers: {userData.followers.length}</p>
-            <p>Está activo: {userData.is_active ? "Si" : "No"}</p>
-            <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
-            <CInputs type="button" value="guardar" className={editProfileData ? "" : "hidden-content"} onClick={saveChangesButton} />
-            <div>POSTS: {
-                userData.posts.map((posts) => {
-                    if (posts.likes.includes(userData._id)) {
-                        return (
-                            <div key={posts._id}>
-                                <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
-                                <div>{userData.name}</div>
-                                <div>post: {posts.post_message}</div>
-                                <div>createdAt: {posts.createdAt}</div>
-                                <div>likes: {posts.likes.length}</div>
-                                <CInputs type="button" value="Dislike" name={posts._id} onClick={likeThisPosts} />
-                                <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
-                                <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-                                <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <div key={posts._id}>
-                                <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
-                                <div>{userData.name}</div>
-                                <div>post: {posts.post_message}</div>
-                                <div>createdAt: {posts.createdAt}</div>
-                                <div>likes: {posts.likes.length}</div>
-                                <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
-                                <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
-                                <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-                                <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
-                            </div>
-                        )
-                    }
-                })
-            }</div>
 
+            <CBlockContent content={
+                (
+                    <div>POSTS: {
+                        userData.posts.map((posts) => {
+                            if (posts.likes.includes(userData._id)) {
+                                return (
+                                    <div key={posts._id}>
+                                        <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
+                                        <div>{userData.name}</div>
+                                        <div>post: {posts.post_message}</div>
+                                        <div>createdAt: {posts.createdAt}</div>
+                                        <div>likes: {posts.likes.length}</div>
+                                        <CInputs type="button" value="Dislike" name={posts._id} onClick={likeThisPosts} />
+                                        <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
+                                        <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
+                                        <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
+                                    </div>
+                                )
+                            } else {
+                                return (
+                                    <div key={posts._id}>
+                                        <div> <img id='profile-photo' src={userData.profile} alt="foto perfil" /></div>
+                                        <div>{userData.name}</div>
+                                        <div>post: {posts.post_message}</div>
+                                        <div>createdAt: {posts.createdAt}</div>
+                                        <div>likes: {posts.likes.length}</div>
+                                        <CInputs type="button" value="like" name={posts._id} onClick={likeThisPosts} />
+                                        <CInputs type="button" value={`Comments ${posts.comments.length}`} name={posts._id} onClick={postById} />
+                                        <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
+                                        <CInputs type="button" value="send" name={posts._id} onClick={sendComment} />
+                                    </div>
+                                )
+                            }
+                        })
+                    }</div>
+                )
+            }/>
         </>
     )
 }
