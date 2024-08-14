@@ -36,7 +36,6 @@ export const Profile = () => {
             name: "",
             email: "",
             phone: "",
-            city: ""
         }
     )
 
@@ -60,7 +59,6 @@ export const Profile = () => {
             const bringprofile = async () => {
 
                 const response = await userProfile(token)
-                console.log(response)
                 if (response) {
                     setUserData(response.data)
                 }
@@ -87,17 +85,56 @@ export const Profile = () => {
                 [e.target.name]: e.target.value
             })
         )
+
     }
 
     const saveChangesButton = async () => {
 
-        if (userUpdate.name.length === 0 && userUpdate.email.length === 0 && userUpdate.city.length === 0 && userUpdate.phone.length === 0) {
+        if (userUpdate.name.length === 0 && userUpdate.email.length === 0 &&  userUpdate.phone.length === 0) {
             return setWargingMessage(true)
         } else {
             setWargingMessage(false)
         }
 
-        if (userUpdate.name.length === 0) {
+        if (userUpdate.name.length === 0 && userUpdate.email.length === 0) {
+            const { name, email, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+
+        } else if (userUpdate.name.length === 0 && userUpdate.phone.length === 0) {
+            const { name, phone, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+
+        } else if (userUpdate.email.length === 0 && userUpdate.phone.length === 0) {
+            const { phone, email, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
+        } else if (userUpdate.name.length === 0 ) {
             const { name, ...newUserUpdate } = userUpdate
             const result = await updateProfile(token, newUserUpdate)
             if (result.success) {
@@ -109,8 +146,7 @@ export const Profile = () => {
                 setErrorUpdatingUser(true)
                 setErrorMessage(result.message)
             }
-
-        } else if (userUpdate.email.length === 0) {
+        } else if (userUpdate.email.length === 0 ) {
             const { email, ...newUserUpdate } = userUpdate
             const result = await updateProfile(token, newUserUpdate)
             if (result.success) {
@@ -122,7 +158,18 @@ export const Profile = () => {
                 setErrorUpdatingUser(true)
                 setErrorMessage(result.message)
             }
-
+        } else if (userUpdate.phone.length === 0 ) {
+            const { phone, ...newUserUpdate } = userUpdate
+            const result = await updateProfile(token, newUserUpdate)
+            if (result.success) {
+                setEditProfileData(false)
+                setErrorUpdatingUser(false)
+                const userUpdated = await userProfile(token)
+                setUserData(userUpdated.data)
+            } else {
+                setErrorUpdatingUser(true)
+                setErrorMessage(result.message)
+            }
         } else {
             const result = await updateProfile(token, userUpdate)
             if (result.success) {
@@ -204,9 +251,6 @@ export const Profile = () => {
                                         </div>
                                         <div>
                                             <CInputs type="number" name="phone" placeholder="Phone" className='input-text-main' onChange={handleNewData} />
-                                        </div>
-                                        <div>
-                                            <CInputs type="email" name="city" placeholder="City" className='input-text-main' onChange={handleNewData} />
                                         </div>
                                         <div>
                                            <p className={wargingMessage ? "" : "hidden-content"}>Nothin to update</p>

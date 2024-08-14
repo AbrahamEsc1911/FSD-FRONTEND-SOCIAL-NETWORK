@@ -11,7 +11,7 @@ export const CSectionTwoProfile = ({bornDate, phone, city, onClick, value}) => {
                         <img src="./images/phone.svg" alt="city-icon" className='section-two-icon-size' />
                     </div>
                     <div className='section-two-text'>
-                        <p className='p-section-two'>{bornDate}</p>
+                        <p className='p-section-two'>{phone}</p>
                     </div>
                 </div>
                 <div className='section-two-block'>
@@ -19,7 +19,7 @@ export const CSectionTwoProfile = ({bornDate, phone, city, onClick, value}) => {
                         <img src="./images/born.svg" alt="city-icon" className='section-two-icon-size' />
                     </div>
                     <div className='section-two-text'>
-                        <p className='p-section-two'>{phone}</p>
+                        <p className='p-section-two'>{bornDate}</p>
                     </div>
                 </div>
                 <div className='section-two-block'>
