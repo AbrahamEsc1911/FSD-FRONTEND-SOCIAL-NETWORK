@@ -204,3 +204,18 @@
 
   cursor: pointer;
 }
+
+.send-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  
+    border: none;
+    background-color: white;
+  
+    background-image: url("../../../images/send.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    cursor: pointer;
+}

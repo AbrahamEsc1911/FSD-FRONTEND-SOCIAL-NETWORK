@@ -309,6 +309,8 @@ export const Profile = () => {
                 postId={posts._id}
                 onClickToPostById={postById}
                 onClickToLike={likeThisPosts}
+                onChangeComments={addComments}
+                onClickToSentComments={sendComment}
                 />)}
                 />  
               </div>
