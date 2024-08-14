@@ -9,6 +9,7 @@ import { NewPostContext } from "../../Context/NewPostContext/NewPostContext";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CSectionOneProfile } from "../../components/CSectionOneProfile/CSectionOneProfile";
 import { CSectionTwoProfile } from "../../components/CSectionTwoProfile/CSectionTwoProfile";
+import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -28,6 +29,7 @@ export const Profile = () => {
     phone: "phone",
     city: "city",
     born: "born",
+    profile: ""
   });
 
   const [userUpdate, setUserUpdate] = useState({
@@ -173,9 +175,9 @@ export const Profile = () => {
   };
 
   const likeThisPosts = async (e) => {
-    const postId = e.target.name;
-    const response = await likeDislike(token, postId);
-    console.log(response);
+    let postId = null
+    if(e){postId = e.target.name;}
+     await likeDislike(token, postId);
     const userUpdated = await userProfile(token);
     setUserData(userUpdated.data);
   };
@@ -211,6 +213,7 @@ export const Profile = () => {
             <div>
               <div>
                 <CSectionOneProfile
+                  portada={"./images/portada.jpg"}
                   profile={userData.profile}
                   name={userData.name}
                   email={userData.email}
@@ -290,102 +293,30 @@ export const Profile = () => {
             </div>
           }
         />
-
-        <CBlockContent
-          content={
-            <div>
-              POSTS:{" "}
-              {userData.posts.map((posts) => {
-                if (posts.likes.includes(userData._id)) {
-                  return (
-                    <div key={posts._id}>
-                      <div>
-                        {" "}
-                        <img
-                          id="profile-photo"
-                          src={userData.profile}
-                          alt="foto perfil"
-                        />
-                      </div>
-                      <div>{userData.name}</div>
-                      <div>post: {posts.post_message}</div>
-                      <div>createdAt: {posts.createdAt}</div>
-                      <div>likes: {posts.likes.length}</div>
-                      <CInputs
-                        type="button"
-                        value="Dislike"
-                        name={posts._id}
-                        onClick={likeThisPosts}
-                      />
-                      <CInputs
-                        type="button"
-                        value={`Comments ${posts.comments.length}`}
-                        name={posts._id}
-                        onClick={postById}
-                      />
-                      <CInputs
-                        type="text"
-                        placeholder="add a comment"
-                        name="comment"
-                        onChange={addComments}
-                        maxLength={250}
-                      />
-                      <CInputs
-                        type="button"
-                        value="send"
-                        name={posts._id}
-                        onClick={sendComment}
-                      />
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div key={posts._id}>
-                      <div>
-                        {" "}
-                        <img
-                          id="profile-photo"
-                          src={userData.profile}
-                          alt="foto perfil"
-                        />
-                      </div>
-                      <div>{userData.name}</div>
-                      <div>post: {posts.post_message}</div>
-                      <div>createdAt: {posts.createdAt}</div>
-                      <div>likes: {posts.likes.length}</div>
-                      <CInputs
-                        type="button"
-                        value="like"
-                        name={posts._id}
-                        onClick={likeThisPosts}
-                      />
-                      <CInputs
-                        type="button"
-                        value={`Comments ${posts.comments.length}`}
-                        name={posts._id}
-                        onClick={postById}
-                      />
-                      <CInputs
-                        type="text"
-                        placeholder="add a comment"
-                        name="comment"
-                        onChange={addComments}
-                        maxLength={250}
-                      />
-                      <CInputs
-                        type="button"
-                        value="send"
-                        name={posts._id}
-                        onClick={sendComment}
-                      />
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          }
-        />
+        <div>
+          {userData.posts.map((posts) => {
+            return (
+              <div key={posts._id}>
+                <CBlockContent content=
+                {(<CPostBlock creatorProfile={userData.profile}
+                creatorName={userData.name}
+                message={posts.post_message}
+                createdAt={posts.createdAt}
+                likeCount={posts.likes.length}
+                commentCount={posts.comments.length}
+                commentsCount={posts.comments.length}
+                newCommentProfile={userData.profile}
+                postId={posts._id}
+                onClickToPostById={postById}
+                onClickToLike={likeThisPosts}
+                />)}
+                />  
+              </div>
+            )
+          })}
+        </div>
       </div>
+
     </>
   );
 };
