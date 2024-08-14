@@ -25,9 +25,51 @@
 
     margin-bottom: 1.8rem;
     padding-top: 0.5rem;
-    padding-bottom: 0.6rem;
+    padding-bottom: 0.4rem;
     padding-left: 0.8rem;
     border-radius: 0.2rem;
     background-color: #f4f4f4;
     border: none;
+}
+
+.cancel-button {
+    height: 2.4rem;
+    width: 7rem;
+
+    border-radius: 3rem;
+    border: none;
+
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    background-color: #d6d5d5;
+    color: rgb(98, 98, 98);
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #b5b5b5;
+    color: rgb(98, 98, 98);
+}
+
+.common-button {
+    height: 2.4rem;
+    width: 7rem;
+
+    border-radius: 3rem;
+    border: none;
+
+    margin-bottom: 1rem;
+
+    background-color: #3461FB;
+    color: white;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.common-button:hover {
+    background-color: #1849ea;
 }

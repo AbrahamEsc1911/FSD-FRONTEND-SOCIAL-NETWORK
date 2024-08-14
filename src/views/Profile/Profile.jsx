@@ -203,7 +203,7 @@ export const Profile = () => {
                                             <CInputs type="email" name="email" placeholder="Email" className='input-text-main' onChange={handleNewData} />
                                         </div>
                                         <div>
-                                            <CInputs type="email" name="phone" placeholder="Phone" className='input-text-main' onChange={handleNewData} />
+                                            <CInputs type="number" name="phone" placeholder="Phone" className='input-text-main' onChange={handleNewData} />
                                         </div>
                                         <div>
                                             <CInputs type="email" name="city" placeholder="City" className='input-text-main' onChange={handleNewData} />
@@ -213,8 +213,8 @@ export const Profile = () => {
                                            <p className={errorUpdatingUser ? "" : "hidden-content"}>{errorMessage}</p>
                                         </div>
                                         <div>
-                                            <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} onClick={editProfile} />
-                                            <CInputs type="button" value="guardar" onClick={saveChangesButton} />
+                                            <CInputs type="button" value={editProfileData ? "Cancel" : "Edit profile"} className='cancel-button' onClick={editProfile} />
+                                            <CInputs type="button" value="guardar" className='common-button' onClick={saveChangesButton} />
                                         </div>
                                     </div>
 
