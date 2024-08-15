@@ -1,10 +1,9 @@
 .comments-main-section {
-    width: auto;
+    width: 50vw;
     height: auto;
 
     margin-top: 2rem;
-
-    background-color: orange;
+    margin-bottom: 2rem;
 }
 
 .comments-header{
@@ -18,8 +17,6 @@
 .comments-header-profile {
     width: 4rem;
     height: 4rem;
-
-    background-color: darkcyan;
 
     border-radius: 50%;
 }
@@ -35,16 +32,12 @@
     width: auto;
     height: 4rem;
 
-    background-color: aqua;
-
     padding-left: 1rem;
 }
 
 .comments-message {
     width: auto;
     width: auto;
-
-    background-color: blueviolet;
 }
 
 .comments-creation-date {
