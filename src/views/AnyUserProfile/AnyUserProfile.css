@@ -1,0 +1,39 @@
+.follow-button {
+    height: 2.4rem;
+    width: 7rem;
+  
+    border-radius: 3rem;
+    border: none;
+  
+    margin-bottom: 1rem;
+  
+    background-color: #3461fb;
+    color: white;
+    font-weight: 400;
+  
+    cursor: pointer;
+}
+
+.follow-button:hover {
+  background-color: #1849ea;
+}
+
+.unfollow-button {
+    height: 2.4rem;
+    width: 7rem;
+  
+    border-radius: 3rem;
+    border: none;
+  
+    margin-bottom: 1rem;
+  
+    background-color: #acacac;
+    color: white;
+    font-weight: 400;
+  
+    cursor: pointer;
+}
+
+.unfollow-button:hover {
+  background-color: #808080;
+}

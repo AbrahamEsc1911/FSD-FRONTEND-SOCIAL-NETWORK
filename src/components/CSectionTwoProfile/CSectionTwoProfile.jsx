@@ -1,7 +1,7 @@
 import React from 'react'
 import './CSectionTwoProfile.css'
 
-export const CSectionTwoProfile = ({bornDate, phone, city, onClick, value}) => {
+export const CSectionTwoProfile = ({bornDate, phone, city, onClick, value, buttonName, className}) => {
   return (
     <>
     
@@ -31,7 +31,7 @@ export const CSectionTwoProfile = ({bornDate, phone, city, onClick, value}) => {
                     </div>
                 </div>
                 <div className='section-two-block'>
-                    <input type="button" value={value} className='button-edit-profile' onClick={onClick} />
+                    <input type="button" value={value} name={buttonName} className={className} onClick={onClick} />
                 </div>
             </div>
     </>
