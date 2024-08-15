@@ -1,6 +1,6 @@
 .ui-main-block {
     width: auto;
-    height: 100%;
+    height: auto;
 
     display: flex;
     flex-direction: column;

@@ -29,7 +29,7 @@ export const Profile = () => {
     phone: "phone",
     city: "city",
     born: "born",
-    profile: ""
+    profile: "",
   });
 
   const [userUpdate, setUserUpdate] = useState({
@@ -175,9 +175,11 @@ export const Profile = () => {
   };
 
   const likeThisPosts = async (e) => {
-    let postId = null
-    if(e){postId = e.target.name;}
-     await likeDislike(token, postId);
+    let postId = null;
+    if (e) {
+      postId = e.target.name;
+    }
+    await likeDislike(token, postId);
     const userUpdated = await userProfile(token);
     setUserData(userUpdated.data);
   };
@@ -297,28 +299,29 @@ export const Profile = () => {
           {userData.posts.map((posts) => {
             return (
               <div key={posts._id}>
-                <CBlockContent content=
-                {(<CPostBlock creatorProfile={userData.profile}
-                creatorName={userData.name}
-                message={posts.post_message}
-                createdAt={posts.createdAt}
-                likeCount={posts.likes.length}
-                commentCount={posts.comments.length}
-                commentsCount={posts.comments.length}
-                newCommentProfile={userData.profile}
-                postId={posts._id}
-                onClickToPostById={postById}
-                onClickToLike={likeThisPosts}
-                onChangeComments={addComments}
-                onClickToSentComments={sendComment}
-                />)}
-                />  
+                <CBlockContent
+                  content={
+                    <CPostBlock
+                      creatorProfile={userData.profile}
+                      creatorName={userData.name}
+                      message={posts.post_message}
+                      createdAt={posts.createdAt}
+                      likeCount={posts.likes.length}
+                      commentCount={posts.comments.length}
+                      newCommentProfile={userData.profile}
+                      postId={posts._id}
+                      onClickToPostById={postById}
+                      onClickToLike={likeThisPosts}
+                      onChangeComments={addComments}
+                      onClickToSentComments={sendComment}
+                    />
+                  }
+                />
               </div>
-            )
+            );
           })}
         </div>
       </div>
-
     </>
   );
 };
