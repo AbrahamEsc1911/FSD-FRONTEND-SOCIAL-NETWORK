@@ -64,3 +64,7 @@
 
     cursor: pointer;
 }
+
+.button-login:hover {
+    background-color: #2b53d5;
+}

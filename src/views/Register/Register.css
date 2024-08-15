@@ -1,65 +1,69 @@
 .hidden-content {
-    display: none;
+  display: none;
 }
 
-.register-view-main{
-    width: 100vw;
-    height: 79vh;
+.register-view-main {
+  width: 100vw;
+  height: 79vh;
 
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.section-register-container{
-    width: 50vw;
-    height: auto;
+.section-register-container {
+  width: 50vw;
+  height: auto;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .section-register-image {
-    width: 50vw;
-    height: 79vh;
+  width: 50vw;
+  height: 79vh;
 }
 
 .register-container {
-    width: auto;
-    height: 18rem;
+  width: auto;
+  height: 18rem;
 
-    padding: 1rem;
+  padding: 1rem;
 
-    display: flex;
-    flex-direction: column; 
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .input-register {
-    height: auto;
-    width: 22rem;
-  
-    padding-top: 0.5rem;
-    padding-bottom: 0.4rem;
-    padding-left: 0.8rem;
-    border-radius: 0.2rem;
-    background-color: #f4f4f4;
-    border: none;
-  }
+  height: auto;
+  width: 22rem;
 
-  .button-register {
-    height: 2.4rem;
-    width: 8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.8rem;
+  border-radius: 0.2rem;
+  background-color: #f4f4f4;
+  border: none;
+}
 
-    border-radius: 3rem;
-    border: none;
-    margin-bottom: 1rem;
+.button-register {
+  height: 2.4rem;
+  width: 8rem;
 
-    background-color: #3461FB;
-    color: white;
-    font-weight: 400;
+  border-radius: 3rem;
+  border: none;
+  margin-bottom: 1rem;
 
-    cursor: pointer;
-  }
+  background-color: #3461fb;
+  color: white;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.button-register:hover {
+  background-color: #2b53d5;
+}
