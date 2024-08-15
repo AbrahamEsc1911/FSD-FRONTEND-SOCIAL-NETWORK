@@ -3,10 +3,26 @@
 }
 
 .body-profile {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap; 
+}
+
+.profile-section-one {
+  width: 32vw;
+  height:auto;
+}
+
+.profile-section-two {
+  width: 50vw;
+  height:auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .edit-profile-form {

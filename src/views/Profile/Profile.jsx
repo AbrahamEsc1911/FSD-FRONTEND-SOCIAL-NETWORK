@@ -210,92 +210,96 @@ export const Profile = () => {
   return (
     <>
       <div className="body-profile">
-        <CBlockContent
-          content={
-            <div>
+        <div className="profile-section-one">
+          <CBlockContent
+            content={
               <div>
-                <CSectionOneProfile
-                  portada={"./images/portada.jpg"}
-                  profile={userData.profile}
-                  name={userData.name}
-                  email={userData.email}
-                  posts={userData.posts.length}
-                  followers={userData.followers.length}
-                  following={userData.following.length}
-                />
-              </div>
-              <div>
-                {!editProfileData && (
-                  <CSectionTwoProfile
-                    bornDate={userData.born}
-                    phone={userData.phone}
-                    city={userData.city}
-                    value={editProfileData ? "Cancel" : "Edit profile"}
-                    onClick={editProfile}
+                <div>
+                  <CSectionOneProfile
+                    portada={"./images/portada.jpg"}
+                    profile={userData.profile}
+                    name={userData.name}
+                    email={userData.email}
+                    posts={userData.posts.length}
+                    followers={userData.followers.length}
+                    following={userData.following.length}
                   />
-                )}{" "}
-                {editProfileData && (
-                  <div className="edit-profile-form">
-                    <div className="profile-form-content">
-                      <div>
-                        <CInputs
-                          type="text"
-                          name="name"
-                          placeholder="Name"
-                          className="input-text-main"
-                          onChange={handleNewData}
-                        />
-                      </div>
-                      <div>
-                        <CInputs
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                          className="input-text-main"
-                          onChange={handleNewData}
-                        />
-                      </div>
-                      <div>
-                        <CInputs
-                          type="number"
-                          name="phone"
-                          placeholder="Phone"
-                          className="input-text-main"
-                          onChange={handleNewData}
-                        />
-                      </div>
-                      <div>
-                        <p className={wargingMessage ? "" : "hidden-content"}>
-                          Nothin to update
-                        </p>
-                        <p
-                          className={errorUpdatingUser ? "" : "hidden-content"}
-                        >
-                          {errorMessage}
-                        </p>
-                      </div>
-                      <div>
-                        <CInputs
-                          type="button"
-                          value={editProfileData ? "Cancel" : "Edit profile"}
-                          className="cancel-button"
-                          onClick={editProfile}
-                        />
-                        <CInputs
-                          type="button"
-                          value="guardar"
-                          className="common-button"
-                          onClick={saveChangesButton}
-                        />
+                </div>
+                <div>
+                  {!editProfileData && (
+                    <CSectionTwoProfile
+                      bornDate={userData.born}
+                      phone={userData.phone}
+                      city={userData.city}
+                      value={editProfileData ? "Cancel" : "Edit profile"}
+                      onClick={editProfile}
+                    />
+                  )}{" "}
+                  {editProfileData && (
+                    <div className="edit-profile-form">
+                      <div className="profile-form-content">
+                        <div>
+                          <CInputs
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            className="input-text-main"
+                            onChange={handleNewData}
+                          />
+                        </div>
+                        <div>
+                          <CInputs
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            className="input-text-main"
+                            onChange={handleNewData}
+                          />
+                        </div>
+                        <div>
+                          <CInputs
+                            type="number"
+                            name="phone"
+                            placeholder="Phone"
+                            className="input-text-main"
+                            onChange={handleNewData}
+                          />
+                        </div>
+                        <div>
+                          <p className={wargingMessage ? "" : "hidden-content"}>
+                            Nothin to update
+                          </p>
+                          <p
+                            className={
+                              errorUpdatingUser ? "" : "hidden-content"
+                            }
+                          >
+                            {errorMessage}
+                          </p>
+                        </div>
+                        <div>
+                          <CInputs
+                            type="button"
+                            value={editProfileData ? "Cancel" : "Edit profile"}
+                            className="cancel-button"
+                            onClick={editProfile}
+                          />
+                          <CInputs
+                            type="button"
+                            value="guardar"
+                            className="common-button"
+                            onClick={saveChangesButton}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          }
-        />
-        <div>
+            }
+          />
+        </div>
+        <div className="profile-section-two">
           {userData.posts.map((posts) => {
             return (
               <div key={posts._id}>
