@@ -1,0 +1,59 @@
+.comments-main-section {
+    width: auto;
+    height: auto;
+
+    margin-top: 2rem;
+
+    background-color: orange;
+}
+
+.comments-header{
+    width: auto;
+    height: 4rem;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.comments-header-profile {
+    width: 4rem;
+    height: 4rem;
+
+    background-color: darkcyan;
+
+    border-radius: 50%;
+}
+
+.comments-header-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+.comments-header-name{
+    width: auto;
+    height: 4rem;
+
+    background-color: aqua;
+
+    padding-left: 1rem;
+}
+
+.comments-message {
+    width: auto;
+    width: auto;
+
+    background-color: blueviolet;
+}
+
+.comments-creation-date {
+    font-size: x-small;
+}
+
+.comments-division-line {
+    height: 0.1rem;
+    width: auto;
+
+    background-color: rgb(172, 172, 172);
+}
