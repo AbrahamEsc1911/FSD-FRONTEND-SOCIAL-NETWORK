@@ -1,106 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import { likeDislike, timeline } from '../../Services/posts.services'
-import { CInputs } from '../../components/CInputs/CInputs'
-import { newComments } from '../../Services/comments.services'
-import { userProfile } from '../../Services/user.services'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { likeDislike, timeline } from "../../Services/posts.services";
+import { CInputs } from "../../components/CInputs/CInputs";
+import { newComments } from "../../Services/comments.services";
+import { userProfile } from "../../Services/user.services";
+import { useNavigate } from "react-router-dom";
+import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
+import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 
 export const Timeline = () => {
+  const passport = JSON.parse(localStorage.getItem("passport"));
+  let token = null;
+  let userId = null;
+  if (passport) {
+    token = passport.token;
+    userId = passport.tokenData.id;
+  }
+  const [allPosts, setAllPosts] = useState([]);
+  const navigate = useNavigate();
+  const [newComment, setNewComment] = useState({
+    comment: "",
+  });
 
-    const passport = JSON.parse(localStorage.getItem("passport"))
-    let token = null
-    let userId = null
-    if (passport) { token = passport.token; userId = passport.tokenData.id }
-    const [allPosts, setAllPosts] = useState([])
-    const navigate = useNavigate()
-    const [newComment, setNewComment] = useState(
-        {
-            comment: ""
-        }
-    )
-
-    useEffect(() => {
-        if (passport) {
-            const timelinePosts = async () => {
-                const res = await timeline(token)
-                setAllPosts(res.data)
-            };
-            timelinePosts()
-        }
-    }, [])
-
-    const postById = async (e) => {
-        const id = e.target.name
-        navigate(`/post/${id}`)
+  useEffect(() => {
+    if (passport) {
+      const timelinePosts = async () => {
+        const res = await timeline(token);
+        setAllPosts(res.data);
+      };
+      timelinePosts();
     }
+  }, []);
 
-    const addComments = (e) => {
-        setNewComment(prevState => (
-            {
-                ...prevState,
-                [e.target.name]: e.target.value
-            })
-        )
+  const postById = async (e) => {
+    const id = e.target.name;
+    navigate(`/post/${id}`);
+  };
+
+  const addComments = (e) => {
+    setNewComment((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const sendComment = async (e) => {
+    const postId = e.target.name;
+    const response = await newComments(token, postId, newComment);
+    if (response.success) {
+      const res = await timeline(token);
+      setAllPosts(res.data);
+    } else {
+      console.log("error creating a new comment");
     }
+  };
 
-    const sendComment = async (e) => {
-        const postId = e.target.name
-        const response = await newComments(token, postId, newComment)
-        if (response.success) {
-            const res = await timeline(token)
-            setAllPosts(res.data)
-        } else {
-            console.log("error creating a new comment")
-        }
-    }
+  const likeThisPosts = async (e) => {
+    const postId = e.target.name;
+    const response = await likeDislike(token, postId);
+    console.log(response);
+    const res = await timeline(token);
+    setAllPosts(res.data);
+  };
 
-    const likeThisPosts = async (e) => {
-        const postId = e.target.name
-        const response = await likeDislike(token, postId)
-        console.log(response)
-        const res = await timeline(token)
-        setAllPosts(res.data)
-    }
-
-    return (
-        <>
-            <div>POSTS
-                {
-                    allPosts.map((post) => {
-                        if (post.likes.includes(userId)) {
-                            return (
-                                <div key={post._id}>
-                                    <div> {post.user.profile}</div>
-                                    <div>{post.user.name}</div>
-                                    <div>{post.post_message}</div>
-                                    <div>likes: {post.likes.length}</div>
-                                    <CInputs type="button" value={`Comments ${post.comments.length}`} name={post._id} onClick={postById} />
-                                    <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-                                    <CInputs type="button" value="send" name={post._id} onClick={sendComment} />
-                                    <CInputs type="button" value="dislike" name={post._id} onClick={likeThisPosts} />
-                                </div>
-                            )
-                        } else {
-
-                            return (
-                                <div key={post._id}>
-                                    <div> {post.user.profile}</div>
-                                    <div>{post.user.name}</div>
-                                    <div>{post.post_message}</div>
-                                    <div>likes: {post.likes.length}</div>
-                                    <CInputs type="button" value={`Comments ${post.comments.length}`} name={post._id} onClick={postById} />
-                                    <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-                                    <CInputs type="button" value="send" name={post._id} onClick={sendComment} />
-                                    <CInputs type="button" value="like" name={post._id} onClick={likeThisPosts} />
-                                </div>
-                            )
-                        }
-
-
-                    })
+  return (
+    <>
+      <div>
+        {allPosts.map((post) => {
+          return (
+            <div key={post._id}>
+              <CBlockContent
+                content={
+                  <CPostBlock
+                    creatorProfile={post.user.profile}
+                    creatorName={post.user.name}
+                    message={post.post_message}
+                    createdAt={post.createdAt}
+                    likeCount={post.likes.length}
+                    commentCount={post.comments.length}
+                    newCommentProfile={post.user.profile}
+                    postId={post._id}
+                    onClickToPostById={postById}
+                    onClickToLike={likeThisPosts}
+                    onChangeComments={addComments}
+                    onClickToSentComments={sendComment}
+                  />
                 }
+              />
             </div>
-
-        </>
-    )
-}
+          );
+        })}
+      </div>
+    </>
+  );
+};
