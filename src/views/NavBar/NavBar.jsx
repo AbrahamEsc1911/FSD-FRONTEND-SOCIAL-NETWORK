@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CNavigation } from "../../components/CNavigation/CNavigation";
-import { CInputs } from "../../components/CInputs/CInputs";
 import { useNavigate } from "react-router-dom";
 import { NewPostContext } from "../../Context/NewPostContext/NewPostContext";
 import { createPost } from "../../Services/posts.services";
@@ -91,7 +90,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items">
           <div className="nav-bar-icon">
             <img
-              src="./images/home.svg"
+              src="../images/home.svg"
               alt="home-icon"
               className="nav-bar-icon-content"
             />
@@ -103,7 +102,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items">
           <div className="nav-bar-icon">
             <img
-              src="./images/profile.svg"
+              src="../images/profile.svg"
               alt="profile-icon"
               className="nav-bar-icon-content"
             />
@@ -115,7 +114,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items-special">
           <div className="nav-bar-icon">
             <img
-              src="./images/post.svg"
+              src="../images/post.svg"
               alt="post-icon"
               className="nav-bar-icon-content"
             />
@@ -127,7 +126,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items">
           <div className="nav-bar-icon">
             <img
-              src="./images/logout.svg"
+              src="../images/logout.svg"
               alt="logout-icon"
               className="nav-bar-icon-content"
             />
@@ -140,20 +139,22 @@ export const NavBar = () => {
 
       {newPostPop && (
         <div className="overlay">
-          <CBlockContent 
-          content={
-            (<CNewPost 
-            userName={userData.name}
-            profile={userData.profile}
-            buttonName='message'
-            inputName='message'
-            onChange={handleMessage}
-            onClick={sendPosts}
-            clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
-            clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
-            onClickClose={newPostPopUp}
-            />)
-          }
+          <CBlockContent
+            content={
+              <CNewPost
+                userName={userData.name}
+                profile={userData.profile}
+                buttonName="message"
+                inputName="message"
+                onChange={handleMessage}
+                onClick={sendPosts}
+                clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
+                clasNameforErrorMessage={
+                  errorPostMessage ? "" : "hidden-content"
+                }
+                onClickClose={newPostPopUp}
+              />
+            }
           />
         </div>
       )}
