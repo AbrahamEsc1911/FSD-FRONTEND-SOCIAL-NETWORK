@@ -1,14 +1,25 @@
 .any-user-profile-body {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap; 
 }
 
 .any-user-profile-section-one {
-  width: 30vw;
+  width: 32vw;
+  height:auto;
+}
 
-  position: relative;
-  z-index: 2;
+.any-user-profile-section-two {
+  width: 50vw;
+  height:auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .follow-button {

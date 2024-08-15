@@ -160,10 +160,8 @@ export const AnyUserProfile = () => {
           }
         />
         </div>
-        <div></div>
-        
-        <div>
-          {userData.posts.map((posts) => {
+        <div className="any-user-profile-section-two">
+        {userData.posts.map((posts) => {
             return (
               <div key={posts._id}>
                 <CBlockContent
