@@ -13,7 +13,8 @@ export const CPostBlock = ({
   onClickToPostById,
   onClickToLike,
   onChangeComments,
-  onClickToSentComments
+  onClickToSentComments,
+  value
 }) => {
   return (
     <>
@@ -81,7 +82,7 @@ export const CPostBlock = ({
           <div className="send-button">
           <input
                 type="button"
-                value=""
+                value={value}
                 className="send-icon"
                 name={postId}
                 onClick={onClickToSentComments}

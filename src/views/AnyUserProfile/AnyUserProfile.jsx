@@ -1,12 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { followUser, getUserById } from "../../Services/user.services";
+import {
+  followUser,
+  getUserById,
+  userProfile,
+} from "../../Services/user.services";
 import { CInputs } from "../../components/CInputs/CInputs";
 import { AnyUserContex } from "../../Context/AnyUserProfileContext/anyUserProfileContext";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CSectionOneProfile } from "../../components/CSectionOneProfile/CSectionOneProfile";
 import { CSectionTwoProfile } from "../../components/CSectionTwoProfile/CSectionTwoProfile";
-import './AnyUserProfile.css'
+import "./AnyUserProfile.css";
+import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
+import { newComments } from "../../Services/comments.services";
+import { likeDislike } from "../../Services/posts.services";
 
 export const AnyUserProfile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -33,16 +40,38 @@ export const AnyUserProfile = () => {
     profile: "",
   });
 
+  const [userToken, setUserToken] = useState({
+    _id: "",
+    name: "",
+    email: "",
+    createdAt: "",
+    posts: [],
+    followers: [],
+    following: [],
+    phone: "phone",
+    city: "city",
+    born: "born",
+    profile: "",
+  });
+
+  const [newComment, setNewComment] = useState({
+    comment: "",
+  });
+
   useEffect(() => {
-    const bringUser = async () => {
-      const res = await getUserById(id);
-      if (res.success) {
-        setUserData(res.data);
-        console.log(res.data);
-      }
-      //TODO AGREGAR REDIRECCION A 404 SI EL RESPONSE ES FALSE
-    };
-    bringUser();
+    if (passport) {
+      const bringUser = async () => {
+        const allProfile = await getUserById(id);
+        const userToken = await userProfile(token);
+        if (allProfile.success) {
+          setUserData(allProfile.data);
+          setUserToken(userToken.data);
+        }
+      };
+      bringUser();
+    } else {
+      navigate("./login");
+    }
   }, []);
 
   const followUnfollow = async (e) => {
@@ -54,6 +83,39 @@ export const AnyUserProfile = () => {
     } else {
       setNavigationPath(id);
       navigate("/login");
+    }
+  };
+
+  const postById = async (e) => {
+    const id = e.target.name;
+    navigate(`/post/${id}`);
+  };
+
+  const likeThisPosts = async (e) => {
+    let postId = null;
+    if (e) {
+      postId = e.target.name;
+    }
+    await likeDislike(token, postId);
+    const userUpdated = await getUserById(id);
+    setUserData(userUpdated.data);
+  };
+
+  const addComments = (e) => {
+    setNewComment((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const sendComment = async (e) => {
+    const postId = e.target.name;
+    const response = await newComments(token, postId, newComment);
+    if (response.success) {
+      const userUpdated = await getUserById(id);
+      setUserData(userUpdated.data);
+    } else {
+      console.log("error creating a new comment");
     }
   };
 
@@ -78,18 +140,52 @@ export const AnyUserProfile = () => {
                     bornDate={userData.born}
                     phone={userData.phone}
                     city={userData.city}
-                    value={userData.followers.includes(userId) ? "Unfollow": "Follow"}
+                    value={
+                      userData.followers.includes(userId)
+                        ? "Unfollow"
+                        : "Follow"
+                    }
                     buttonName={userData._id}
                     onClick={followUnfollow}
-                    className={userData.followers.includes(userId) ? "unfollow-button" : "follow-button"}
+                    className={
+                      userData.followers.includes(userId)
+                        ? "unfollow-button"
+                        : "follow-button"
+                    }
                   />
                 </div>
               </div>
             </div>
           }
         />
+        <div>
+          {userData.posts.map((posts) => {
+            return (
+              <div key={posts._id}>
+                <CBlockContent
+                  content={
+                    <CPostBlock
+                      creatorProfile={userData.profile}
+                      creatorName={userData.name}
+                      message={posts.post_message}
+                      createdAt={posts.createdAt}
+                      likeCount={posts.likes.length}
+                      commentCount={posts.comments.length}
+                      newCommentProfile={userToken.profile}
+                      postId={posts._id}
+                      value='comment'
+                      onClickToPostById={postById}
+                      onClickToLike={likeThisPosts}
+                      onChangeComments={addComments}
+                      onClickToSentComments={sendComment}
+                    />
+                  }
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-
     </>
   );
 };
