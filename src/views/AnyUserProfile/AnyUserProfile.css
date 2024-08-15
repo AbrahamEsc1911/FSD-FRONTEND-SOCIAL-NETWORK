@@ -1,17 +1,30 @@
+.any-user-profile-body {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.any-user-profile-section-one {
+  width: 30vw;
+
+  position: relative;
+  z-index: 2;
+}
+
 .follow-button {
-    height: 2.4rem;
-    width: 7rem;
-  
-    border-radius: 3rem;
-    border: none;
-  
-    margin-bottom: 1rem;
-  
-    background-color: #3461fb;
-    color: white;
-    font-weight: 400;
-  
-    cursor: pointer;
+  height: 2.4rem;
+  width: 7rem;
+
+  border-radius: 3rem;
+  border: none;
+
+  margin-bottom: 1rem;
+
+  background-color: #3461fb;
+  color: white;
+  font-weight: 400;
+
+  cursor: pointer;
 }
 
 .follow-button:hover {
@@ -19,19 +32,19 @@
 }
 
 .unfollow-button {
-    height: 2.4rem;
-    width: 7rem;
-  
-    border-radius: 3rem;
-    border: none;
-  
-    margin-bottom: 1rem;
-  
-    background-color: #acacac;
-    color: white;
-    font-weight: 400;
-  
-    cursor: pointer;
+  height: 2.4rem;
+  width: 7rem;
+
+  border-radius: 3rem;
+  border: none;
+
+  margin-bottom: 1rem;
+
+  background-color: #acacac;
+  color: white;
+  font-weight: 400;
+
+  cursor: pointer;
 }
 
 .unfollow-button:hover {

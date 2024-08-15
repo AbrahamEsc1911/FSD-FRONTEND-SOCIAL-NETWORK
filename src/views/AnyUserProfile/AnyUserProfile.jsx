@@ -121,7 +121,8 @@ export const AnyUserProfile = () => {
 
   return (
     <>
-      <div>
+      <div className="any-user-profile-body">
+        <div className="any-user-profile-section-one">
         <CBlockContent
           content={
             <div>
@@ -158,6 +159,9 @@ export const AnyUserProfile = () => {
             </div>
           }
         />
+        </div>
+        <div></div>
+        
         <div>
           {userData.posts.map((posts) => {
             return (
