@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { likeDislike, timeline } from "../../Services/posts.services";
-import { CInputs } from "../../components/CInputs/CInputs";
 import { newComments } from "../../Services/comments.services";
-import { userProfile } from "../../Services/user.services";
 import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
+import './Timeline.css'
+import { getAllUsers } from "../../Services/user.services";
+import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 
 export const Timeline = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -16,6 +17,7 @@ export const Timeline = () => {
     userId = passport.tokenData.id;
   }
   const [allPosts, setAllPosts] = useState([]);
+  const [usersToFollow, setusersToFollow] = useState([])
   const navigate = useNavigate();
   const [newComment, setNewComment] = useState({
     comment: "",
@@ -25,7 +27,10 @@ export const Timeline = () => {
     if (passport) {
       const timelinePosts = async () => {
         const res = await timeline(token);
+        const bringUsers = await getAllUsers(token)
         setAllPosts(res.data);
+        setusersToFollow(bringUsers.data)
+        console.log(bringUsers.data)
       };
       timelinePosts();
     }
@@ -62,8 +67,33 @@ export const Timeline = () => {
     setAllPosts(res.data);
   };
 
+  const follow = async () => {
+
+  }
+
   return (
     <>
+
+    <div>
+      {
+        usersToFollow.map((user) => {
+          if(!user.followers.includes(userId)){
+            return(
+              <div key={user._id}>
+                <CRecomendationBlock
+                profile={user.profile}
+                userName={user.name}
+                buttonName={user._id}
+                buttonOnClick={follow}
+                />
+              </div>
+            )
+          }
+          
+        })
+      }
+    </div>
+
       <div>
         {allPosts.map((post) => {
           return (

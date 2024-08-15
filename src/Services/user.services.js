@@ -60,3 +60,15 @@ export const followUser = async (token, id) => {
 
     return await response.json()
 }
+
+export const getAllUsers = async (token) => {
+    const response = await fetch(`${URL}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    return await response.json()
+}
