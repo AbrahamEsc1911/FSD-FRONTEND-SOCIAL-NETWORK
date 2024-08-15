@@ -105,17 +105,6 @@ export const SiglePost = () => {
         }   
         />
         
-            <p>{post.user.name}</p>
-            <p>{post.post_message}</p>
-            <p>{post.createdAt}</p>
-            <p>likes: {post.likes.length}</p>
-            <p>comentarios: {post.comments.length}</p>
-            <div></div>
-            <CInputs type="button" value={post.likes.includes(userId) ? "Dislike" : "like"} name={post._id} onClick={likeThisPosts} />
-            <CInputs type="text" placeholder="add a comment" name="comment" onChange={addComments} maxLength={250} />
-            <CInputs type="button" value="send" name={post._id} onClick={sendComment} />
-
-
             <div> Comentarios:
                 {post.comments.map((comments) => {
                     return (
