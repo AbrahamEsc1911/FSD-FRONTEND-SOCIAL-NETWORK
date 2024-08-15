@@ -87,5 +87,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Asegura que esté por encima de todo el contenido */
+    z-index: 1000; 
   }
+
+
+  /* DESDE AQUI */
+  

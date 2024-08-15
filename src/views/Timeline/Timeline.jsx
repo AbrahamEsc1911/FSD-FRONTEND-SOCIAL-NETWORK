@@ -69,7 +69,7 @@ export const Timeline = () => {
           return (
             <div key={post._id}>
               <CBlockContent
-                content={
+                content={ 
                   <CPostBlock
                     creatorProfile={post.user.profile}
                     creatorName={post.user.name}
