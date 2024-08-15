@@ -232,6 +232,7 @@ export const Profile = () => {
                       phone={userData.phone}
                       city={userData.city}
                       value={editProfileData ? "Cancel" : "Edit profile"}
+                      className='common-button'
                       onClick={editProfile}
                     />
                   )}{" "}
