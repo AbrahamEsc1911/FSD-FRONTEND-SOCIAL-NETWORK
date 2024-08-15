@@ -1,0 +1,88 @@
+.new-post-section {
+    width: 40vw;
+    height: auto;
+  }
+
+  .new-post-close {
+    height: 1.2rem;
+    width: 40vw;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .close-icon {
+    width: 1rem;
+  }
+
+  .new-post-header{
+    width: 40vw;
+    height: 4rem;
+
+    display: flex;
+  }
+
+  .new-post-profile{
+    width: 4rem;
+    height: 4rem;
+
+    background-color: green;
+
+    border-radius: 50%;
+  }
+
+  .new-post-name {
+    height: 4rem;
+    width: auto;
+
+    padding-left: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .text-no-margin {
+    margin: 0;
+  }
+
+  #new-post-message {
+    width: 38vw;
+    height: 5rem;
+
+    padding: 0.5rem;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    border: none;
+    border-radius: 1rem;
+
+    resize: none;
+  }
+
+  .new-post-button {
+    width: 39vw;
+    height: auto;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .new-post-send-button {
+    height: 2.4rem;
+    width: 9rem;
+
+    border-radius: 3rem;
+    border: none;
+
+    background-color: #3461FB;
+    color: white;
+    font-weight: 400;
+
+    cursor: pointer;
+  }
+
+  .new-post-send-button:hover {
+    background-color: #1849ea;
+  }
