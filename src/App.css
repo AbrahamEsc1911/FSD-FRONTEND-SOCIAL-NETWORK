@@ -36,3 +36,18 @@ html, body, #root {
   background-color: #F4F4F4;
   overflow-x: hidden;
 }
+
+.content-container-full-width{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto; 
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+  background-color: #F4F4F4;
+  overflow-x: hidden;
+}
