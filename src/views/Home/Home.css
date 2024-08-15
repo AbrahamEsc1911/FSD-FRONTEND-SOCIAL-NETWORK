@@ -1,0 +1,73 @@
+.home-view-main {
+    width: 100vw;
+    height: 79vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.section-home-image {
+    width: 50vw;
+    height: 79vh;
+}
+
+.section-home-container{ 
+    width: 50vw;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.text-home-container {
+    width: 38vw;
+    height: auto;
+}
+
+.button-home-container {
+    width: 23vw;
+    height: auto;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-button {
+    height: 2.4rem;
+    width: 8rem;
+
+    border-radius: 3rem;
+    border: none;
+
+    background-color: #3461FB;
+    color: white;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #2b53d5;
+}
+
+.login-button {
+    height: 2.4rem;
+    width: 8rem;
+
+    border-radius: 3rem;
+    border: none;
+
+    background-color: #626262;
+    color: white;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #4f4f4f;
+}

@@ -1,34 +1,45 @@
-import React, { useContext, useEffect } from 'react'
-import { CInputs } from '../../components/CInputs/CInputs'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect } from "react";
+import { CInputs } from "../../components/CInputs/CInputs";
+import { useNavigate } from "react-router-dom";
+import "./Home.css";
 
 export const Home = () => {
+  const passport = JSON.parse(localStorage.getItem("passport"));
+  let token = null;
+  if (passport) {
+    token = passport.token;
+  }
 
-    const passport = JSON.parse(localStorage.getItem("passport"))
-    let token = null
-    if (passport) { token = passport.token }
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const navRegister = () => {
+    navigate("/register");
+  };
 
-    const navRegister = () => {
-        navigate("/register")
+  const navLogin = () => {
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    if (passport) {
+      navigate("/timeline");
     }
+  }, [passport]);
 
-    const navLogin = () => {
-        navigate("/login")
-    }
-
-    useEffect(() => {
-        if (passport) {
-            navigate("/timeline")
-        }
-    }, [passport])
-
-    return (
-        <>
-            <h3>Habla con el mundo, y comparte lo que ocurre en tu mundo</h3>
-            <CInputs type="button" value="Registrate" onClick={navRegister} />
-            <CInputs type="button" value="ingresar" onClick={navLogin} />
-        </>
-    )
-}
+  return (
+    <>
+      <div className="home-view-main">
+        <div className="section-home-image"></div>
+        <div className="section-home-container">
+          <div className="text-home-container">
+            <h1>Share with the World, what happend in your world</h1>
+          </div>
+          <div className="button-home-container">
+            <CInputs type="button" value="Registrate" onClick={navRegister} className='register-button'/>
+            <CInputs type="button" value="ingresar" onClick={navLogin} className='login-button'/>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
