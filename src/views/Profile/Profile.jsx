@@ -69,7 +69,7 @@ export const Profile = () => {
     } else {
       navigate("/login");
     }
-  }, [newPostPop]);
+  }, [newPostPop, userData]);
 
   const editProfile = () => {
     setEditProfileData(!editProfileData);
@@ -95,6 +95,8 @@ export const Profile = () => {
     if (newPost.message.length > 0) {
       const res = await createPost(token, newPost);
       if (res.success) {
+        const userUpdated = await userProfile(token);
+        setUserData(userUpdated.data);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
       } else {
