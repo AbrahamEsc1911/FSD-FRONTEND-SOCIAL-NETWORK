@@ -3,13 +3,14 @@ import { updateProfile, userProfile } from "../../Services/user.services";
 import { useNavigate } from "react-router-dom";
 import { CInputs } from "../../components/CInputs/CInputs";
 import "./Profile.css";
-import { likeDislike } from "../../Services/posts.services";
+import { createPost, likeDislike } from "../../Services/posts.services";
 import { newComments } from "../../Services/comments.services";
 import { NewPostContext } from "../../Context/NewPostContext/NewPostContext";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CSectionOneProfile } from "../../components/CSectionOneProfile/CSectionOneProfile";
 import { CSectionTwoProfile } from "../../components/CSectionTwoProfile/CSectionTwoProfile";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
+import { CNewPost } from "../../components/CNewPost/CNewPost";
 
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -42,12 +43,18 @@ export const Profile = () => {
     comment: "",
   });
 
+  const [newPost, setNewPost] = useState({
+    message: "",
+  });
+
   const navigate = useNavigate();
   const [editProfileData, setEditProfileData] = useState(false);
   const [wargingMessage, setWargingMessage] = useState(false);
   const [errorUpdatingUser, setErrorUpdatingUser] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { newPostPop } = useContext(NewPostContext);
+  const [errorPostMessage, setErrorPostMessage] = useState(false);
+  const [errorEmptyPost, setErrorEmptyPost] = useState(false);
 
   useEffect(() => {
     if (passport) {
@@ -75,6 +82,27 @@ export const Profile = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleMessage = (e) => {
+    setNewPost((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const sendPosts = async () => {
+    if (newPost.message.length > 0) {
+      const res = await createPost(token, newPost);
+      if (res.success) {
+        setErrorPostMessage(false);
+        setErrorEmptyPost(false);
+      } else {
+        setErrorPostMessage(true);
+      }
+    } else {
+      setErrorEmptyPost(true);
+    }
   };
 
   const saveChangesButton = async () => {
@@ -232,7 +260,7 @@ export const Profile = () => {
                       phone={userData.phone}
                       city={userData.city}
                       value={editProfileData ? "Cancel" : "Edit profile"}
-                      className='common-button'
+                      className="common-button"
                       onClick={editProfile}
                     />
                   )}{" "}
@@ -301,6 +329,24 @@ export const Profile = () => {
           />
         </div>
         <div className="profile-section-two">
+          <CBlockContent
+            content={
+              <CNewPost
+                showOrNotIconClose="hidden-content"
+                userName={userData.name}
+                profile={userData.profile}
+                buttonName="message"
+                inputName="message"
+                onChange={handleMessage}
+                onClick={sendPosts}
+                clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
+                clasNameforErrorMessage={
+                  errorPostMessage ? "" : "hidden-content"
+                }
+              />
+            }
+          />
+
           {userData.posts.map((posts) => {
             return (
               <div key={posts._id}>

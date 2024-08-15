@@ -11,11 +11,12 @@ export const CNewPost = ({
   clasNameforErrorMessage,
   clasNameForEmtyMessage,
   onClickClose,
+  showOrNotIconClose
 }) => {
   return (
     <>
       <div className="new-post-section">
-        <div className="new-post-close">
+        <div className={`new-post-close ${showOrNotIconClose}`} >
           <img
             src="./images/close.png"
             alt="close-icon"
