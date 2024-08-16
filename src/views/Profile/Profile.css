@@ -10,10 +10,12 @@
   justify-content: space-evenly;
   align-items: flex-start;
   flex-wrap: wrap; 
+
+  margin-bottom: 1rem;
 }
 
 .profile-section-one {
-  width: 32vw;
+  width: 30vw;
   height:auto;
 }
 
