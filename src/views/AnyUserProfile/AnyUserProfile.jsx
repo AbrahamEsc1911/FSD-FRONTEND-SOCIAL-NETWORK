@@ -166,6 +166,7 @@ export const AnyUserProfile = () => {
         </div>
         <div className="any-user-profile-section-two">
         {userData.posts.map((posts) => {
+          if(posts.likes.includes(userToken._id)){
             return (
               <div key={posts._id}>
                 <CBlockContent
@@ -186,11 +187,41 @@ export const AnyUserProfile = () => {
                       onClickToSentComments={sendComment}
                       creatorId={userData._id}
                       onClickToGoUserProfile={userById}
+                      classNameButtonLike={'dislike'}
                     />
                   }
                 />
               </div>
             );
+          } else if (!posts.likes.includes(userToken._id)) {
+            return (
+              <div key={posts._id}>
+                <CBlockContent
+                  content={
+                    <CPostBlock
+                      creatorProfile={userData.profile}
+                      creatorName={userData.name}
+                      message={posts.post_message}
+                      createdAt={posts.createdAt}
+                      likeCount={posts.likes.length}
+                      commentCount={posts.comments.length}
+                      newCommentProfile={userToken.profile}
+                      postId={posts._id}
+                      value='comment'
+                      onClickToPostById={postById}
+                      onClickToLike={likeThisPosts}
+                      onChangeComments={addComments}
+                      onClickToSentComments={sendComment}
+                      creatorId={userData._id}
+                      onClickToGoUserProfile={userById}
+                      classNameButtonLike={'like'}
+                    />
+                  }
+                />
+              </div>
+            );
+          }
+            
           })}
         </div>
       </div>
