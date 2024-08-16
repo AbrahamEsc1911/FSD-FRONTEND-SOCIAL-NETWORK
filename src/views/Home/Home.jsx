@@ -35,8 +35,8 @@ export const Home = () => {
             <h1>Share with the World, what happend in your world</h1>
           </div>
           <div className="button-home-container">
-            <CInputs type="button" value="Registrate" onClick={navRegister} className='register-button'/>
-            <CInputs type="button" value="ingresar" onClick={navLogin} className='login-button'/>
+            <CInputs type="button" value="Sing Up" onClick={navRegister} className='register-button'/>
+            <CInputs type="button" value="Login" onClick={navLogin} className='login-button'/>
           </div>
         </div>
       </div>

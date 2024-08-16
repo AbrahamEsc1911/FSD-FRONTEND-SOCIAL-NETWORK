@@ -95,3 +95,16 @@
 .button-register:hover {
   background-color: #2b53d5;
 }
+
+
+.special-text {
+  font-weight: 600;
+  cursor: pointer;
+  color: #2d58e6;
+}
+
+.special-text:hover {
+  font-weight: 600;
+  cursor: pointer;
+  color: #2649bd;
+}

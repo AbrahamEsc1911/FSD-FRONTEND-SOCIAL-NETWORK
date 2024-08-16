@@ -50,6 +50,10 @@ export const Register = () => {
     }
   };
 
+  const goToLogin = () => {
+    navigate('../login')
+  }
+
   return (
     <>
       <div className="register-view-main">
@@ -57,11 +61,11 @@ export const Register = () => {
           <CBlockContent
             content={
               <div className="register-container">
-                <h2 className="text-no-margin">Register</h2>
+                <h2 className="text-no-margin">Sing Up</h2>
                 <CInputs
                   type="text"
                   name="name"
-                  placeholder="Nombre"
+                  placeholder="Name"
                   onChange={handleChange}
                   className="input-register"
                 />
@@ -89,10 +93,11 @@ export const Register = () => {
                 <div>
                   <CInputs
                     type="button"
-                    value="Registrarse"
+                    value="Sing Up"
                     onClick={registerButton}
                     className="button-register"
                   />
+                  <p className="text-no-margin">Already have an acount? <span className="special-text" onClick={goToLogin}>Login</span></p>
                 </div>
               </div>
             }

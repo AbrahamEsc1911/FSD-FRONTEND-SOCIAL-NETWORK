@@ -20,7 +20,7 @@ export const Login = () => {
   const [passwordChart, setPasswordChart] = useState(false);
   const navigate = useNavigate();
   const { postId, setPostId } = useContext(PostContext);
-  const {setNavBar} = useContext(NavBarContext)
+  const { setNavBar } = useContext(NavBarContext);
   const { navigationPath, setNavigationPath } = useContext(AnyUserContex);
 
   const handleChangeLog = (e) => {
@@ -46,7 +46,7 @@ export const Login = () => {
       setPasswordChart(false);
 
       if (response.success) {
-        setNavBar(true)
+        setNavBar(true);
         const tokenDecoded = jwtDecode(response.data);
         const passport = {
           token: response.data,
@@ -68,59 +68,69 @@ export const Login = () => {
     }
   };
 
+  const goToRegister = () => {
+    navigate("../register");
+  };
+
   return (
     <>
-    <div className="login-view-main">
+      <div className="login-view-main">
         <div className="section-login-container">
-        <CBlockContent
-        content={
-          <div className="login-container">
-            <h2 className="text-no-margin">Login</h2>
-            <div>
-              <CInputs
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={handleChangeLog}
-                className="input-login"
-              />
-            </div>
-            <div>
-              <CInputs
-                type="password"
-                name="password"
-                placeholder="Constraseña"
-                onChange={handleChangeLog}
-                className="input-login"
-              />
-            </div>
-            <p className={warningMessage ? "" : "hidden-content"}>
-              Email y contraseña son requeridos
-            </p>
-            <p className={passwordChart ? "" : "hidden-content"}>
-              la contraseña debe ser mayor a 8 y menor a 12 caracteres
-            </p>
-            <p className={invalidAccesMessage ? "" : "hidden-content"}>
-              Correo o contraseña incorrectos
-            </p>
-            <div>
-              <CInputs
-                type="button"
-                name="login"
-                value="ingresar"
-                onClick={loginButton}
-                className='button-login'
-              />
-            </div>
-          </div>
-        }
-      />
+          <CBlockContent
+            content={
+              <div className="login-container">
+                <h2 className="text-no-margin">Login</h2>
+                <div>
+                  <CInputs
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChangeLog}
+                    className="input-login"
+                  />
+                </div>
+                <div>
+                  <CInputs
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleChangeLog}
+                    className="input-login"
+                  />
+                </div>
+                <p className={warningMessage ? "" : "hidden-content"}>
+                  Email and password are required.
+                </p>
+                <p className={passwordChart ? "" : "hidden-content"}>
+                  The password must be greater than 8 and less than 12
+                  characters.
+                </p>
+                <p className={invalidAccesMessage ? "" : "hidden-content"}>
+                  Incorrect email or password.
+                </p>
+                <div>
+                  <CInputs
+                    type="button"
+                    name="login"
+                    value="Login"
+                    onClick={loginButton}
+                    className="button-login"
+                  />
+                  <p className="text-no-margin">
+                    Don't have an acoutn yet?{" "}
+                    <span className="special-text" onClick={goToRegister}>
+                      Sing up
+                    </span>
+                  </p>
+                </div>
+              </div>
+            }
+          />
         </div>
         <div className="section-login-image">
-            <img src="./images/profile.jpg" alt="" />
+          <img src="./images/profile.jpg" alt="" />
         </div>
-    </div>
-      
+      </div>
     </>
   );
 };
