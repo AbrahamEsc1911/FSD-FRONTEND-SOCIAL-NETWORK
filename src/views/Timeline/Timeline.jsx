@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { likeDislike, timeline } from "../../Services/posts.services";
+import { createPost, likeDislike, timeline } from "../../Services/posts.services";
 import { newComments } from "../../Services/comments.services";
 import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import "./Timeline.css";
-import {
-  followUser,
-  getAllUsers,
-  userProfile,
-} from "../../Services/user.services";
+import { followUser, getAllUsers, userProfile,} from "../../Services/user.services";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
+import { CNewPost } from "../../components/CNewPost/CNewPost";
 
 export const Timeline = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -20,9 +17,16 @@ export const Timeline = () => {
     token = passport.token;
     userId = passport.tokenData.id;
   }
+
+  const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState([]);
   const [usersToFollow, setusersToFollow] = useState([]);
-  const navigate = useNavigate();
+  const [errorPostMessage, setErrorPostMessage] = useState(false);
+  const [errorEmptyPost, setErrorEmptyPost] = useState(false);
+  const [updateView, setUpdateView] = useState(false)
+  const [newPost, setNewPost] = useState({
+    message: "",
+  });
   const [newComment, setNewComment] = useState({
     comment: "",
   });
@@ -52,11 +56,18 @@ export const Timeline = () => {
       };
       timelinePosts();
     }
-  }, []);
-  console.log(usersToFollow);
+  }, [newPost, passport]);
+
   const postById = async (e) => {
     const id = e.target.name;
     navigate(`/post/${id}`);
+  };
+
+  const handleMessage = (e) => {
+    setNewPost((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const addComments = (e) => {
@@ -66,12 +77,30 @@ export const Timeline = () => {
     }));
   };
 
+  const sendPosts = async () => {
+    if (newPost.message.length > 0) {
+      const res = await createPost(token, newPost);
+      if (res.success) {
+        setNewPost({message: "",});
+        const res = await timeline(token);
+        setAllPosts(res.data);
+        setErrorPostMessage(false);
+        setErrorEmptyPost(false);
+      } else {
+        setErrorPostMessage(true);
+      }
+    } else {
+      setErrorEmptyPost(true);
+    }
+  };
+
   const sendComment = async (e) => {
     const postId = e.target.name;
     const response = await newComments(token, postId, newComment);
     if (response.success) {
       const res = await timeline(token);
       setAllPosts(res.data);
+      setUpdateView(true)
     } else {
       console.log("error creating a new comment");
     }
@@ -98,6 +127,23 @@ export const Timeline = () => {
     <>
       <div className="timeline-body">
         <div className="timeline-section-one">
+          <div>
+          <CBlockContent
+            content={
+              <CNewPost
+                showOrNotIconClose="hidden-content"
+                userName={userData.name}
+                profile={userData.profile}
+                buttonName="message"
+                inputName="message"
+                onChange={handleMessage}
+                onClick={sendPosts}
+                clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
+                clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
+              />
+            }
+          />
+          </div>
           <div>
             {allPosts.map((post) => {
               return (

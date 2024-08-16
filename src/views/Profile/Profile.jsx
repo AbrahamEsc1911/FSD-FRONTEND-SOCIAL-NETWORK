@@ -96,6 +96,7 @@ export const Profile = () => {
       const res = await createPost(token, newPost);
       if (res.success) {
         const userUpdated = await userProfile(token);
+        setNewPost({message: "",});
         setUserData(userUpdated.data);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
