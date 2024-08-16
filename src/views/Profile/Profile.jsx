@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getUserById, updateProfile, userProfile } from "../../Services/user.services";
+import {
+  getUserById,
+  updateProfile,
+  userProfile,
+} from "../../Services/user.services";
 import { useNavigate } from "react-router-dom";
 import { CInputs } from "../../components/CInputs/CInputs";
 import "./Profile.css";
@@ -96,7 +100,7 @@ export const Profile = () => {
       const res = await createPost(token, newPost);
       if (res.success) {
         const userUpdated = await userProfile(token);
-        setNewPost({message: "",});
+        setNewPost({ message: "" });
         setUserData(userUpdated.data);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
@@ -239,12 +243,12 @@ export const Profile = () => {
   };
 
   const userById = async (userId) => {
-    console.log(userId)
-    navigate(`../user/${userId}`)
-    const res = await getUserById(userId)
-    if(res.success){
+    console.log(userId);
+    navigate(`../user/${userId}`);
+    const res = await getUserById(userId);
+    if (res.success) {
     }
-  }
+  };
 
   return (
     <>
@@ -351,37 +355,65 @@ export const Profile = () => {
                 onChange={handleMessage}
                 onClick={sendPosts}
                 clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
-                clasNameforErrorMessage={
-                  errorPostMessage ? "" : "hidden-content"
-                }
+                clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
               />
             }
           />
           {userData.posts.map((posts) => {
-            return (
-              <div key={posts._id}>
-                <CBlockContent
-                  content={
-                    <CPostBlock
-                      creatorProfile={userData.profile}
-                      creatorName={userData.name}
-                      message={posts.post_message}
-                      createdAt={posts.createdAt}
-                      likeCount={posts.likes.length}
-                      commentCount={posts.comments.length}
-                      newCommentProfile={userData.profile}
-                      postId={posts._id}
-                      onClickToPostById={postById}
-                      onClickToLike={likeThisPosts}
-                      onChangeComments={addComments}
-                      onClickToSentComments={sendComment}
-                      creatorId={userData._id}
-                      onClickToGoUserProfile={userById}
-                    />
-                  }
-                />
-              </div>
-            );
+            if(posts.likes.includes(userData._id)){
+              return (
+                <div key={posts._id}>
+                  <CBlockContent
+                    content={
+                      <CPostBlock
+                        creatorProfile={userData.profile}
+                        creatorName={userData.name}
+                        message={posts.post_message}
+                        createdAt={posts.createdAt}
+                        likeCount={posts.likes.length}
+                        commentCount={posts.comments.length}
+                        newCommentProfile={userData.profile}
+                        postId={posts._id}
+                        onClickToPostById={postById}
+                        onClickToLike={likeThisPosts}
+                        onChangeComments={addComments}
+                        onClickToSentComments={sendComment}
+                        creatorId={userData._id}
+                        onClickToGoUserProfile={userById}
+                        classNameButtonLike={"dislike"}
+                      />
+                    }
+                  />
+                </div>
+              );
+            } else if(!posts.likes.includes(userData._id)){
+              return (
+                <div key={posts._id}>
+                  <CBlockContent
+                    content={
+                      <CPostBlock
+                        creatorProfile={userData.profile}
+                        creatorName={userData.name}
+                        message={posts.post_message}
+                        createdAt={posts.createdAt}
+                        likeCount={posts.likes.length}
+                        commentCount={posts.comments.length}
+                        newCommentProfile={userData.profile}
+                        postId={posts._id}
+                        onClickToPostById={postById}
+                        onClickToLike={likeThisPosts}
+                        onChangeComments={addComments}
+                        onClickToSentComments={sendComment}
+                        creatorId={userData._id}
+                        onClickToGoUserProfile={userById}
+                        classNameButtonLike={"like"}
+                      />
+                    }
+                  />
+                </div>
+              );
+            }
+            
           })}
         </div>
       </div>
