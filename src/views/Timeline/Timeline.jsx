@@ -56,7 +56,7 @@ export const Timeline = () => {
       };
       timelinePosts();
     }
-  }, [newPost, passport]);
+  }, []);
 
   const postById = async (e) => {
     const id = e.target.name;

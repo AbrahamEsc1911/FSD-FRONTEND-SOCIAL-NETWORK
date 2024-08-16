@@ -62,12 +62,14 @@ export const NavBar = () => {
     setNewPostPop(!newPostPop);
     setErrorPostMessage(false);
     setErrorEmptyPost(false);
+    setNewPost({message: "",});
   };
 
   const sendPosts = async () => {
     if (newPost.message.length > 0) {
       const res = await createPost(token, newPost);
       if (res.success) {
+        setNewPost({message: "",});
         setNewPostPop(false);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
