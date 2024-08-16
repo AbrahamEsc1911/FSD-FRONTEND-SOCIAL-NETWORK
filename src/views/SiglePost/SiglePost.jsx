@@ -145,6 +145,8 @@ export const SiglePost = () => {
                     userName={user.name}
                     buttonName={user._id}
                     buttonOnClick={follow}
+                    userProfile={user._id}
+                    onClickToGoUserProfile={userById}
                   />
                 )}
               </div>
