@@ -7,6 +7,7 @@ import "./NavBar.css";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { userProfile } from "../../Services/user.services";
+import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
 
 export const NavBar = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -19,6 +20,7 @@ export const NavBar = () => {
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { newPostPop, setNewPostPop } = useContext(NewPostContext);
+  const {setNavBar} = useContext(NavBarContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -38,6 +40,7 @@ export const NavBar = () => {
 
   useEffect(() => {
     if (passport) {
+      setNavBar(true)
       const bringprofile = async () => {
         const response = await userProfile(token);
         if (response) {
@@ -83,6 +86,7 @@ export const NavBar = () => {
 
   const logout = () => {
     localStorage.removeItem("passport");
+    setNavBar(false)
     navigate("/login");
   };
 

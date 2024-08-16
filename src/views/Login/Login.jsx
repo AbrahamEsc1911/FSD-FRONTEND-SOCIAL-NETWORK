@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { PostContext } from "../../Context/postContext/postContex";
 import { AnyUserContex } from "../../Context/AnyUserProfileContext/anyUserProfileContext";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
+import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
 
 export const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -19,6 +20,7 @@ export const Login = () => {
   const [passwordChart, setPasswordChart] = useState(false);
   const navigate = useNavigate();
   const { postId, setPostId } = useContext(PostContext);
+  const {setNavBar} = useContext(NavBarContext)
   const { navigationPath, setNavigationPath } = useContext(AnyUserContex);
 
   const handleChangeLog = (e) => {
@@ -44,6 +46,7 @@ export const Login = () => {
       setPasswordChart(false);
 
       if (response.success) {
+        setNavBar(true)
         const tokenDecoded = jwtDecode(response.data);
         const passport = {
           token: response.data,
