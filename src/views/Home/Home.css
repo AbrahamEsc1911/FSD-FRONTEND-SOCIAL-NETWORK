@@ -1,73 +1,101 @@
 .home-view-main {
-    width: 100vw;
-    height: 79vh;
+  width: 100vw;
+  height: 79vh;
 
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .section-home-image {
-    width: 50vw;
-    height: 79vh;
+  width: 50vw;
+  height: 79vh;
 }
 
-.section-home-container{ 
-    width: 50vw;
+@media (max-width: 1100px) {
+  .section-home-image {
+    width: 60vw;
     height: auto;
+  }
+}
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+@media (max-width: 920px) {
+  .section-home-image {
+    width: 60vw;
+    height: auto;
+  }
+}
+
+.section-home-container {
+  width: 50vw;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 1100px) {
+  .section-home-container {
+    width: 60vw;
+    height: auto;
+  }
+}
+
+@media (max-width: 920px) {
+  .section-home-container {
+    width: 60vw;
+    height: auto;
+  }
 }
 
 .text-home-container {
-    width: 38vw;
-    height: auto;
+  width: 38vw;
+  height: auto;
 }
 
 .button-home-container {
-    width: 23vw;
-    height: auto;
+  width: 23vw;
+  height: auto;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .register-button {
-    height: 2.4rem;
-    width: 8rem;
+  height: 2.4rem;
+  width: 8rem;
 
-    border-radius: 3rem;
-    border: none;
+  border-radius: 3rem;
+  border: none;
 
-    background-color: #3461FB;
-    color: white;
-    font-weight: 400;
+  background-color: #3461fb;
+  color: white;
+  font-weight: 400;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .register-button:hover {
-    background-color: #2b53d5;
+  background-color: #2b53d5;
 }
 
 .login-button {
-    height: 2.4rem;
-    width: 8rem;
+  height: 2.4rem;
+  width: 8rem;
 
-    border-radius: 3rem;
-    border: none;
+  border-radius: 3rem;
+  border: none;
 
-    background-color: #626262;
-    color: white;
-    font-weight: 400;
+  background-color: #626262;
+  color: white;
+  font-weight: 400;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .login-button:hover {
-    background-color: #4f4f4f;
+  background-color: #4f4f4f;
 }
