@@ -189,14 +189,30 @@
   color: #264ac0;
 }
 
-.like-icon {
+.like {
+  transition: 0.2s;
   width: 1.3rem;
   height: 1.2rem;
 
   border: none;
   background-color: white;
 
-  background-image: url("../../../images/like.png");
+  background-image: url("../../../images/dislike.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+}
+.dislike {
+  transition: 0.2s;
+  width: 1.3rem;
+  height: 1.2rem;
+
+  border: none;
+  background-color: white;
+
+  background-image: url("../../../images/like.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

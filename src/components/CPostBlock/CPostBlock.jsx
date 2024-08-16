@@ -16,7 +16,8 @@ export const CPostBlock = ({
   onClickToSentComments,
   value,
   creatorId,
-  onClickToGoUserProfile
+  onClickToGoUserProfile,
+  classNameButtonLike
 }) => {
   return (
     <>
@@ -44,7 +45,7 @@ export const CPostBlock = ({
               <input
                 type="button"
                 value=""
-                className="like-icon"
+                className={classNameButtonLike}
                 name={postId}
                 onClick={onClickToLike}
               />
