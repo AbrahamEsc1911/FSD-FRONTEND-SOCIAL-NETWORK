@@ -113,6 +113,7 @@ export const SiglePost = () => {
                 onClickToSentComments={sendComment}
                 creatorId={post.user._id}
                 onClickToGoUserProfile={userById}
+                classNameButtonLike={post.likes.includes(userId) ? 'dislike' : 'like'}
               />
             }
           />
