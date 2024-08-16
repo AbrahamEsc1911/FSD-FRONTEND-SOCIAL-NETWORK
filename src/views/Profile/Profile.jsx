@@ -244,7 +244,7 @@ export const Profile = () => {
         <div className="profile-section-one">
           <CBlockContent
             content={
-              <div>
+              <div className="parent-block-profile">
                 <div>
                   <CSectionOneProfile
                     portada={"./images/portada.jpg"}

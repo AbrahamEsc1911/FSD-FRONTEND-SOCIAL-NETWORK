@@ -14,9 +14,29 @@
   margin-bottom: 1rem;
 }
 
+.parent-block-profile{
+  width: 30vw;
+}
+
+
 .profile-section-one {
   width: 30vw;
   height:auto;
+}
+
+
+@media (max-width: 1100px) {
+  .profile-section-one {
+    width: 60vw;
+    height:auto;
+  }
+}
+
+@media (max-width: 920px) {
+  .profile-section-one {
+    width: 60vw;
+    height:auto;
+  }
 }
 
 .profile-section-two {
@@ -26,6 +46,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media (max-width: 1100px) {
+  .profile-section-two {
+    width: 60vw;
+    height:auto;
+  }
+}
+
+@media (max-width: 920px) {
+  .profile-section-two {
+    width: 60vw;
+    height:auto;
+  }
 }
 
 .edit-profile-form {

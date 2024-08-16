@@ -1,4 +1,8 @@
 .section-one-profile {
+    width: 30vw;
+    height: auto;
+
+    /* background-color: orange; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +27,8 @@
 .block-two {
     height: 3.5rem;
     width: 19rem;
+
+    /* background-color: green; */
 
     display: flex;
     align-items: flex-end;
@@ -69,6 +75,8 @@
 
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+    /* background-color: yellow; */
 
     display: flex;
     justify-content: center;
