@@ -9,8 +9,10 @@ export const CRecomendationBlock = ({profile, userName, buttonName, buttonOnClic
           <img src={profile} alt="profile-image" id={userProfile} onClick={() => onClickToGoUserProfile(userProfile)}/>
         </div>
         <div className="recomendation-content">
+          <div className="text-name-navigation">
           <h4 className="text-no-margin" id={userProfile} onClick={() => onClickToGoUserProfile(userProfile)}>{userName}</h4>
-          <input type="button" value="follow" name={buttonName} onClick={buttonOnClick} className={classNameButton}/>
+          </div>
+          <input type="button" value="follow" name={buttonName} onClick={buttonOnClick} className='follow-button-recomendation'/>
         </div>
       </div>
     </>
