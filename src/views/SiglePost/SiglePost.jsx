@@ -6,6 +6,9 @@ import { newComments } from "../../Services/comments.services";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CCommentsBlock } from "../../components/CCommentsBlock/CCommentsBlock";
+import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
+import { getAllUsers } from "../../Services/user.services";
+import './SiglePost.css'
 
 export const SiglePost = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -29,6 +32,7 @@ export const SiglePost = () => {
   const [newComment, setNewComment] = useState({
     comment: "",
   });
+  const [usersToFollow, setusersToFollow] = useState([]);
 
   const navigate = useNavigate();
   const { setPostId } = useContext(PostContext);
@@ -37,9 +41,13 @@ export const SiglePost = () => {
     const bringPostById = async () => {
       const res = await getPostById(id);
       setPost(res.data);
+      if(passport){
+        const bringUsers = await getAllUsers(token);
+        setusersToFollow(bringUsers.data)
+      }
     };
-
     bringPostById();
+    
   }, []);
 
   const likeThisPosts = async (e) => {
@@ -72,9 +80,71 @@ export const SiglePost = () => {
     }
   };
 
+  const follow = async (e) => {
+    const followId = e.target.name;
+    if (followId) {
+      await followUser(token, followId);
+      const bringUsers = await getAllUsers(token);
+      setusersToFollow(bringUsers.data);
+    }
+  };
+
   return (
     <>
-      <CBlockContent
+      <div className="single-post-body">
+        <div className="single-post-section-one">
+          <CBlockContent
+            content={
+              <CPostBlock
+                creatorProfile={post.user.profile}
+                creatorName={post.user.name}
+                message={post.post_message}
+                createdAt={post.createdAt}
+                likeCount={post.likes.length}
+                commentCount={post.comments.length}
+                newCommentProfile={post.user.profile}
+                postId={post._id}
+                onClickToLike={likeThisPosts}
+                onChangeComments={addComments}
+                onClickToSentComments={sendComment}
+              />
+            }
+          />
+          <CBlockContent
+            content={post.comments.map((comments) => {
+              return (
+                <div key={comments._id}>
+                  <CCommentsBlock
+                    profile={comments.user.profile}
+                    name={comments.user.name}
+                    message={comments.message}
+                    createdAt={comments.createdAt}
+                  />
+                </div>
+              );
+            })}
+          />
+        </div>
+        <div className="single-post-section-two">
+        <CBlockContent
+          content={usersToFollow.map((user) => {
+            return (
+              <div key={user._id}>
+                {!user.followers.includes(userId) && user._id !== userId && (
+                  <CRecomendationBlock
+                    profile={user.profile}
+                    userName={user.name}
+                    buttonName={user._id}
+                    buttonOnClick={follow}
+                  />
+                )}
+              </div>
+            );
+          })}
+        />
+        </div>
+      </div>
+      {/* <CBlockContent
         content={
           <CPostBlock
             creatorProfile={post.user.profile}
@@ -93,7 +163,8 @@ export const SiglePost = () => {
       />
 
       <div>
-       <CBlockContent content={post.comments.map((comments) => {
+        <CBlockContent
+          content={post.comments.map((comments) => {
             return (
               <div key={comments._id}>
                 <CCommentsBlock
@@ -104,10 +175,28 @@ export const SiglePost = () => {
                 />
               </div>
             );
-          })
-       }
+          })}
         />
       </div>
+
+      <div>
+        <CBlockContent
+          content={usersToFollow.map((user) => {
+            return (
+              <div key={user._id}>
+                {!user.followers.includes(userId) && user._id !== userId && (
+                  <CRecomendationBlock
+                    profile={user.profile}
+                    userName={user.name}
+                    buttonName={user._id}
+                    buttonOnClick={follow}
+                  />
+                )}
+              </div>
+            );
+          })}
+        />
+      </div> */}
     </>
   );
 };

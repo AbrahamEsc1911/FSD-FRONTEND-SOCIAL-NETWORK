@@ -23,7 +23,6 @@ export const Timeline = () => {
   const [usersToFollow, setusersToFollow] = useState([]);
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
-  const [updateView, setUpdateView] = useState(false)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -100,7 +99,6 @@ export const Timeline = () => {
     if (response.success) {
       const res = await timeline(token);
       setAllPosts(res.data);
-      setUpdateView(true)
     } else {
       console.log("error creating a new comment");
     }
