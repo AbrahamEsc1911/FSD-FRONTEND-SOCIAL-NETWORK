@@ -2,7 +2,7 @@
     width: 20rem;
     height: 4rem;
 
-    background-color: purple;
+    margin-top: 1rem;
 
     display: flex;
     flex-wrap: wrap;
@@ -11,8 +11,8 @@
 }
 
 .recomendation-profile{
-    height: 4rem;
-    width: 4rem;
+    height: 3.5rem;
+    width: 3.5rem;
 
     border-radius: 50%;
 

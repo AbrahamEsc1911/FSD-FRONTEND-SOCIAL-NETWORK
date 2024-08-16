@@ -4,8 +4,12 @@ import { newComments } from "../../Services/comments.services";
 import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
-import './Timeline.css'
-import { getAllUsers } from "../../Services/user.services";
+import "./Timeline.css";
+import {
+  followUser,
+  getAllUsers,
+  userProfile,
+} from "../../Services/user.services";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 
 export const Timeline = () => {
@@ -17,25 +21,39 @@ export const Timeline = () => {
     userId = passport.tokenData.id;
   }
   const [allPosts, setAllPosts] = useState([]);
-  const [usersToFollow, setusersToFollow] = useState([])
+  const [usersToFollow, setusersToFollow] = useState([]);
   const navigate = useNavigate();
   const [newComment, setNewComment] = useState({
     comment: "",
+  });
+  const [userData, setUserData] = useState({
+    _id: "",
+    name: "",
+    email: "",
+    createdAt: "",
+    posts: [],
+    followers: [],
+    following: [],
+    phone: "phone",
+    city: "city",
+    born: "born",
+    profile: "",
   });
 
   useEffect(() => {
     if (passport) {
       const timelinePosts = async () => {
         const res = await timeline(token);
-        const bringUsers = await getAllUsers(token)
+        const user = await userProfile(token);
+        const bringUsers = await getAllUsers(token);
         setAllPosts(res.data);
-        setusersToFollow(bringUsers.data)
-        console.log(bringUsers.data)
+        setUserData(user.data);
+        setusersToFollow(bringUsers.data);
       };
       timelinePosts();
     }
   }, []);
-
+  console.log(usersToFollow);
   const postById = async (e) => {
     const id = e.target.name;
     navigate(`/post/${id}`);
@@ -67,58 +85,71 @@ export const Timeline = () => {
     setAllPosts(res.data);
   };
 
-  const follow = async () => {
+  const follow = async (e) => {
+    const followId = e.target.name;
+    if (followId) {
+      await followUser(token, followId);
+      const bringUsers = await getAllUsers(token);
+      setusersToFollow(bringUsers.data);
+    }
+  };
 
-  }
+  usersToFollow.map((user) => {
+    return console.log(user.followers.includes(userId));
+    if (!user.followers.includes(userId)) {
+      return console.log(user.name);
+    }
+  });
 
   return (
     <>
-
-    <div>
-      {
-        usersToFollow.map((user) => {
-          if(!user.followers.includes(userId)){
-            return(
-              <div key={user._id}>
-                <CRecomendationBlock
-                profile={user.profile}
-                userName={user.name}
-                buttonName={user._id}
-                buttonOnClick={follow}
-                />
-              </div>
-            )
-          }
-          
-        })
-      }
-    </div>
-
       <div>
-        {allPosts.map((post) => {
-          return (
-            <div key={post._id}>
-              <CBlockContent
-                content={ 
-                  <CPostBlock
-                    creatorProfile={post.user.profile}
-                    creatorName={post.user.name}
-                    message={post.post_message}
-                    createdAt={post.createdAt}
-                    likeCount={post.likes.length}
-                    commentCount={post.comments.length}
-                    newCommentProfile={post.user.profile}
-                    postId={post._id}
-                    onClickToPostById={postById}
-                    onClickToLike={likeThisPosts}
-                    onChangeComments={addComments}
-                    onClickToSentComments={sendComment}
+        <div>
+          <CBlockContent
+            content={usersToFollow.map((user) => {
+              return (
+                <div key={user._id}>
+                  {!user.followers.includes(userId) && user._id !== userId && (
+                    <CRecomendationBlock
+                      profile={user.profile}
+                      userName={user.name}
+                      buttonName={user._id}
+                      buttonOnClick={follow}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          />
+        </div>
+        <div>
+          <div>
+            {allPosts.map((post) => {
+              return (
+                <div key={post._id}>
+                  <CBlockContent
+                    content={
+                      <CPostBlock
+                        creatorProfile={post.user.profile}
+                        creatorName={post.user.name}
+                        message={post.post_message}
+                        createdAt={post.createdAt}
+                        likeCount={post.likes.length}
+                        commentCount={post.comments.length}
+                        newCommentProfile={userData.profile}
+                        postId={post._id}
+                        onClickToPostById={postById}
+                        onClickToLike={likeThisPosts}
+                        onChangeComments={addComments}
+                        onClickToSentComments={sendComment}
+                      />
+                    }
                   />
-                }
-              />
-            </div>
-          );
-        })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </>
   );
