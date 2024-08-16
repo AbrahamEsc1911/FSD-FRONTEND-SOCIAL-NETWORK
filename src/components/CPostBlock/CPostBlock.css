@@ -1,6 +1,6 @@
 .basic-block-post {
   height: auto;
-  width: 28rem;
+  width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,17 +9,16 @@
 }
 
 .block-post-header {
-  height: 4rem;
-  width: 28rem;
+  height: auto;
+  width: 40vw;
 
-  /* background-color: #1849ea; */
   display: flex;
   align-items: center;
 }
 
 .post-header-profile {
-  height: 3.2rem;
-  width: 3.2rem;
+  height: 3.3rem;
+  width: auto;
   background-color: rgb(144, 144, 144);
 
   border-radius: 50%;
@@ -33,10 +32,8 @@
 }
 
 .post-header-name {
-  height: 4rem;
-  width: 24rem;
-
-  /* background-color: orange; */
+  height: auto;
+  width: 30vw;
 
   display: flex;
   flex-direction: column;
@@ -51,14 +48,14 @@
 
 .block-post-message {
   height: auto;
-  width: 28rem;
-
-  /* background-color: #3461fb; */
+  width: 40vw;
+/* 
+  background-color: #3461fb; */
 }
 
 .block-post-creation-date {
   height: auto;
-  width: 28rem;
+  width: 40vw;
 
   /* background-color: peru; */
 }
@@ -70,8 +67,11 @@
 
 .block-post-likes-comments {
   height: 2.8rem;
-  width: 28rem;
+  width: 40vw;
   /* background-color: blueviolet; */
+
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .post-likes-comments {
@@ -101,11 +101,6 @@
 .post-likes-comments-text {
   height: 3rem;
   width: auto;
-  /*   
-    background-color: rgb(72, 26, 133); */
-
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 
   display: flex;
   align-items: center;
@@ -113,13 +108,13 @@
 
 .block-post-new-comment {
   height: auto;
-  width: 28rem;
-
-  /* background-color: red; */
+  width: 40vw;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  /* background-color: red; */
 
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -129,7 +124,7 @@
   width: 2rem;
   height: 2rem;
 
-  /* background-color: #3461fb; */
+
   padding-left: 0.3rem;
 
   border-radius: 0.2rem;
@@ -139,18 +134,18 @@
   cursor: pointer;
 }
 
-.send-button:hover {
-  background-color: #2148c8;
-}
-
 .send-icon {
   width: 1.5rem;
-  padding-top: 0.3rem;
+}
+
+.send-icon:hover {
+  width: 1.55rem;
+  transition: 0.2s;
 }
 
 .new-comment-input {
   height: auto;
-  width: 22rem;
+  width: 32vw;
 
   padding-top: 0.5rem;
   padding-bottom: 0.4rem;
@@ -192,7 +187,7 @@
 }
 
 .like-icon {
-  width: 1.2rem;
+  width: 1.3rem;
   height: 1.2rem;
 
   border: none;
@@ -207,16 +202,16 @@
 }
 
 .send-icon {
-    width: 1.2rem;
-    height: 1.2rem;
-  
-    border: none;
-    background-color: white;
-  
-    background-image: url("../../../images/send.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  
-    cursor: pointer;
+  width: 1.2rem;
+  height: 1.2rem;
+
+  border: none;
+  background-color: white;
+
+  background-image: url("../../../images/send.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
 }

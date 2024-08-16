@@ -144,59 +144,6 @@ export const SiglePost = () => {
         />
         </div>
       </div>
-      {/* <CBlockContent
-        content={
-          <CPostBlock
-            creatorProfile={post.user.profile}
-            creatorName={post.user.name}
-            message={post.post_message}
-            createdAt={post.createdAt}
-            likeCount={post.likes.length}
-            commentCount={post.comments.length}
-            newCommentProfile={post.user.profile}
-            postId={post._id}
-            onClickToLike={likeThisPosts}
-            onChangeComments={addComments}
-            onClickToSentComments={sendComment}
-          />
-        }
-      />
-
-      <div>
-        <CBlockContent
-          content={post.comments.map((comments) => {
-            return (
-              <div key={comments._id}>
-                <CCommentsBlock
-                  profile={comments.user.profile}
-                  name={comments.user.name}
-                  message={comments.message}
-                  createdAt={comments.createdAt}
-                />
-              </div>
-            );
-          })}
-        />
-      </div>
-
-      <div>
-        <CBlockContent
-          content={usersToFollow.map((user) => {
-            return (
-              <div key={user._id}>
-                {!user.followers.includes(userId) && user._id !== userId && (
-                  <CRecomendationBlock
-                    profile={user.profile}
-                    userName={user.name}
-                    buttonName={user._id}
-                    buttonOnClick={follow}
-                  />
-                )}
-              </div>
-            );
-          })}
-        />
-      </div> */}
     </>
   );
 };
