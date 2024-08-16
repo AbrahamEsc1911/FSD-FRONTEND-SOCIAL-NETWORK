@@ -148,30 +148,59 @@ export const Timeline = () => {
           </div>
           <div>
             {allPosts.map((post) => {
-              return (
-                <div key={post._id}>
-                  <CBlockContent
-                    content={
-                      <CPostBlock
-                        creatorProfile={post.user.profile}
-                        creatorName={post.user.name}
-                        message={post.post_message}
-                        createdAt={post.createdAt}
-                        likeCount={post.likes.length}
-                        commentCount={post.comments.length}
-                        newCommentProfile={userData.profile}
-                        postId={post._id}
-                        onClickToPostById={postById}
-                        onClickToLike={likeThisPosts}
-                        onChangeComments={addComments}
-                        onClickToSentComments={sendComment}
-                        creatorId={post.user._id}
-                        onClickToGoUserProfile={userById}
-                      />
-                    }
-                  />
-                </div>
-              );
+              if(post.likes.includes(userData._id)){
+                return (
+                  <div key={post._id}>
+                    <CBlockContent
+                      content={
+                        <CPostBlock
+                          creatorProfile={post.user.profile}
+                          creatorName={post.user.name}
+                          message={post.post_message}
+                          createdAt={post.createdAt}
+                          likeCount={post.likes.length}
+                          commentCount={post.comments.length}
+                          newCommentProfile={userData.profile}
+                          postId={post._id}
+                          onClickToPostById={postById}
+                          onClickToLike={likeThisPosts}
+                          onChangeComments={addComments}
+                          onClickToSentComments={sendComment}
+                          creatorId={post.user._id}
+                          onClickToGoUserProfile={userById}
+                          classNameButtonLike={'dislike'}
+                        />
+                      }
+                    />
+                  </div>
+                );
+              } else if(!post.likes.includes(userData._id)){
+                return (
+                  <div key={post._id}>
+                    <CBlockContent
+                      content={
+                        <CPostBlock
+                          creatorProfile={post.user.profile}
+                          creatorName={post.user.name}
+                          message={post.post_message}
+                          createdAt={post.createdAt}
+                          likeCount={post.likes.length}
+                          commentCount={post.comments.length}
+                          newCommentProfile={userData.profile}
+                          postId={post._id}
+                          onClickToPostById={postById}
+                          onClickToLike={likeThisPosts}
+                          onChangeComments={addComments}
+                          onClickToSentComments={sendComment}
+                          creatorId={post.user._id}
+                          onClickToGoUserProfile={userById}
+                          classNameButtonLike={'like'}
+                        />
+                      }
+                    />
+                  </div>
+                )
+              }
             })}
           </div>
         </div>
