@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import "./Timeline.css";
-import { followUser, getAllUsers, userProfile,} from "../../Services/user.services";
+import { followUser, getAllUsers, getUserById, userProfile,} from "../../Services/user.services";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 
@@ -121,6 +121,10 @@ export const Timeline = () => {
     }
   };
 
+  const userById = async (userId) => {
+    navigate(`../user/${userId}`)
+  }
+
   return (
     <>
       <div className="timeline-body">
@@ -161,6 +165,8 @@ export const Timeline = () => {
                         onClickToLike={likeThisPosts}
                         onChangeComments={addComments}
                         onClickToSentComments={sendComment}
+                        creatorId={post.user._id}
+                        onClickToGoUserProfile={userById}
                       />
                     }
                   />

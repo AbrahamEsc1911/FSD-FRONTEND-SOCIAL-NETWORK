@@ -89,6 +89,10 @@ export const SiglePost = () => {
     }
   };
 
+  const userById = async (userId) => {
+    navigate(`../user/${userId}`)
+  }
+
   return (
     <>
       <div className="single-post-body">
@@ -107,6 +111,8 @@ export const SiglePost = () => {
                 onClickToLike={likeThisPosts}
                 onChangeComments={addComments}
                 onClickToSentComments={sendComment}
+                creatorId={post.user._id}
+                onClickToGoUserProfile={userById}
               />
             }
           />

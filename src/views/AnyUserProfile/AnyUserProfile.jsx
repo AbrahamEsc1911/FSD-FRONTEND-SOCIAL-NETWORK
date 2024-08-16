@@ -119,6 +119,10 @@ export const AnyUserProfile = () => {
     }
   };
 
+  const userById = async (userId) => {
+    navigate(`../user/${userId}`)
+  }
+
   return (
     <>
       <div className="any-user-profile-body">
@@ -180,6 +184,8 @@ export const AnyUserProfile = () => {
                       onClickToLike={likeThisPosts}
                       onChangeComments={addComments}
                       onClickToSentComments={sendComment}
+                      creatorId={userData._id}
+                      onClickToGoUserProfile={userById}
                     />
                   }
                 />

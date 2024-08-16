@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { updateProfile, userProfile } from "../../Services/user.services";
+import { getUserById, updateProfile, userProfile } from "../../Services/user.services";
 import { useNavigate } from "react-router-dom";
 import { CInputs } from "../../components/CInputs/CInputs";
 import "./Profile.css";
@@ -238,6 +238,14 @@ export const Profile = () => {
     navigate(`/post/${id}`);
   };
 
+  const userById = async (userId) => {
+    console.log(userId)
+    navigate(`../user/${userId}`)
+    const res = await getUserById(userId)
+    if(res.success){
+    }
+  }
+
   return (
     <>
       <div className="body-profile">
@@ -349,7 +357,6 @@ export const Profile = () => {
               />
             }
           />
-
           {userData.posts.map((posts) => {
             return (
               <div key={posts._id}>
@@ -368,6 +375,8 @@ export const Profile = () => {
                       onClickToLike={likeThisPosts}
                       onChangeComments={addComments}
                       onClickToSentComments={sendComment}
+                      creatorId={userData._id}
+                      onClickToGoUserProfile={userById}
                     />
                   }
                 />

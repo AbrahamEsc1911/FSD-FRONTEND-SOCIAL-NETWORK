@@ -14,16 +14,18 @@ export const CPostBlock = ({
   onClickToLike,
   onChangeComments,
   onClickToSentComments,
-  value
+  value,
+  creatorId,
+  onClickToGoUserProfile
 }) => {
   return (
     <>
       <div className="basic-block-post">
         <div className="block-post-header">
           <div className="post-header-profile">
-            <img src={creatorProfile} alt="profile-creator" />
+            <img src={creatorProfile} alt="profile-creator" id={creatorId} onClick={() => onClickToGoUserProfile(creatorId)}/>
           </div>
-          <div className="post-header-name">
+          <div className="post-header-name" id={creatorId} onClick={() => onClickToGoUserProfile(creatorId)}>
             <h3 className="text-no-margin">{creatorName}</h3>
             <p className="text-no-margin small-font-size">Public</p>
           </div>
