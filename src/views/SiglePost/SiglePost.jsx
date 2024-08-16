@@ -125,6 +125,8 @@ export const SiglePost = () => {
                     name={comments.user.name}
                     message={comments.message}
                     createdAt={comments.createdAt}
+                    creatorId={comments.user._id}
+                    onClickToGoUserProfile={userById}
                   />
                 </div>
               );

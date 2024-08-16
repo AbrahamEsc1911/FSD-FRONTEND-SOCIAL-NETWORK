@@ -26,6 +26,8 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+
+    cursor: pointer;
   }
 
 .comments-header-name{
@@ -33,6 +35,7 @@
     height: 4rem;
 
     padding-left: 1rem;
+    cursor: pointer;
 }
 
 .comments-message {
