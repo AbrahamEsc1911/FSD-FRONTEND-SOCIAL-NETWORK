@@ -94,35 +94,10 @@ export const Timeline = () => {
     }
   };
 
-  usersToFollow.map((user) => {
-    return console.log(user.followers.includes(userId));
-    if (!user.followers.includes(userId)) {
-      return console.log(user.name);
-    }
-  });
-
   return (
     <>
-      <div>
-        <div>
-          <CBlockContent
-            content={usersToFollow.map((user) => {
-              return (
-                <div key={user._id}>
-                  {!user.followers.includes(userId) && user._id !== userId && (
-                    <CRecomendationBlock
-                      profile={user.profile}
-                      userName={user.name}
-                      buttonName={user._id}
-                      buttonOnClick={follow}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          />
-        </div>
-        <div>
+      <div className="timeline-body">
+        <div className="timeline-section-one">
           <div>
             {allPosts.map((post) => {
               return (
@@ -149,6 +124,24 @@ export const Timeline = () => {
               );
             })}
           </div>
+        </div>
+        <div className="timeline-section-two">
+          <CBlockContent
+            content={usersToFollow.map((user) => {
+              return (
+                <div key={user._id}>
+                  {!user.followers.includes(userId) && user._id !== userId && (
+                    <CRecomendationBlock
+                      profile={user.profile}
+                      userName={user.name}
+                      buttonName={user._id}
+                      buttonOnClick={follow}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          />
         </div>
       </div>
     </>
