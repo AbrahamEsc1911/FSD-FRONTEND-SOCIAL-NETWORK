@@ -13,10 +13,10 @@ import './SiglePost.css'
 export const SiglePost = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
   let token = null;
-  let userId = null;
+  let userToken = null;
   if (passport) {
     token = passport.token;
-    userId = passport.tokenData.id;
+    userToken = passport.tokenData.id;
   }
 
   const { id } = useParams();
@@ -90,7 +90,11 @@ export const SiglePost = () => {
   };
 
   const userById = async (userId) => {
-    navigate(`../user/${userId}`)
+    if(userId === userToken){
+      navigate(`../profile`)
+    } else {
+      navigate(`../user/${userId}`)
+    }
   }
 
   return (
@@ -113,7 +117,7 @@ export const SiglePost = () => {
                 onClickToSentComments={sendComment}
                 creatorId={post.user._id}
                 onClickToGoUserProfile={userById}
-                classNameButtonLike={post.likes.includes(userId) ? 'dislike' : 'like'}
+                classNameButtonLike={post.likes.includes(userToken) ? 'dislike' : 'like'}
               />
             }
           />
@@ -139,7 +143,7 @@ export const SiglePost = () => {
           content={usersToFollow.map((user) => {
             return (
               <div key={user._id}>
-                {!user.followers.includes(userId) && user._id !== userId && (
+                {!user.followers.includes(userToken) && user._id !== userToken && (
                   <CRecomendationBlock
                     profile={user.profile}
                     userName={user.name}

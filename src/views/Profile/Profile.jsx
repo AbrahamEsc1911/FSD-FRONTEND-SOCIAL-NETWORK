@@ -19,8 +19,10 @@ import { CNewPost } from "../../components/CNewPost/CNewPost";
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
   let token = null;
+  let userProfileId = null
   if (passport) {
     token = passport.token;
+    userProfileId = passport.tokenData.id
   }
 
   const [userData, setUserData] = useState({
@@ -35,6 +37,7 @@ export const Profile = () => {
     city: "city",
     born: "born",
     profile: "",
+    portada: ""
   });
 
   const [userUpdate, setUserUpdate] = useState({
@@ -73,7 +76,7 @@ export const Profile = () => {
     } else {
       navigate("/login");
     }
-  }, [newPostPop, userData]);
+  }, [newPostPop]);
 
   const editProfile = () => {
     setEditProfileData(!editProfileData);
@@ -243,10 +246,8 @@ export const Profile = () => {
   };
 
   const userById = async (userId) => {
-    console.log(userId);
-    navigate(`../user/${userId}`);
-    const res = await getUserById(userId);
-    if (res.success) {
+    if(userId !== userProfileId) {
+      navigate(`../user/${userId}`);
     }
   };
 
