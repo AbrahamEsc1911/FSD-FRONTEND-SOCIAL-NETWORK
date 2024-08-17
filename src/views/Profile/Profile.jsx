@@ -67,7 +67,7 @@ export const Profile = () => {
     if (passport) {
       const bringprofile = async () => {
         const response = await userProfile(token);
-        if (response) {
+        if (response.success) {
           setUserData(response.data);
         }
       };

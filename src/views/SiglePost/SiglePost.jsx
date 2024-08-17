@@ -7,7 +7,7 @@ import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CCommentsBlock } from "../../components/CCommentsBlock/CCommentsBlock";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
-import { getAllUsers } from "../../Services/user.services";
+import { getAllUsers, userProfile } from "../../Services/user.services";
 import './SiglePost.css'
 
 export const SiglePost = () => {
@@ -29,6 +29,21 @@ export const SiglePost = () => {
     _id: "",
   });
 
+  const [userData, setUserData] = useState({
+    _id: "",
+    name: "",
+    email: "",
+    createdAt: "",
+    posts: [],
+    followers: [],
+    following: [],
+    phone: "phone",
+    city: "city",
+    born: "born",
+    profile: "",
+    portada: ""
+  });
+
   const [newComment, setNewComment] = useState({
     comment: "",
   });
@@ -43,7 +58,9 @@ export const SiglePost = () => {
       setPost(res.data);
       if(passport){
         const bringUsers = await getAllUsers(token);
+        const response = await userProfile(token);
         setusersToFollow(bringUsers.data)
+        setUserData(response.data);
       }
     };
     bringPostById();
@@ -110,7 +127,7 @@ export const SiglePost = () => {
                 createdAt={post.createdAt}
                 likeCount={post.likes.length}
                 commentCount={post.comments.length}
-                newCommentProfile={post.user.profile}
+                newCommentProfile={userData.profile}
                 postId={post._id}
                 onClickToLike={likeThisPosts}
                 onChangeComments={addComments}
