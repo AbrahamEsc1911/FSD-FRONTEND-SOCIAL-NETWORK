@@ -71,10 +71,6 @@
     cursor: pointer;
 }
 
-.nav-bar-text:hover {
-    color: #3461FB;
-}
-
 .overlay {
     position: fixed;
     top: 0;
