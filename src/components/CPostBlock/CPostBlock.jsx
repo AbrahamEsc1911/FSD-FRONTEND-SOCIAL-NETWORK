@@ -36,7 +36,7 @@ export const CPostBlock = ({
         </div>
         <div className="block-post-creation-date">
           <p className="small-font-size text-no-margin">
-            posted since {createdAt}
+            {createdAt}
           </p>
         </div>
         <div className="block-post-likes-comments">

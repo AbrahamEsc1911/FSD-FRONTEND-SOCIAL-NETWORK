@@ -16,7 +16,7 @@ export const CSectionOneProfile = ({ portada, profile, name, email, posts, follo
                         <h4 className='profile-txt-no-margin'>
                             {name}
                         </h4>
-                        <p className='profile-txt-no-margin text-gray'>
+                        <p className='profile-txt-no-margin text-gray small-font-size'>
                             {email}
                         </p>
                     </div>

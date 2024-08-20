@@ -30,7 +30,7 @@ export const CNewPost = ({
           </div>
           <div className="new-post-name">
             <h4 className="text-no-margin">{userName}</h4>
-            <p className="text-no-margin">Public</p>
+            <p className="text-no-margin small-font-size">Public</p>
           </div>
         </div>
         <div>
