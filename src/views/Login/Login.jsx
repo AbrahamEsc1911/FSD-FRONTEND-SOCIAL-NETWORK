@@ -128,7 +128,7 @@ export const Login = () => {
           />
         </div>
         <div className="section-login-image">
-          <img src="./images/profile.jpg" alt="" />
+          <img src="./images/login-image.svg" alt="login-main-image" id="banner-home-main" />
         </div>
       </div>
     </>

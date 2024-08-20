@@ -4,12 +4,22 @@
 
 .login-view-main {
   width: 100vw;
-  height: 79vh;
+  height: 100vh;
 
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+}
+
+@media (max-width: 1100px) {
+  .login-view-main {
+    width: 100vw;
+    height: auto;
+
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 }
 
 .section-login-container {
@@ -37,20 +47,33 @@
 
 .section-login-image {
   width: 50vw;
-  height: 79vh;
+  height: auto;
+
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 1100px) {
   .section-login-image {
-    width: 60vw;
+    width: 80vw;
     height: auto;
+
+    display: flex;
+    justify-content: center;
+
+    padding-top: 3rem;
   }
 }
 
 @media (max-width: 920px) {
   .section-login-image {
-    width: 60vw;
+    width: 100vw;
     height: auto;
+
+    display: flex;
+    justify-content: center;
+
+    padding-top: 3rem;
   }
 }
 
