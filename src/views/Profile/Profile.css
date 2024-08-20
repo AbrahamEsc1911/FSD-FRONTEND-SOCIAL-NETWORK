@@ -9,39 +9,37 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 
   margin-bottom: 1rem;
 }
 
-.parent-block-profile{
+.parent-block-profile {
   width: 30vw;
 }
-
 
 .profile-section-one {
   width: 30vw;
-  height:auto;
+  height: auto;
 }
-
 
 @media (max-width: 1100px) {
   .profile-section-one {
     width: 60vw;
-    height:auto;
+    height: auto;
   }
 }
 
 @media (max-width: 920px) {
   .profile-section-one {
     width: 60vw;
-    height:auto;
+    height: auto;
   }
 }
 
 .profile-section-two {
   width: 50vw;
-  height:auto;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -51,14 +49,14 @@
 @media (max-width: 1100px) {
   .profile-section-two {
     width: 60vw;
-    height:auto;
+    height: auto;
   }
 }
 
 @media (max-width: 920px) {
   .profile-section-two {
     width: 60vw;
-    height:auto;
+    height: auto;
   }
 }
 

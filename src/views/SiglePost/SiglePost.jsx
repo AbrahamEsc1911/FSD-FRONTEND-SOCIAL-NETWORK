@@ -121,13 +121,13 @@ export const SiglePost = () => {
           <CBlockContent
             content={
               <CPostBlock
-                creatorProfile={post.user.profile}
+                creatorProfile={`../${post.user.profile}`}
                 creatorName={post.user.name}
                 message={post.post_message}
                 createdAt={post.createdAt}
                 likeCount={post.likes.length}
                 commentCount={post.comments.length}
-                newCommentProfile={userData.profile}
+                newCommentProfile={`../${userData.profile}`}
                 postId={post._id}
                 onClickToLike={likeThisPosts}
                 onChangeComments={addComments}
@@ -143,7 +143,7 @@ export const SiglePost = () => {
               return (
                 <div key={comments._id}>
                   <CCommentsBlock
-                    profile={comments.user.profile}
+                    profile={`../${comments.user.profile}`}
                     name={comments.user.name}
                     message={comments.message}
                     createdAt={comments.createdAt}
@@ -162,7 +162,7 @@ export const SiglePost = () => {
               <div key={user._id}>
                 {!user.followers.includes(userToken) && user._id !== userToken && (
                   <CRecomendationBlock
-                    profile={user.profile}
+                    profile={`../${user.profile}`}
                     userName={user.name}
                     buttonName={user._id}
                     buttonOnClick={follow}
