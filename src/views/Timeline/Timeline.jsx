@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { createPost, likeDislike, timeline } from "../../Services/posts.services";
+import {
+  createPost,
+  likeDislike,
+  timeline,
+} from "../../Services/posts.services";
 import { newComments } from "../../Services/comments.services";
 import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import "./Timeline.css";
-import { followUser, getAllUsers, getUserById, userProfile,} from "../../Services/user.services";
+import {
+  followUser,
+  getAllUsers,
+  getUserById,
+  userProfile,
+} from "../../Services/user.services";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 
@@ -80,7 +89,7 @@ export const Timeline = () => {
     if (newPost.message.length > 0) {
       const res = await createPost(token, newPost);
       if (res.success) {
-        setNewPost({message: "",});
+        setNewPost({ message: "" });
         const res = await timeline(token);
         setAllPosts(res.data);
         setErrorPostMessage(false);
@@ -122,33 +131,35 @@ export const Timeline = () => {
   };
 
   const userById = async (userId) => {
-    navigate(`../user/${userId}`)
-  }
+    navigate(`../user/${userId}`);
+  };
 
   return (
     <>
       <div className="timeline-body">
         <div className="timeline-section-one">
           <div>
-          <CBlockContent
-            content={
-              <CNewPost
-                showOrNotIconClose="hidden-content"
-                userName={userData.name}
-                profile={userData.profile}
-                buttonName="message"
-                inputName="message"
-                onChange={handleMessage}
-                onClick={sendPosts}
-                clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
-                clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
-              />
-            }
-          />
+            <CBlockContent
+              content={
+                <CNewPost
+                  showOrNotIconClose="hidden-content"
+                  userName={userData.name}
+                  profile={userData.profile}
+                  buttonName="message"
+                  inputName="message"
+                  onChange={handleMessage}
+                  onClick={sendPosts}
+                  clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content" }
+                  clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
+                  classTextArea="textarea-small-size"
+                />
+              }
+            />
           </div>
+          <h1 id="main-text-on-feeds">Feeds</h1>
           <div>
             {allPosts.map((post) => {
-              if(post.likes.includes(userData._id)){
+              if (post.likes.includes(userData._id)) {
                 return (
                   <div key={post._id}>
                     <CBlockContent
@@ -168,13 +179,13 @@ export const Timeline = () => {
                           onClickToSentComments={sendComment}
                           creatorId={post.user._id}
                           onClickToGoUserProfile={userById}
-                          classNameButtonLike={'dislike'}
+                          classNameButtonLike={"dislike"}
                         />
                       }
                     />
                   </div>
                 );
-              } else if(!post.likes.includes(userData._id)){
+              } else if (!post.likes.includes(userData._id)) {
                 return (
                   <div key={post._id}>
                     <CBlockContent
@@ -194,30 +205,31 @@ export const Timeline = () => {
                           onClickToSentComments={sendComment}
                           creatorId={post.user._id}
                           onClickToGoUserProfile={userById}
-                          classNameButtonLike={'like'}
+                          classNameButtonLike={"like"}
                         />
                       }
                     />
                   </div>
-                )
+                );
               }
             })}
           </div>
         </div>
         <div className="timeline-section-two">
           <CBlockContent
+            blockTitle={"Sueggestions For You"}
             content={usersToFollow.map((user) => {
-              if(!user.followers.includes(userId) && user._id !== userId){
+              if (!user.followers.includes(userId) && user._id !== userId) {
                 return (
                   <div key={user._id}>
-                      <CRecomendationBlock
-                        profile={user.profile}
-                        userName={user.name}
-                        buttonName={user._id}
-                        buttonOnClick={follow}
-                        userProfile={user._id}
-                        onClickToGoUserProfile={userById}
-                      />
+                    <CRecomendationBlock
+                      profile={user.profile}
+                      userName={user.name}
+                      buttonName={user._id}
+                      buttonOnClick={follow}
+                      userProfile={user._id}
+                      onClickToGoUserProfile={userById}
+                    />
                   </div>
                 );
               }

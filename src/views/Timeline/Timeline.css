@@ -51,3 +51,15 @@
     height: auto;
   }
 }
+
+#main-text-on-feeds {
+
+  padding-bottom: 0.3rem;
+  margin-left: 1rem;
+
+  color: rgb(38, 38, 38);
+}
+
+.textarea-small-size {
+  height: 4rem;
+}

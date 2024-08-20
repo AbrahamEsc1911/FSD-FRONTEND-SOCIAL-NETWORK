@@ -11,7 +11,8 @@ export const CNewPost = ({
   clasNameforErrorMessage,
   clasNameForEmtyMessage,
   onClickClose,
-  showOrNotIconClose
+  showOrNotIconClose,
+  classTextArea
 }) => {
   return (
     <>
@@ -40,6 +41,7 @@ export const CNewPost = ({
             placeholder="What are you thinking"
             maxLength={280}
             onChange={onChange}
+            className={classTextArea}
           ></textarea>
         </div>
         <div className={clasNameforErrorMessage}>

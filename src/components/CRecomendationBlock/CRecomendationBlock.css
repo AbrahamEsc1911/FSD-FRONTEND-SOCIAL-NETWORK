@@ -10,6 +10,18 @@
   justify-content: flex-start;
 }
 
+@media (max-width: 1100px) {
+  .block-user-recomendation {
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+
+    padding-left: 4rem;
+  }
+}
+
 .recomendation-profile {
   height: 3.5rem;
   width: 3.5rem;
@@ -45,7 +57,7 @@
   width: 5rem;
   height: 1.5rem;
 
-  background-color: #3461FB;
+  background-color: #3461fb;
   color: white;
 
   border-radius: 2rem;
@@ -54,6 +66,5 @@
 }
 
 .follow-button-recomendation:hover {
-
-    background-color: #1849ea;
-  }
+  background-color: #1849ea;
+}
