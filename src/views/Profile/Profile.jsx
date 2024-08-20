@@ -12,6 +12,7 @@ import { CSectionTwoProfile } from "../../components/CSectionTwoProfile/CSection
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
+import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
 
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -56,9 +57,10 @@ export const Profile = () => {
   const [wargingMessage, setWargingMessage] = useState(false);
   const [errorUpdatingUser, setErrorUpdatingUser] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { newPostPop } = useContext(NewPostContext);
+  const {newPostPop } = useContext(NewPostContext);
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
+  const {setNavigation} = useContext(NavigationContext)
 
   useEffect(() => {
     if (passport) {
@@ -66,6 +68,7 @@ export const Profile = () => {
         const response = await userProfile(token);
         if (response.success) {
           setUserData(response.data);
+          setNavigation('profile')
         }
       };
 

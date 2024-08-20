@@ -4,9 +4,9 @@ export const NavigationContext = createContext()
 
 export const NavigationProvider = ({children}) => {
 
-const [navitagion, setNavigation] = useState(false)
+const [navigation, setNavigation] = useState(false)
 
-return <NavigationContext.Provider value={{navitagion, setNavigation}}>
+return <NavigationContext.Provider value={{navigation, setNavigation}}>
 
     {children}
 

@@ -8,6 +8,7 @@ import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { userProfile } from "../../Services/user.services";
 import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
+import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
 
 export const NavBar = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -20,7 +21,7 @@ export const NavBar = () => {
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { newPostPop, setNewPostPop } = useContext(NewPostContext);
-  const {navBar, setNavBar} = useContext(NavBarContext)
+  const {navigation} = useContext(NavigationContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -102,7 +103,7 @@ export const NavBar = () => {
             />
           </div>
           <div className="nav-bar-text">
-            <CNavigation path="/" content="home" isActive={navBar === 'timeline'} />
+            <CNavigation path="/" content="home" isActive={navigation === 'timeline'} />
           </div>
         </div>
         <div className="nav-bar-block-items">
@@ -114,7 +115,7 @@ export const NavBar = () => {
             />
           </div>
           <div className="nav-bar-text">
-            <CNavigation path="/profile" content="Profile" isActive={navBar === 'profile'} />
+            <CNavigation path="/profile" content="Profile" isActive={navigation === 'profile'} />
           </div>
         </div>
         <div className="nav-bar-block-items-special">

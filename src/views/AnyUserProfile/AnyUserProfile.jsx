@@ -14,6 +14,7 @@ import "./AnyUserProfile.css";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { newComments } from "../../Services/comments.services";
 import { likeDislike } from "../../Services/posts.services";
+import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
 
 export const AnyUserProfile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -26,6 +27,7 @@ export const AnyUserProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { setNavigationPath } = useContext(AnyUserContex);
+  const {setNavigation} = useContext(NavigationContext)
   const [userData, setUserData] = useState({
     _id: "",
     name: "",
@@ -66,6 +68,7 @@ export const AnyUserProfile = () => {
         if (allProfile.success) {
           setUserData(allProfile.data);
           setUserToken(userToken.data);
+          setNavigation(false)
         }
       };
       bringUser();

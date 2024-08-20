@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createPost, likeDislike, timeline } from "../../Services/posts.services";
 import { newComments } from "../../Services/comments.services";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import {
 } from "../../Services/user.services";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
+import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
 
 export const Timeline = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -28,6 +29,7 @@ export const Timeline = () => {
   const [usersToFollow, setusersToFollow] = useState([]);
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
+  const {setNavigation} = useContext(NavigationContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -57,7 +59,7 @@ export const Timeline = () => {
         setAllPosts(res.data);
         setUserData(user.data);
         setusersToFollow(bringUsers.data);
-        setNavBar('timeline')
+        setNavigation('timeline')
       };
       timelinePosts();
     }
