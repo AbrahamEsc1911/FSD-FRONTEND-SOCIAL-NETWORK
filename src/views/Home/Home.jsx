@@ -29,7 +29,9 @@ export const Home = () => {
   return (
     <>
       <div className="home-view-main">
-        <div className="section-home-image"></div>
+        <div className="section-home-image">
+          <img src="./images/home-image.svg" alt="home-social-network-image" id="banner-home-main"/>
+        </div>
         <div className="section-home-container">
           <div className="text-home-container">
             <h1>Share with the World, what happend in your world</h1>

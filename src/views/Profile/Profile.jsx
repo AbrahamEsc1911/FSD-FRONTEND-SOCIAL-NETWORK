@@ -107,6 +107,7 @@ export const Profile = () => {
         setUserData(userUpdated.data);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
+        setTextPost('')
       } else {
         setErrorPostMessage(true);
       }

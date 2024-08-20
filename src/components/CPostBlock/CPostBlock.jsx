@@ -17,7 +17,7 @@ export const CPostBlock = ({
   value,
   creatorId,
   onClickToGoUserProfile,
-  classNameButtonLike
+  classNameButtonLike,
 }) => {
   return (
     <>

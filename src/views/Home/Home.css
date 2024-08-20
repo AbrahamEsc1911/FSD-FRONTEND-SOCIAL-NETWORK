@@ -1,6 +1,8 @@
 .home-view-main {
   width: 100vw;
-  height: 79vh;
+  height: 100vh;
+
+
 
   display: flex;
   flex-wrap: wrap;
@@ -8,9 +10,27 @@
   justify-content: center;
 }
 
+@media (max-width: 1100px) {
+  .home-view-main {
+    width: 100vw;
+    height: auto;
+
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
 .section-home-image {
   width: 50vw;
-  height: 79vh;
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#banner-home-main {
+  width: 80%;
 }
 
 @media (max-width: 1100px) {

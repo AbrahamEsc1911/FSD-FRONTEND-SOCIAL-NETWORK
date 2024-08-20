@@ -207,20 +207,20 @@ export const Timeline = () => {
         <div className="timeline-section-two">
           <CBlockContent
             content={usersToFollow.map((user) => {
-              return (
-                <div key={user._id}>
-                  {!user.followers.includes(userId) && user._id !== userId && (
-                    <CRecomendationBlock
-                      profile={user.profile}
-                      userName={user.name}
-                      buttonName={user._id}
-                      buttonOnClick={follow}
-                      userProfile={user._id}
-                      onClickToGoUserProfile={userById}
-                    />
-                  )}
-                </div>
-              );
+              if(!user.followers.includes(userId) && user._id !== userId){
+                return (
+                  <div key={user._id}>
+                      <CRecomendationBlock
+                        profile={user.profile}
+                        userName={user.name}
+                        buttonName={user._id}
+                        buttonOnClick={follow}
+                        userProfile={user._id}
+                        onClickToGoUserProfile={userById}
+                      />
+                  </div>
+                );
+              }
             })}
           />
         </div>
