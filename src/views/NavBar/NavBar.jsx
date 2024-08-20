@@ -22,6 +22,7 @@ export const NavBar = () => {
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { newPostPop, setNewPostPop } = useContext(NewPostContext);
   const {navigation} = useContext(NavigationContext)
+  const {setNavBar} = useContext(NavBarContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
