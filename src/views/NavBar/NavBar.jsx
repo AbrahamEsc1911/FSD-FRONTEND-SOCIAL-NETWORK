@@ -46,7 +46,6 @@ export const NavBar = () => {
         const response = await userProfile(token);
         if (response) {
           setUserData(response.data);
-          console.log(navBar)
         }
       };
 
@@ -98,7 +97,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items">
           <div className="nav-bar-icon">
             <img
-              src="../images/home.svg"
+              src={navigation === 'timeline' ? '../images/home-blue.svg' : "../images/home.svg"}
               alt="home-icon"
               className="nav-bar-icon-content"
             />
@@ -110,7 +109,7 @@ export const NavBar = () => {
         <div className="nav-bar-block-items">
           <div className="nav-bar-icon">
             <img
-              src="../images/profile.svg"
+              src={navigation === 'profile' ? '../images/profile-blue.svg' :"../images/profile.svg"}
               alt="profile-icon"
               className="nav-bar-icon-content"
             />

@@ -35,7 +35,7 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     color: white;
-    font-weight:600;
+    font-weight: normal;
 
     background-color: #3461FB;
     border-radius: 3rem;
@@ -67,7 +67,7 @@
 .nav-bar-text {
     padding-left: 0.2rem;
 
-    font-weight:600;
+    font-weight:norm;
     cursor: pointer;
 }
 

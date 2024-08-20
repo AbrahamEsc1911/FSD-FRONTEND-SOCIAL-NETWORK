@@ -1,9 +1,7 @@
 .nav-item {
     color: rgb(37, 37, 37);
-}
 
-.nav-item:hover {
-    color: #3461FB;
+    font-weight: normal;
 }
 
 .nav-item.active {
