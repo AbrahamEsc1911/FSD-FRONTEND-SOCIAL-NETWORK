@@ -73,7 +73,7 @@ export const CPostBlock = ({
         <div className="block-post-new-comment">
           <div className={"new-comment-image-profile"}>
             {" "}
-            <img src={newCommentProfile} alt="" />
+            <img src={newCommentProfile} alt="my-profile" />
           </div>
           <input
             type="text"
