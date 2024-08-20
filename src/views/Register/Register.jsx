@@ -103,7 +103,9 @@ export const Register = () => {
             }
           />
         </div>
-        <div className="section-register-image"></div>
+        <div className="section-register-image">
+          <img src="./images/register-image.svg" alt="image-main-register" id="banner-home-main"/>
+        </div>
       </div>
     </>
   );
