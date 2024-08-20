@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  createPost,
-  likeDislike,
-  timeline,
-} from "../../Services/posts.services";
+import { createPost, likeDislike, timeline } from "../../Services/posts.services";
 import { newComments } from "../../Services/comments.services";
 import { useNavigate } from "react-router-dom";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
@@ -61,6 +57,7 @@ export const Timeline = () => {
         setAllPosts(res.data);
         setUserData(user.data);
         setusersToFollow(bringUsers.data);
+        setNavBar('timeline')
       };
       timelinePosts();
     }

@@ -20,7 +20,7 @@ export const NavBar = () => {
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { newPostPop, setNewPostPop } = useContext(NewPostContext);
-  const {setNavBar} = useContext(NavBarContext)
+  const {navBar, setNavBar} = useContext(NavBarContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -40,11 +40,11 @@ export const NavBar = () => {
 
   useEffect(() => {
     if (passport) {
-      setNavBar(true)
       const bringprofile = async () => {
         const response = await userProfile(token);
         if (response) {
           setUserData(response.data);
+          console.log(navBar)
         }
       };
 
@@ -102,7 +102,7 @@ export const NavBar = () => {
             />
           </div>
           <div className="nav-bar-text">
-            <CNavigation path="/" content="home" />
+            <CNavigation path="/" content="home" isActive={navBar === 'timeline'} />
           </div>
         </div>
         <div className="nav-bar-block-items">
@@ -114,7 +114,7 @@ export const NavBar = () => {
             />
           </div>
           <div className="nav-bar-text">
-            <CNavigation path="/profile" content="Profile" />
+            <CNavigation path="/profile" content="Profile" isActive={navBar === 'profile'} />
           </div>
         </div>
         <div className="nav-bar-block-items-special">

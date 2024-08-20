@@ -7,6 +7,7 @@ import { PostProvider } from "./Context/postContext/postContex.jsx";
 import { AnyUserProvider } from "./Context/AnyUserProfileContext/anyUserProfileContext.jsx";
 import { NewPostProvider } from "./Context/NewPostContext/NewPostContext.jsx";
 import { NavBarProvider } from "./Context/NavBarContext/NavBarContext.jsx";
+import { NavigationProvider } from "./Context/NavigationContext/NavigationContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <AnyUserProvider>
           <NewPostProvider>
             <NavBarProvider>
-              <App />
+              <NavigationProvider>
+                <App />
+              </NavigationProvider>
             </NavBarProvider>
           </NewPostProvider>
         </AnyUserProvider>

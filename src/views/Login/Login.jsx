@@ -46,7 +46,7 @@ export const Login = () => {
       setPasswordChart(false);
 
       if (response.success) {
-        setNavBar(true);
+        setNavBar('profile');
         const tokenDecoded = jwtDecode(response.data);
         const passport = {
           token: response.data,

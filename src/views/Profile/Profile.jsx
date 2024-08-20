@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  getUserById,
-  updateProfile,
-  userProfile,
-} from "../../Services/user.services";
+import { updateProfile, userProfile } from "../../Services/user.services";
 import { useNavigate } from "react-router-dom";
 import { CInputs } from "../../components/CInputs/CInputs";
 import "./Profile.css";
@@ -15,14 +11,15 @@ import { CSectionOneProfile } from "../../components/CSectionOneProfile/CSection
 import { CSectionTwoProfile } from "../../components/CSectionTwoProfile/CSectionTwoProfile";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
+import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
 
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
   let token = null;
-  let userProfileId = null
+  let userProfileId = null;
   if (passport) {
     token = passport.token;
-    userProfileId = passport.tokenData.id
+    userProfileId = passport.tokenData.id;
   }
 
   const [userData, setUserData] = useState({
@@ -37,7 +34,7 @@ export const Profile = () => {
     city: "city",
     born: "born",
     profile: "",
-    portada: ""
+    portada: "",
   });
 
   const [userUpdate, setUserUpdate] = useState({
@@ -107,7 +104,7 @@ export const Profile = () => {
         setUserData(userUpdated.data);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
-        setTextPost('')
+        setTextPost("");
       } else {
         setErrorPostMessage(true);
       }
@@ -247,7 +244,7 @@ export const Profile = () => {
   };
 
   const userById = async (userId) => {
-    if(userId !== userProfileId) {
+    if (userId !== userProfileId) {
       navigate(`../user/${userId}`);
     }
   };
@@ -357,12 +354,14 @@ export const Profile = () => {
                 onChange={handleMessage}
                 onClick={sendPosts}
                 clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
-                clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
+                clasNameforErrorMessage={
+                  errorPostMessage ? "" : "hidden-content"
+                }
               />
             }
           />
           {userData.posts.map((posts) => {
-            if(posts.likes.includes(userData._id)){
+            if (posts.likes.includes(userData._id)) {
               return (
                 <div key={posts._id}>
                   <CBlockContent
@@ -388,7 +387,7 @@ export const Profile = () => {
                   />
                 </div>
               );
-            } else if(!posts.likes.includes(userData._id)){
+            } else if (!posts.likes.includes(userData._id)) {
               return (
                 <div key={posts._id}>
                   <CBlockContent
@@ -415,7 +414,6 @@ export const Profile = () => {
                 </div>
               );
             }
-            
           })}
         </div>
       </div>
