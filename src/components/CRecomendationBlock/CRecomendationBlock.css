@@ -1,10 +1,10 @@
 .block-user-recomendation {
-  width: 28vw;
+  width: 26vw;
   height: auto;
 
   margin-top: 1rem;
 
-  /* background-color: orange; */
+
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -54,17 +54,17 @@
 }
 
 .follow-button-recomendation {
-  width: 5rem;
-  height: 1.5rem;
+  width: 1.7rem;
+  height: 1.7rem;
 
-  background-color: #3461fb;
-  color: white;
-
-  border-radius: 2rem;
   border: none;
   cursor: pointer;
+
+  background-color: white;
+
+  background-image: url("../../../images/follow.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.follow-button-recomendation:hover {
-  background-color: #1849ea;
-}
