@@ -9,6 +9,7 @@ import { CCommentsBlock } from "../../components/CCommentsBlock/CCommentsBlock";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 import { getAllUsers, userProfile } from "../../Services/user.services";
 import './SiglePost.css'
+import { Loader } from "../../components/Loader/Loader";
 
 export const SiglePost = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -48,6 +49,7 @@ export const SiglePost = () => {
     comment: "",
   });
   const [usersToFollow, setusersToFollow] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate();
   const { setPostId } = useContext(PostContext);
@@ -56,15 +58,18 @@ export const SiglePost = () => {
     const bringPostById = async () => {
       const res = await getPostById(id);
       setPost(res.data);
-      if(passport){
+      if (passport) {
         const bringUsers = await getAllUsers(token);
         const response = await userProfile(token);
         setusersToFollow(bringUsers.data)
         setUserData(response.data);
       }
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     };
     bringPostById();
-    
+
   }, []);
 
   const likeThisPosts = async (e) => {
@@ -107,7 +112,7 @@ export const SiglePost = () => {
   };
 
   const userById = async (userId) => {
-    if(userId === userToken){
+    if (userId === userToken) {
       navigate(`../profile`)
     } else {
       navigate(`../user/${userId}`)
@@ -116,66 +121,73 @@ export const SiglePost = () => {
 
   return (
     <>
-      <div className="single-post-body">
-        <div className="single-post-section-one">
-          <CBlockContent
-            content={
-              <CPostBlock
-                creatorProfile={`../${post.user.profile}`}
-                creatorName={post.user.name}
-                message={post.post_message}
-                createdAt={post.createdAt}
-                likeCount={post.likes.length}
-                commentCount={post.comments.length}
-                newCommentProfile={`../${userData.profile}`}
-                postId={post._id}
-                onClickToLike={likeThisPosts}
-                onChangeComments={addComments}
-                onClickToSentComments={sendComment}
-                creatorId={post.user._id}
-                onClickToGoUserProfile={userById}
-                classNameButtonLike={post.likes.includes(userToken) ? 'dislike' : 'like'}
+      <div>
+        {loading && <Loader />}
+      </div>
+      <div>
+        {!loading && (
+          <div className="single-post-body">
+            <div className="single-post-section-one">
+              <CBlockContent
+                content={
+                  <CPostBlock
+                    creatorProfile={`../${post.user.profile}`}
+                    creatorName={post.user.name}
+                    message={post.post_message}
+                    createdAt={post.createdAt}
+                    likeCount={post.likes.length}
+                    commentCount={post.comments.length}
+                    newCommentProfile={`../${userData.profile}`}
+                    postId={post._id}
+                    onClickToLike={likeThisPosts}
+                    onChangeComments={addComments}
+                    onClickToSentComments={sendComment}
+                    creatorId={post.user._id}
+                    onClickToGoUserProfile={userById}
+                    classNameButtonLike={post.likes.includes(userToken) ? 'dislike' : 'like'}
+                  />
+                }
               />
-            }
-          />
-          <CBlockContent
-            content={post.comments.map((comments) => {
-              return (
-                <div key={comments._id}>
-                  <CCommentsBlock
-                    profile={`../${comments.user.profile}`}
-                    name={comments.user.name}
-                    message={comments.message}
-                    createdAt={comments.createdAt}
-                    creatorId={comments.user._id}
-                    onClickToGoUserProfile={userById}
-                  />
-                </div>
-              );
-            })}
-          />
-        </div>
-        <div className="single-post-section-two">
-        <CBlockContent
-          content={usersToFollow.map((user) => {
-            return (
-              <div key={user._id}>
-                {!user.followers.includes(userToken) && user._id !== userToken && (
-                  <CRecomendationBlock
-                    profile={`../${user.profile}`}
-                    userName={user.name}
-                    city={user.city}
-                    buttonName={user._id}
-                    buttonOnClick={follow}
-                    userProfile={user._id}
-                    onClickToGoUserProfile={userById}
-                  />
-                )}
-              </div>
-            );
-          })}
-        />
-        </div>
+              <CBlockContent
+                content={post.comments.map((comments) => {
+                  return (
+                    <div key={comments._id}>
+                      <CCommentsBlock
+                        profile={`../${comments.user.profile}`}
+                        name={comments.user.name}
+                        message={comments.message}
+                        createdAt={comments.createdAt}
+                        creatorId={comments.user._id}
+                        onClickToGoUserProfile={userById}
+                      />
+                    </div>
+                  );
+                })}
+              />
+            </div>
+            <div className="single-post-section-two">
+              <CBlockContent
+                content={usersToFollow.map((user) => {
+                  return (
+                    <div key={user._id}>
+                      {!user.followers.includes(userToken) && user._id !== userToken && (
+                        <CRecomendationBlock
+                          profile={`../${user.profile}`}
+                          userName={user.name}
+                          city={user.city}
+                          buttonName={user._id}
+                          buttonOnClick={follow}
+                          userProfile={user._id}
+                          onClickToGoUserProfile={userById}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
