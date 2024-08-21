@@ -1,7 +1,7 @@
 import React from "react";
 import "./CRecomendationBlock.css";
 
-export const CRecomendationBlock = ({profile, userName, buttonName, buttonOnClick, classNameButton, userProfile, onClickToGoUserProfile }) => {
+export const CRecomendationBlock = ({profile, userName, buttonName, buttonOnClick, classNameButton, userProfile, onClickToGoUserProfile, city }) => {
   return (
     <>
       <div className="block-user-recomendation">
@@ -11,7 +11,7 @@ export const CRecomendationBlock = ({profile, userName, buttonName, buttonOnClic
         <div className="recomendation-content">
           <div className="text-name-navigation">
           <h4 className="text-no-margin" id={userProfile} onClick={() => onClickToGoUserProfile(userProfile)}>{userName}</h4>
-          <p className="small-font-size text-no-margin">Ciudad</p>
+          <p className="small-font-size text-no-margin">{city}</p>
           </div>
         </div>
         <div>

@@ -219,6 +219,7 @@ export const Timeline = () => {
                     <CRecomendationBlock
                       profile={user.profile}
                       userName={user.name}
+                      city={user.city}
                       buttonName={user._id}
                       buttonOnClick={follow}
                       userProfile={user._id}
