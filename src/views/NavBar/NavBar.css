@@ -3,9 +3,9 @@
 }
 
 .nav-bar-block {
-    height: 37rem;
+    height: 100vh;
     width: 10rem;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 
     padding-left: 1rem;
     padding-right: 1rem;
@@ -17,12 +17,36 @@
     justify-content: center;
 }
 
+.nav-bar-main-block-one {
+    height: 20vh;
+    width: 10rem;
+
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.logo-nav-bar {
+    width: 7rem;
+}
+
+.nav-bar-main-block-two {
+    height: 70vh;
+    width: 10rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .nav-bar-block-items {
     width: 8rem;
     height: 2.5rem;
 
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
 
     display: flex;
     align-items: center;

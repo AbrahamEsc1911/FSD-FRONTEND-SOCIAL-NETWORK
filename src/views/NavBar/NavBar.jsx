@@ -21,8 +21,8 @@ export const NavBar = () => {
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { newPostPop, setNewPostPop } = useContext(NewPostContext);
-  const {navigation} = useContext(NavigationContext)
-  const {setNavBar} = useContext(NavBarContext)
+  const { navigation } = useContext(NavigationContext)
+  const { setNavBar } = useContext(NavBarContext)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -66,14 +66,14 @@ export const NavBar = () => {
     setNewPostPop(!newPostPop);
     setErrorPostMessage(false);
     setErrorEmptyPost(false);
-    setNewPost({message: "",});
+    setNewPost({ message: "", });
   };
 
   const sendPosts = async () => {
     if (newPost.message.length > 0) {
       const res = await createPost(token, newPost);
       if (res.success) {
-        setNewPost({message: "",});
+        setNewPost({ message: "", });
         setNewPostPop(false);
         setErrorPostMessage(false);
         setErrorEmptyPost(false);
@@ -94,52 +94,57 @@ export const NavBar = () => {
   return (
     <>
       <div className="nav-bar-block">
-        <div className="nav-bar-block-items">
-          <div className="nav-bar-icon">
-            <img
-              src={navigation === 'timeline' ? '../images/home-blue.svg' : "../images/home.svg"}
-              alt="home-icon"
-              className="nav-bar-icon-content"
-            />
-          </div>
-          <div className="nav-bar-text">
-            <CNavigation path="/" content="home" isActive={navigation === 'timeline'} />
-          </div>
+        <div className="nav-bar-main-block-one">
+          <img src="../images\logo.svg" alt="logo-social-network" className="logo-nav-bar"/>
         </div>
-        <div className="nav-bar-block-items">
-          <div className="nav-bar-icon">
-            <img
-              src={navigation === 'profile' ? '../images/profile-blue.svg' :"../images/profile.svg"}
-              alt="profile-icon"
-              className="nav-bar-icon-content"
-            />
+        <div className="nav-bar-main-block-two">
+          <div className="nav-bar-block-items">
+            <div className="nav-bar-icon">
+              <img
+                src={navigation === 'timeline' ? '../images/home-blue.svg' : "../images/home.svg"}
+                alt="home-icon"
+                className="nav-bar-icon-content"
+              />
+            </div>
+            <div className="nav-bar-text">
+              <CNavigation path="/" content="home" isActive={navigation === 'timeline'} />
+            </div>
           </div>
-          <div className="nav-bar-text">
-            <CNavigation path="/profile" content="Profile" isActive={navigation === 'profile'} />
+          <div className="nav-bar-block-items">
+            <div className="nav-bar-icon">
+              <img
+                src={navigation === 'profile' ? '../images/profile-blue.svg' : "../images/profile.svg"}
+                alt="profile-icon"
+                className="nav-bar-icon-content"
+              />
+            </div>
+            <div className="nav-bar-text">
+              <CNavigation path="/profile" content="Profile" isActive={navigation === 'profile'} />
+            </div>
           </div>
-        </div>
-        <div className="nav-bar-block-items-special">
-          <div className="nav-bar-icon">
-            <img
-              src="../images/post.svg"
-              alt="post-icon"
-              className="nav-bar-icon-content"
-            />
+          <div className="nav-bar-block-items-special">
+            <div className="nav-bar-icon">
+              <img
+                src="../images/post.svg"
+                alt="post-icon"
+                className="nav-bar-icon-content"
+              />
+            </div>
+            <div className="nav-bar-text-special">
+              <div onClick={newPostPopUp}>New Post</div>
+            </div>
           </div>
-          <div className="nav-bar-text-special">
-            <div onClick={newPostPopUp}>New Post</div>
-          </div>
-        </div>
-        <div className="nav-bar-block-items">
-          <div className="nav-bar-icon">
-            <img
-              src="../images/logout.svg"
-              alt="logout-icon"
-              className="nav-bar-icon-content"
-            />
-          </div>
-          <div className="nav-bar-text">
-            <p onClick={logout}>Logout</p>
+          <div className="nav-bar-block-items">
+            <div className="nav-bar-icon">
+              <img
+                src="../images/logout.svg"
+                alt="logout-icon"
+                className="nav-bar-icon-content"
+              />
+            </div>
+            <div className="nav-bar-text">
+              <p onClick={logout}>Logout</p>
+            </div>
           </div>
         </div>
       </div>
