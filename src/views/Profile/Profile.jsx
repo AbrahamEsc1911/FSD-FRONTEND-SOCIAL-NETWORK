@@ -38,11 +38,16 @@ export const Profile = () => {
     portada: "",
   });
 
-  const [userUpdate, setUserUpdate] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const initialStateForUserUpdate = (
+    {
+        name: "",
+        email: "",
+        phone: "",
+        city: "",
+        born: ""
+    }
+  )
+  const [userUpdate, setUserUpdate] = useState(initialStateForUserUpdate);
 
   const [newComment, setNewComment] = useState({
     comment: "",
@@ -57,10 +62,10 @@ export const Profile = () => {
   const [wargingMessage, setWargingMessage] = useState(false);
   const [errorUpdatingUser, setErrorUpdatingUser] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const {newPostPop } = useContext(NewPostContext);
+  const { newPostPop } = useContext(NewPostContext);
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
-  const {setNavigation} = useContext(NavigationContext)
+  const { setNavigation } = useContext(NavigationContext)
 
   useEffect(() => {
     if (passport) {
@@ -89,6 +94,7 @@ export const Profile = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    console.log(userUpdate)
   };
 
   const handleMessage = (e) => {
@@ -117,100 +123,27 @@ export const Profile = () => {
   };
 
   const saveChangesButton = async () => {
-    if (
-      userUpdate.name.length === 0 &&
-      userUpdate.email.length === 0 &&
-      userUpdate.phone.length === 0
-    ) {
+    if ( userUpdate.name.length === 0 && userUpdate.email.length === 0 && userUpdate.phone.length === 0 && userUpdate.born.length === 0 && userUpdate.city.length === 0) {
       return setWargingMessage(true);
     } else {
       setWargingMessage(false);
     }
 
-    if (userUpdate.name.length === 0 && userUpdate.email.length === 0) {
-      const { name, email, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else if (userUpdate.name.length === 0 && userUpdate.phone.length === 0) {
-      const { name, phone, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else if (userUpdate.email.length === 0 && userUpdate.phone.length === 0) {
-      const { phone, email, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else if (userUpdate.name.length === 0) {
-      const { name, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else if (userUpdate.email.length === 0) {
-      const { email, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else if (userUpdate.phone.length === 0) {
-      const { phone, ...newUserUpdate } = userUpdate;
-      const result = await updateProfile(token, newUserUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    } else {
-      const result = await updateProfile(token, userUpdate);
-      if (result.success) {
-        setEditProfileData(false);
-        setErrorUpdatingUser(false);
-        const userUpdated = await userProfile(token);
-        setUserData(userUpdated.data);
-      } else {
-        setErrorUpdatingUser(true);
-        setErrorMessage(result.message);
-      }
-    }
+    const filteredData = Object.fromEntries(
+      Object.entries(userUpdate).filter(([key, value]) => value !== '' && value !== null && value !== undefined)
+  );
+
+  const result = await updateProfile(token, filteredData);
+     if (result.success) {
+       setEditProfileData(false);
+       setErrorUpdatingUser(false);
+       setUserUpdate(initialStateForUserUpdate)
+       const userUpdated = await userProfile(token);
+       setUserData(userUpdated.data);
+     } else {
+       setErrorUpdatingUser(true);
+       setErrorMessage(result.message);
+     }
   };
 
   const likeThisPosts = async (e) => {
@@ -307,6 +240,24 @@ export const Profile = () => {
                             type="number"
                             name="phone"
                             placeholder="Phone"
+                            className="input-text-main"
+                            onChange={handleNewData}
+                          />
+                        </div>
+                        <div>
+                          <CInputs
+                            type="text"
+                            name="city"
+                            placeholder="City"
+                            className="input-text-main"
+                            onChange={handleNewData}
+                          />
+                        </div>
+                        <div>
+                          <CInputs
+                            type="text"
+                            name="born"
+                            placeholder="Born Date"
                             className="input-text-main"
                             onChange={handleNewData}
                           />
