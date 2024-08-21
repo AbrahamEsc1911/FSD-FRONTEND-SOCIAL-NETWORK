@@ -57,12 +57,12 @@ export const SiglePost = () => {
   useEffect(() => {
     const bringPostById = async () => {
       const res = await getPostById(id);
-      if(res.success){
+      if (res.success) {
         setPost(res.data);
       } else (
         navigate('../*')
       )
-      
+
       if (passport) {
         const bringUsers = await getAllUsers(token);
         const response = await userProfile(token);
@@ -153,6 +153,7 @@ export const SiglePost = () => {
                   />
                 }
               />
+              <h1 id="main-text-on-feeds">Comments</h1>
               <CBlockContent
                 content={post.comments.map((comments) => {
                   return (
@@ -172,23 +173,28 @@ export const SiglePost = () => {
             </div>
             <div className="single-post-section-two">
               <CBlockContent
-                content={usersToFollow.map((user) => {
-                  return (
-                    <div key={user._id}>
-                      {!user.followers.includes(userToken) && user._id !== userToken && (
-                        <CRecomendationBlock
-                          profile={`../${user.profile}`}
-                          userName={user.name}
-                          city={user.city}
-                          buttonName={user._id}
-                          buttonOnClick={follow}
-                          userProfile={user._id}
-                          onClickToGoUserProfile={userById}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+                content={
+                  <div>
+                    <h3 id="title-suggested-users">Seggestions for you</h3>
+                    {usersToFollow.map((user) => {
+                      return (
+                        <div key={user._id}>
+                          {!user.followers.includes(userToken) && user._id !== userToken && (
+                            <CRecomendationBlock
+                              profile={`../${user.profile}`}
+                              userName={user.name}
+                              city={user.city}
+                              buttonName={user._id}
+                              buttonOnClick={follow}
+                              userProfile={user._id}
+                              onClickToGoUserProfile={userById}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                }
               />
             </div>
           </div>

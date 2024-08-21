@@ -52,3 +52,12 @@
     height:auto;
   }
 }
+
+#title-suggested-users {
+  font-size: larger;
+  margin: 0;
+  padding-bottom:0.6rem;
+  padding-left: 0.5rem;
+
+  color: rgb(45, 45, 45);
+}

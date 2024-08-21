@@ -53,14 +53,14 @@ export const Timeline = () => {
         const res = await timeline(token);
         const user = await userProfile(token);
         const bringUsers = await getAllUsers(token);
-        
-          setAllPosts(res.data);
-          setUserData(user.data);
-          setusersToFollow(bringUsers.data);
-          setNavigation('timeline')
-          setTimeout(() => {
-            setLoading(false);
-          }, 500);
+
+        setAllPosts(res.data);
+        setUserData(user.data);
+        setusersToFollow(bringUsers.data);
+        setNavigation('timeline')
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       };
       timelinePosts();
     } else {
@@ -226,24 +226,29 @@ export const Timeline = () => {
             </div>
             <div className="timeline-section-two">
               <CBlockContent
-                blockTitle={"Sueggestions For You"}
-                content={usersToFollow.map((user) => {
-                  if (!user.followers.includes(userId) && user._id !== userId) {
-                    return (
-                      <div key={user._id}>
-                        <CRecomendationBlock
-                          profile={user.profile}
-                          userName={user.name}
-                          city={user.city}
-                          buttonName={user._id}
-                          buttonOnClick={follow}
-                          userProfile={user._id}
-                          onClickToGoUserProfile={userById}
-                        />
-                      </div>
-                    );
-                  }
-                })}
+                content={
+                  <div>
+                    <h3 id="title-suggested-users">Seggestions for you</h3>
+                    {usersToFollow.map((user) => {
+                      if (!user.followers.includes(userId) && user._id !== userId) {
+                        return (
+                          <div key={user._id}>
+                            <CRecomendationBlock
+                              profile={user.profile}
+                              userName={user.name}
+                              city={user.city}
+                              buttonName={user._id}
+                              buttonOnClick={follow}
+                              userProfile={user._id}
+                              onClickToGoUserProfile={userById}
+                            />
+                          </div>
+                        );
+                      }
+                      return null; 
+                    })}
+                  </div>
+                }
               />
             </div>
           </div>
