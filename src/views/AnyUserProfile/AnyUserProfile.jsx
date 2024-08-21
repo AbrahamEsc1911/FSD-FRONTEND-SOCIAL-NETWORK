@@ -15,6 +15,7 @@ import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { newComments } from "../../Services/comments.services";
 import { likeDislike } from "../../Services/posts.services";
 import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
+import { Loader } from "../../components/Loader/Loader";
 
 export const AnyUserProfile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -27,7 +28,8 @@ export const AnyUserProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { setNavigationPath } = useContext(AnyUserContex);
-  const {setNavigation} = useContext(NavigationContext)
+  const { setNavigation } = useContext(NavigationContext)
+  const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState({
     _id: "",
     name: "",
@@ -69,6 +71,9 @@ export const AnyUserProfile = () => {
           setUserData(allProfile.data);
           setUserToken(userToken.data);
           setNavigation(false)
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         }
       };
       bringUser();
@@ -128,104 +133,111 @@ export const AnyUserProfile = () => {
 
   return (
     <>
-      <div className="any-user-profile-body">
-        <div className="any-user-profile-section-one">
-          <CBlockContent
-            content={
-              <div>
-                <div>
-                  <CSectionOneProfile
-                    portada={"../images/portada.jpg"}
-                    profile={`../${userData.profile}`}
-                    name={userData.name}
-                    email={userData.email}
-                    posts={userData.posts.length}
-                    followers={userData.followers.length}
-                    following={userData.following.length}
-                  />
+      <div>
+        {loading && <Loader />}
+      </div>
+      <div>
+        {!loading && (
+          <div className="any-user-profile-body">
+            <div className="any-user-profile-section-one">
+              <CBlockContent
+                content={
                   <div>
-                    <CSectionTwoProfile
-                      bornDate={userData.born}
-                      phone={userData.phone}
-                      city={userData.city}
-                      value={
-                        userData.followers.includes(userId)
-                          ? "Unfollow"
-                          : "Follow"
-                      }
-                      buttonName={userData._id}
-                      onClick={followUnfollow}
-                      className={
-                        userData.followers.includes(userId)
-                          ? "unfollow-button"
-                          : "follow-button"
-                      }
-                    />
+                    <div>
+                      <CSectionOneProfile
+                        portada={"../images/portada.jpg"}
+                        profile={`../${userData.profile}`}
+                        name={userData.name}
+                        email={userData.email}
+                        posts={userData.posts.length}
+                        followers={userData.followers.length}
+                        following={userData.following.length}
+                      />
+                      <div>
+                        <CSectionTwoProfile
+                          bornDate={userData.born}
+                          phone={userData.phone}
+                          city={userData.city}
+                          value={
+                            userData.followers.includes(userId)
+                              ? "Unfollow"
+                              : "Follow"
+                          }
+                          buttonName={userData._id}
+                          onClick={followUnfollow}
+                          className={
+                            userData.followers.includes(userId)
+                              ? "unfollow-button"
+                              : "follow-button"
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            }
-          />
-        </div>
-        <div className="any-user-profile-section-two">
-          {userData.posts.map((posts) => {
-            if (posts.likes.includes(userToken._id)) {
-              return (
-                <div key={posts._id}>
-                  <CBlockContent
-                    content={
-                      <CPostBlock
-                        creatorProfile={`../${userData.profile}`}
-                        creatorName={userData.name}
-                        message={posts.post_message}
-                        createdAt={posts.createdAt}
-                        likeCount={posts.likes.length}
-                        commentCount={posts.comments.length}
-                        newCommentProfile={`../${userToken.profile}`}
-                        postId={posts._id}
-                        value="comment"
-                        onClickToPostById={postById}
-                        onClickToLike={likeThisPosts}
-                        onChangeComments={addComments}
-                        onClickToSentComments={sendComment}
-                        creatorId={userData._id}
-                        onClickToGoUserProfile={userById}
-                        classNameButtonLike={"dislike"}
+                }
+              />
+            </div>
+            <div className="any-user-profile-section-two">
+              {userData.posts.map((posts) => {
+                if (posts.likes.includes(userToken._id)) {
+                  return (
+                    <div key={posts._id}>
+                      <CBlockContent
+                        content={
+                          <CPostBlock
+                            creatorProfile={`../${userData.profile}`}
+                            creatorName={userData.name}
+                            message={posts.post_message}
+                            createdAt={posts.createdAt}
+                            likeCount={posts.likes.length}
+                            commentCount={posts.comments.length}
+                            newCommentProfile={`../${userToken.profile}`}
+                            postId={posts._id}
+                            value=""
+                            onClickToPostById={postById}
+                            onClickToLike={likeThisPosts}
+                            onChangeComments={addComments}
+                            onClickToSentComments={sendComment}
+                            creatorId={userData._id}
+                            onClickToGoUserProfile={userById}
+                            classNameButtonLike={"dislike"}
+                          />
+                        }
                       />
-                    }
-                  />
-                </div>
-              );
-            } else if (!posts.likes.includes(userToken._id)) {
-              return (
-                <div key={posts._id}>
-                  <CBlockContent
-                    content={
-                      <CPostBlock
-                        creatorProfile={`../${userData.profile}`}
-                        creatorName={userData.name}
-                        message={posts.post_message}
-                        createdAt={posts.createdAt}
-                        likeCount={posts.likes.length}
-                        commentCount={posts.comments.length}
-                        newCommentProfile={`../${userToken.profile}`}
-                        postId={posts._id}
-                        value="comment"
-                        onClickToPostById={postById}
-                        onClickToLike={likeThisPosts}
-                        onChangeComments={addComments}
-                        onClickToSentComments={sendComment}
-                        creatorId={userData._id}
-                        onClickToGoUserProfile={userById}
-                        classNameButtonLike={"like"}
+                    </div>
+                  );
+                } else if (!posts.likes.includes(userToken._id)) {
+                  return (
+                    <div key={posts._id}>
+                      <CBlockContent
+                        content={
+                          <CPostBlock
+                            creatorProfile={`../${userData.profile}`}
+                            creatorName={userData.name}
+                            message={posts.post_message}
+                            createdAt={posts.createdAt}
+                            likeCount={posts.likes.length}
+                            commentCount={posts.comments.length}
+                            newCommentProfile={`../${userToken.profile}`}
+                            postId={posts._id}
+                            value="comment"
+                            onClickToPostById={postById}
+                            onClickToLike={likeThisPosts}
+                            onChangeComments={addComments}
+                            onClickToSentComments={sendComment}
+                            creatorId={userData._id}
+                            onClickToGoUserProfile={userById}
+                            classNameButtonLike={"like"}
+                          />
+                        }
                       />
-                    }
-                  />
-                </div>
-              );
-            }
-          })}
-        </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

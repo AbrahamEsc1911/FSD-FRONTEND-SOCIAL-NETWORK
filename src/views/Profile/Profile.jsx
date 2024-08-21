@@ -13,6 +13,7 @@ import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
 import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
+import { Loader } from "../../components/Loader/Loader";
 
 export const Profile = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -66,6 +67,7 @@ export const Profile = () => {
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
   const { setNavigation } = useContext(NavigationContext)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (passport) {
@@ -74,6 +76,9 @@ export const Profile = () => {
         if (response.success) {
           setUserData(response.data);
           setNavigation('profile')
+          setTimeout(() => {
+            setLoading(false);
+        }, 500);
         }
       };
 
@@ -185,192 +190,201 @@ export const Profile = () => {
     }
   };
 
+ 
+
   return (
     <>
-      <div className="body-profile">
-        <div className="profile-section-one">
-          <CBlockContent
-            content={
-              <div className="parent-block-profile">
-                <div>
-                  <CSectionOneProfile
-                    portada={"./images/portada.jpg"}
-                    profile={userData.profile}
-                    name={userData.name}
-                    email={userData.email}
-                    posts={userData.posts.length}
-                    followers={userData.followers.length}
-                    following={userData.following.length}
-                  />
-                </div>
-                <div>
-                  {!editProfileData && (
-                    <CSectionTwoProfile
-                      bornDate={userData.born}
-                      phone={userData.phone}
-                      city={userData.city}
-                      value={editProfileData ? "Cancel" : "Edit profile"}
-                      className="common-button"
-                      onClick={editProfile}
+      <div>
+        {loading && <Loader />}
+      </div>
+      <div>
+        {!loading && (<div className="body-profile">
+          <div className="profile-section-one">
+            <CBlockContent
+              content={
+                <div className="parent-block-profile">
+                  <div>
+                    <CSectionOneProfile
+                      portada={"./images/portada.jpg"}
+                      profile={userData.profile}
+                      name={userData.name}
+                      email={userData.email}
+                      posts={userData.posts.length}
+                      followers={userData.followers.length}
+                      following={userData.following.length}
                     />
-                  )}{" "}
-                  {editProfileData && (
-                    <div className="edit-profile-form">
-                      <div className="profile-form-content">
-                        <div>
-                          <CInputs
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            className="input-text-main"
-                            onChange={handleNewData}
-                          />
-                        </div>
-                        <div>
-                          <CInputs
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            className="input-text-main"
-                            onChange={handleNewData}
-                          />
-                        </div>
-                        <div>
-                          <CInputs
-                            type="number"
-                            name="phone"
-                            placeholder="Phone"
-                            className="input-text-main"
-                            onChange={handleNewData}
-                          />
-                        </div>
-                        <div>
-                          <CInputs
-                            type="text"
-                            name="city"
-                            placeholder="City"
-                            className="input-text-main"
-                            onChange={handleNewData}
-                          />
-                        </div>
-                        <div>
-                          <CInputs
-                            type="text"
-                            name="born"
-                            placeholder="Born Date"
-                            className="input-text-main"
-                            onChange={handleNewData}
-                          />
-                        </div>
-                        <div>
-                          <p className={wargingMessage ? "" : "hidden-content"}>
-                            Nothin to update
-                          </p>
-                          <p
-                            className={
-                              errorUpdatingUser ? "" : "hidden-content"
-                            }
-                          >
-                            {errorMessage}
-                          </p>
-                        </div>
-                        <div>
-                          <CInputs
-                            type="button"
-                            value={editProfileData ? "Cancel" : "Edit profile"}
-                            className="cancel-button"
-                            onClick={editProfile}
-                          />
-                          <CInputs
-                            type="button"
-                            value="guardar"
-                            className="common-button"
-                            onClick={saveChangesButton}
-                          />
+                  </div>
+                  <div>
+                    {!editProfileData && (
+                      <CSectionTwoProfile
+                        bornDate={userData.born}
+                        phone={userData.phone}
+                        city={userData.city}
+                        value={editProfileData ? "Cancel" : "Edit profile"}
+                        className="common-button"
+                        onClick={editProfile}
+                      />
+                    )}{" "}
+                    {editProfileData && (
+                      <div className="edit-profile-form">
+                        <div className="profile-form-content">
+                          <div>
+                            <CInputs
+                              type="text"
+                              name="name"
+                              placeholder="Name"
+                              className="input-text-main"
+                              onChange={handleNewData}
+                            />
+                          </div>
+                          <div>
+                            <CInputs
+                              type="email"
+                              name="email"
+                              placeholder="Email"
+                              className="input-text-main"
+                              onChange={handleNewData}
+                            />
+                          </div>
+                          <div>
+                            <CInputs
+                              type="number"
+                              name="phone"
+                              placeholder="Phone"
+                              className="input-text-main"
+                              onChange={handleNewData}
+                            />
+                          </div>
+                          <div>
+                            <CInputs
+                              type="text"
+                              name="city"
+                              placeholder="City"
+                              className="input-text-main"
+                              onChange={handleNewData}
+                            />
+                          </div>
+                          <div>
+                            <CInputs
+                              type="text"
+                              name="born"
+                              placeholder="Born Date"
+                              className="input-text-main"
+                              onChange={handleNewData}
+                            />
+                          </div>
+                          <div>
+                            <p className={wargingMessage ? "" : "hidden-content"}>
+                              Nothin to update
+                            </p>
+                            <p
+                              className={
+                                errorUpdatingUser ? "" : "hidden-content"
+                              }
+                            >
+                              {errorMessage}
+                            </p>
+                          </div>
+                          <div>
+                            <CInputs
+                              type="button"
+                              value={editProfileData ? "Cancel" : "Edit profile"}
+                              className="cancel-button"
+                              onClick={editProfile}
+                            />
+                            <CInputs
+                              type="button"
+                              value="guardar"
+                              className="common-button"
+                              onClick={saveChangesButton}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            }
-          />
+              }
+            />
+          </div>
+          <div className="profile-section-two">
+            <CBlockContent
+              content={
+                <CNewPost
+                  showOrNotIconClose="hidden-content"
+                  userName={userData.name}
+                  profile={userData.profile}
+                  buttonName="message"
+                  inputName="message"
+                  onChange={handleMessage}
+                  onClick={sendPosts}
+                  clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
+                  clasNameforErrorMessage={
+                    errorPostMessage ? "" : "hidden-content"
+                  }
+                />
+              }
+            />
+            {userData.posts.map((posts) => {
+              if (posts.likes.includes(userData._id)) {
+                return (
+                  <div key={posts._id}>
+                    <CBlockContent
+                      content={
+                        <CPostBlock
+                          creatorProfile={userData.profile}
+                          creatorName={userData.name}
+                          message={posts.post_message}
+                          createdAt={posts.createdAt}
+                          likeCount={posts.likes.length}
+                          commentCount={posts.comments.length}
+                          newCommentProfile={userData.profile}
+                          postId={posts._id}
+                          onClickToPostById={postById}
+                          onClickToLike={likeThisPosts}
+                          onChangeComments={addComments}
+                          onClickToSentComments={sendComment}
+                          creatorId={userData._id}
+                          onClickToGoUserProfile={userById}
+                          classNameButtonLike={"dislike"}
+                        />
+                      }
+                    />
+                  </div>
+                );
+              } else if (!posts.likes.includes(userData._id)) {
+                return (
+                  <div key={posts._id}>
+                    <CBlockContent
+                      content={
+                        <CPostBlock
+                          creatorProfile={userData.profile}
+                          creatorName={userData.name}
+                          message={posts.post_message}
+                          createdAt={posts.createdAt}
+                          likeCount={posts.likes.length}
+                          commentCount={posts.comments.length}
+                          newCommentProfile={userData.profile}
+                          postId={posts._id}
+                          onClickToPostById={postById}
+                          onClickToLike={likeThisPosts}
+                          onChangeComments={addComments}
+                          onClickToSentComments={sendComment}
+                          creatorId={userData._id}
+                          onClickToGoUserProfile={userById}
+                          classNameButtonLike={"like"}
+                        />
+                      }
+                    />
+                  </div>
+                );
+              }
+            })}
+          </div>
         </div>
-        <div className="profile-section-two">
-          <CBlockContent
-            content={
-              <CNewPost
-                showOrNotIconClose="hidden-content"
-                userName={userData.name}
-                profile={userData.profile}
-                buttonName="message"
-                inputName="message"
-                onChange={handleMessage}
-                onClick={sendPosts}
-                clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
-                clasNameforErrorMessage={
-                  errorPostMessage ? "" : "hidden-content"
-                }
-              />
-            }
-          />
-          {userData.posts.map((posts) => {
-            if (posts.likes.includes(userData._id)) {
-              return (
-                <div key={posts._id}>
-                  <CBlockContent
-                    content={
-                      <CPostBlock
-                        creatorProfile={userData.profile}
-                        creatorName={userData.name}
-                        message={posts.post_message}
-                        createdAt={posts.createdAt}
-                        likeCount={posts.likes.length}
-                        commentCount={posts.comments.length}
-                        newCommentProfile={userData.profile}
-                        postId={posts._id}
-                        onClickToPostById={postById}
-                        onClickToLike={likeThisPosts}
-                        onChangeComments={addComments}
-                        onClickToSentComments={sendComment}
-                        creatorId={userData._id}
-                        onClickToGoUserProfile={userById}
-                        classNameButtonLike={"dislike"}
-                      />
-                    }
-                  />
-                </div>
-              );
-            } else if (!posts.likes.includes(userData._id)) {
-              return (
-                <div key={posts._id}>
-                  <CBlockContent
-                    content={
-                      <CPostBlock
-                        creatorProfile={userData.profile}
-                        creatorName={userData.name}
-                        message={posts.post_message}
-                        createdAt={posts.createdAt}
-                        likeCount={posts.likes.length}
-                        commentCount={posts.comments.length}
-                        newCommentProfile={userData.profile}
-                        postId={posts._id}
-                        onClickToPostById={postById}
-                        onClickToLike={likeThisPosts}
-                        onChangeComments={addComments}
-                        onClickToSentComments={sendComment}
-                        creatorId={userData._id}
-                        onClickToGoUserProfile={userById}
-                        classNameButtonLike={"like"}
-                      />
-                    }
-                  />
-                </div>
-              );
-            }
-          })}
-        </div>
+        )}
       </div>
+      
     </>
   );
 };

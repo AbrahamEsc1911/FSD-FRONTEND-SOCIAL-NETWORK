@@ -9,6 +9,7 @@ import { followUser, getAllUsers, userProfile } from "../../Services/user.servic
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
+import { Loader } from "../../components/Loader/Loader";
 
 export const Timeline = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -24,7 +25,8 @@ export const Timeline = () => {
   const [usersToFollow, setusersToFollow] = useState([]);
   const [errorPostMessage, setErrorPostMessage] = useState(false);
   const [errorEmptyPost, setErrorEmptyPost] = useState(false);
-  const {setNavigation} = useContext(NavigationContext)
+  const { setNavigation } = useContext(NavigationContext)
+  const [loading, setLoading] = useState(true)
   const [newPost, setNewPost] = useState({
     message: "",
   });
@@ -55,6 +57,9 @@ export const Timeline = () => {
         setUserData(user.data);
         setusersToFollow(bringUsers.data);
         setNavigation('timeline')
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       };
       timelinePosts();
     }
@@ -130,107 +135,114 @@ export const Timeline = () => {
 
   return (
     <>
-      <div className="timeline-body">
-        <div className="timeline-section-one">
-          <div>
-            <CBlockContent
-              content={
-                <CNewPost
-                  showOrNotIconClose="hidden-content"
-                  userName={userData.name}
-                  profile={userData.profile}
-                  buttonName="message"
-                  inputName="message"
-                  onChange={handleMessage}
-                  onClick={sendPosts}
-                  clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content" }
-                  clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
-                  classTextArea="textarea-small-size"
+      <div>
+        {loading && <Loader />}
+      </div>
+      <div>
+        {!loading && (
+          <div className="timeline-body">
+            <div className="timeline-section-one">
+              <div>
+                <CBlockContent
+                  content={
+                    <CNewPost
+                      showOrNotIconClose="hidden-content"
+                      userName={userData.name}
+                      profile={userData.profile}
+                      buttonName="message"
+                      inputName="message"
+                      onChange={handleMessage}
+                      onClick={sendPosts}
+                      clasNameForEmtyMessage={errorEmptyPost ? "" : "hidden-content"}
+                      clasNameforErrorMessage={errorPostMessage ? "" : "hidden-content"}
+                      classTextArea="textarea-small-size"
+                    />
+                  }
                 />
-              }
-            />
-          </div>
-          <h1 id="main-text-on-feeds">Feeds</h1>
-          <div>
-            {allPosts.map((post) => {
-              if (post.likes.includes(userData._id)) {
-                return (
-                  <div key={post._id}>
-                    <CBlockContent
-                      content={
-                        <CPostBlock
-                          creatorProfile={post.user.profile}
-                          creatorName={post.user.name}
-                          message={post.post_message}
-                          createdAt={post.createdAt}
-                          likeCount={post.likes.length}
-                          commentCount={post.comments.length}
-                          newCommentProfile={userData.profile}
-                          postId={post._id}
-                          onClickToPostById={postById}
-                          onClickToLike={likeThisPosts}
-                          onChangeComments={addComments}
-                          onClickToSentComments={sendComment}
-                          creatorId={post.user._id}
-                          onClickToGoUserProfile={userById}
-                          classNameButtonLike={"dislike"}
+              </div>
+              <h1 id="main-text-on-feeds">Feeds</h1>
+              <div>
+                {allPosts.map((post) => {
+                  if (post.likes.includes(userData._id)) {
+                    return (
+                      <div key={post._id}>
+                        <CBlockContent
+                          content={
+                            <CPostBlock
+                              creatorProfile={post.user.profile}
+                              creatorName={post.user.name}
+                              message={post.post_message}
+                              createdAt={post.createdAt}
+                              likeCount={post.likes.length}
+                              commentCount={post.comments.length}
+                              newCommentProfile={userData.profile}
+                              postId={post._id}
+                              onClickToPostById={postById}
+                              onClickToLike={likeThisPosts}
+                              onChangeComments={addComments}
+                              onClickToSentComments={sendComment}
+                              creatorId={post.user._id}
+                              onClickToGoUserProfile={userById}
+                              classNameButtonLike={"dislike"}
+                            />
+                          }
                         />
-                      }
-                    />
-                  </div>
-                );
-              } else if (!post.likes.includes(userData._id)) {
-                return (
-                  <div key={post._id}>
-                    <CBlockContent
-                      content={
-                        <CPostBlock
-                          creatorProfile={post.user.profile}
-                          creatorName={post.user.name}
-                          message={post.post_message}
-                          createdAt={post.createdAt}
-                          likeCount={post.likes.length}
-                          commentCount={post.comments.length}
-                          newCommentProfile={userData.profile}
-                          postId={post._id}
-                          onClickToPostById={postById}
-                          onClickToLike={likeThisPosts}
-                          onChangeComments={addComments}
-                          onClickToSentComments={sendComment}
-                          creatorId={post.user._id}
-                          onClickToGoUserProfile={userById}
-                          classNameButtonLike={"like"}
+                      </div>
+                    );
+                  } else if (!post.likes.includes(userData._id)) {
+                    return (
+                      <div key={post._id}>
+                        <CBlockContent
+                          content={
+                            <CPostBlock
+                              creatorProfile={post.user.profile}
+                              creatorName={post.user.name}
+                              message={post.post_message}
+                              createdAt={post.createdAt}
+                              likeCount={post.likes.length}
+                              commentCount={post.comments.length}
+                              newCommentProfile={userData.profile}
+                              postId={post._id}
+                              onClickToPostById={postById}
+                              onClickToLike={likeThisPosts}
+                              onChangeComments={addComments}
+                              onClickToSentComments={sendComment}
+                              creatorId={post.user._id}
+                              onClickToGoUserProfile={userById}
+                              classNameButtonLike={"like"}
+                            />
+                          }
                         />
-                      }
-                    />
-                  </div>
-                );
-              }
-            })}
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+            <div className="timeline-section-two">
+              <CBlockContent
+                blockTitle={"Sueggestions For You"}
+                content={usersToFollow.map((user) => {
+                  if (!user.followers.includes(userId) && user._id !== userId) {
+                    return (
+                      <div key={user._id}>
+                        <CRecomendationBlock
+                          profile={user.profile}
+                          userName={user.name}
+                          city={user.city}
+                          buttonName={user._id}
+                          buttonOnClick={follow}
+                          userProfile={user._id}
+                          onClickToGoUserProfile={userById}
+                        />
+                      </div>
+                    );
+                  }
+                })}
+              />
+            </div>
           </div>
-        </div>
-        <div className="timeline-section-two">
-          <CBlockContent
-            blockTitle={"Sueggestions For You"}
-            content={usersToFollow.map((user) => {
-              if (!user.followers.includes(userId) && user._id !== userId) {
-                return (
-                  <div key={user._id}>
-                    <CRecomendationBlock
-                      profile={user.profile}
-                      userName={user.name}
-                      city={user.city}
-                      buttonName={user._id}
-                      buttonOnClick={follow}
-                      userProfile={user._id}
-                      onClickToGoUserProfile={userById}
-                    />
-                  </div>
-                );
-              }
-            })}
-          />
-        </div>
+        )}
       </div>
     </>
   );
