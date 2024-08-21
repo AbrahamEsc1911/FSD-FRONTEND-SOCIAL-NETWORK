@@ -62,6 +62,8 @@ export const Timeline = () => {
         }, 500);
       };
       timelinePosts();
+    } else {
+      navigate('../')
     }
   }, []);
 

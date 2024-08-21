@@ -78,7 +78,7 @@ export const AnyUserProfile = () => {
       };
       bringUser();
     } else {
-      navigate("./login");
+      navigate("../login");
     }
   }, []);
 

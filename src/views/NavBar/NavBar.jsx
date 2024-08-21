@@ -88,7 +88,7 @@ export const NavBar = () => {
   const logout = () => {
     localStorage.removeItem("passport");
     setNavBar(false)
-    navigate("/login");
+    navigate("../");
   };
 
   return (

@@ -19,7 +19,7 @@ export const CNewPost = ({
       <div className="new-post-section">
         <div className={`new-post-close ${showOrNotIconClose}`} >
           <img
-            src="./images/close.png"
+            src="../images/close.png"
             alt="close-icon"
             className="close-icon"
             onClick={onClickClose}
@@ -27,7 +27,7 @@ export const CNewPost = ({
         </div>
         <div className="new-post-header">
           <div className="new-post-profile">
-            <img src={profile} alt="close-icon" />
+            <img src={`../${profile}`} alt="close-icon" />
           </div>
           <div className="new-post-name">
             <h4 className="text-no-margin">{userName}</h4>
