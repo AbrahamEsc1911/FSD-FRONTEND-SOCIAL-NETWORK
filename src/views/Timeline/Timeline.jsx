@@ -125,7 +125,9 @@ export const Timeline = () => {
     if (followId) {
       await followUser(token, followId);
       const bringUsers = await getAllUsers(token);
+      const res = await timeline(token);
       setusersToFollow(bringUsers.data);
+      setAllPosts(res.data);
     }
   };
 
