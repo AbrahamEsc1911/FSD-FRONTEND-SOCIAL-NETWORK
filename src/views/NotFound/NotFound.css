@@ -1,0 +1,32 @@
+.body-not-found {
+    width: 100vw;
+    height: 78vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-not-found-view{
+    width: 100vw;
+    height: 18vh;
+}
+
+.body-not-found-view{
+    width: 100vw;
+    height: 60vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+#not-found-image-size {
+    width: 50vw;
+}
+
+#logo-not-found-view-size {
+    width: 8rem;
+    margin: 2rem;
+
+    cursor: pointer;
+}

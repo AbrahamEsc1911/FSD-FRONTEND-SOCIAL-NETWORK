@@ -7,20 +7,22 @@ import { Profile } from '../Profile/Profile'
 import { SiglePost } from '../SiglePost/SiglePost'
 import { Timeline } from '../Timeline/Timeline'
 import { AnyUserProfile } from '../AnyUserProfile/AnyUserProfile'
+import { NotFound } from '../NotFound/NotFound'
 
 
 export const Body = () => {
   return (
     <>
-    <Routes>
-        <Route path='/register' element={<Register/>} />
+      <Routes>
+        <Route path='/*' element={<NotFound />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/post/:id' element={<SiglePost />} />
         <Route path='/timeline' element={<Timeline />} />
         <Route path='/user/:id' element={<AnyUserProfile />} />
-    </Routes>
+      </Routes>
     </>
   )
 }
