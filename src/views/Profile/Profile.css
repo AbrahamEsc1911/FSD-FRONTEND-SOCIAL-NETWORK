@@ -61,13 +61,13 @@
 }
 
 .edit-profile-form {
-  width: 19rem;
-  height: 18rem;
+  width: auto;
+  height: auto;
 
   margin-top: 2.5rem;
-
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   align-items: center;
 }
