@@ -74,6 +74,8 @@ export const AnyUserProfile = () => {
           setTimeout(() => {
             setLoading(false);
           }, 500);
+        } else {
+            navigate('../*')
         }
       };
       bringUser();

@@ -57,7 +57,12 @@ export const SiglePost = () => {
   useEffect(() => {
     const bringPostById = async () => {
       const res = await getPostById(id);
-      setPost(res.data);
+      if(res.success){
+        setPost(res.data);
+      } else (
+        navigate('../*')
+      )
+      
       if (passport) {
         const bringUsers = await getAllUsers(token);
         const response = await userProfile(token);

@@ -53,13 +53,14 @@ export const Timeline = () => {
         const res = await timeline(token);
         const user = await userProfile(token);
         const bringUsers = await getAllUsers(token);
-        setAllPosts(res.data);
-        setUserData(user.data);
-        setusersToFollow(bringUsers.data);
-        setNavigation('timeline')
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        
+          setAllPosts(res.data);
+          setUserData(user.data);
+          setusersToFollow(bringUsers.data);
+          setNavigation('timeline')
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
       };
       timelinePosts();
     } else {
