@@ -8,8 +8,10 @@ export const CSearch = () => {
 
     const passport = JSON.parse(localStorage.getItem("passport"));
     let token = null;
+    let userTokenId = null
     if (passport) {
         token = passport.token;
+        userTokenId = passport.tokenData.id
     }
 
     const navigate = useNavigate()
@@ -26,7 +28,7 @@ export const CSearch = () => {
             } else {
                 setSuggestions([]);
             }
-        }, 2000),
+        }, 1000),
         [token]
     );
 
@@ -44,7 +46,7 @@ export const CSearch = () => {
     }
 
     const userProfile = (userId) => {
-        if (userId === token) {
+        if (userId === userTokenId) {
             navigate(`../profile`)
         } else {
             navigate(`../user/${userId}`)

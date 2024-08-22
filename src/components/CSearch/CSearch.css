@@ -51,6 +51,10 @@
     cursor: pointer;
 }
 
+.space-list-elements:hover {
+    color: #3461FB;
+}
+
 .input-with-icon {
     padding-left: 2.2rem; 
     background-image: url('../../../images/search.svg'); 
