@@ -72,3 +72,15 @@ export const getAllUsers = async (token) => {
 
     return await response.json()
 }
+
+export const getUserByName = async (query, token) => {
+    const response = await fetch(`${URL}/filter?email=${query}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    return await response.json()
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { CNavigation } from "../../components/CNavigation/CNavigation";
 import { useNavigate } from "react-router-dom";
 import { NewPostContext } from "../../Context/NewPostContext/NewPostContext";
@@ -6,9 +6,10 @@ import { createPost } from "../../Services/posts.services";
 import "./NavBar.css";
 import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CNewPost } from "../../components/CNewPost/CNewPost";
-import { userProfile } from "../../Services/user.services";
+import { getUserByName, userProfile } from "../../Services/user.services";
 import { NavBarContext } from "../../Context/NavBarContext/NavBarContext";
 import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
+import debounce from 'lodash/debounce';
 
 export const NavBar = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -48,11 +49,12 @@ export const NavBar = () => {
           setUserData(response.data);
         }
       };
-
+ 
       bringprofile();
     } else {
       navigate("/login");
     }
+
   }, []);
 
   const handleMessage = (e) => {
@@ -91,11 +93,13 @@ export const NavBar = () => {
     navigate("../");
   };
 
+
+
   return (
     <>
       <div className="nav-bar-block">
         <div className="nav-bar-main-block-one">
-          <img src="../images\logo.svg" alt="logo-social-network" className="logo-nav-bar"/>
+          <img src="../images\logo.svg" alt="logo-social-network" className="logo-nav-bar" />
         </div>
         <div className="nav-bar-main-block-two">
           <div className="nav-bar-block-items">
