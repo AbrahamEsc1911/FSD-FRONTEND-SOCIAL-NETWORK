@@ -10,6 +10,7 @@ import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecom
 import { CNewPost } from "../../components/CNewPost/CNewPost";
 import { NavigationContext } from "../../Context/NavigationContext/NavigationContext";
 import { Loader } from "../../components/Loader/Loader";
+import { CSearch } from "../../components/CSearch/CSearch";
 
 export const Timeline = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
@@ -147,6 +148,9 @@ export const Timeline = () => {
         {!loading && (
           <div className="timeline-body">
             <div className="timeline-section-one">
+              <div>
+                <CSearch />
+              </div>
               <div>
                 <CBlockContent
                   content={

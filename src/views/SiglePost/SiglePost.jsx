@@ -7,9 +7,10 @@ import { CBlockContent } from "../../components/CBlockContent/CBlockContent";
 import { CPostBlock } from "../../components/CPostBlock/CPostBlock";
 import { CCommentsBlock } from "../../components/CCommentsBlock/CCommentsBlock";
 import { CRecomendationBlock } from "../../components/CRecomendationBlock/CRecomendationBlock";
-import { getAllUsers, userProfile } from "../../Services/user.services";
+import { followUser, getAllUsers, userProfile } from "../../Services/user.services";
 import './SiglePost.css'
 import { Loader } from "../../components/Loader/Loader";
+import { CSearch } from "../../components/CSearch/CSearch";
 
 export const SiglePost = () => {
   const passport = JSON.parse(localStorage.getItem("passport"));
