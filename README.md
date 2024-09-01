@@ -39,3 +39,55 @@ Technologies used for the development of this project:
 <a href="https://developer.mozilla.org/es/docs/Web/JavaScript">
     <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black"/>
 </a>
+
+## Local Installation
+
+To install and run the project locally, follow these steps:
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/AbrahamEsc1911/FSD-FRONTEND-SOCIAL-NETWORK.git
+    cd your-repo
+    ```
+
+2. Install project dependencies:
+    ```sh
+    npm install
+    ```
+
+3. Start the frontend development server:
+    ```sh
+    npm run dev
+    ```
+
+4. Set up and start the backend server:
+    - Clone the repository:
+      ```sh
+        git clone Backend https://github.com/AbrahamEsc1911/FSD-API-SOCIAL-NETWORK.git
+    - Ensure that the MongoDB database is running.
+    - Use the CORS library to allow connections between the frontend and backend.
+    - Navigate to the backend directory and execute the following commands:
+    ```sh
+    cd ../your-repo-backend
+    npm install
+    npm run dev
+    ```
+
+## Screenshots
+
+**Home**
+!['images-screenshot'](./images/sc1.png)
+**Sign up**
+!['images-screenshot'](./images/sc2.png)
+**Login**
+!['images-screenshot'](./images/sc3.png)
+**Profile**
+!['images-screenshot'](./images/sc4.png)
+**User Profile**
+!['images-screenshot'](./images/sc5.png)
+**New Post**
+!['images-screenshot'](./images/sc6.png)
+**Timeline**
+!['images-screenshot'](./images/sc7.png)
+**Single Post**
+!['images-screenshot'](./images/sc8.png)
