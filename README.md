@@ -44,23 +44,7 @@ Technologies used for the development of this project:
 
 To install and run the project locally, follow these steps:
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/AbrahamEsc1911/FSD-FRONTEND-SOCIAL-NETWORK.git
-    cd your-repo
-    ```
-
-2. Install project dependencies:
-    ```sh
-    npm install
-    ```
-
-3. Start the frontend development server:
-    ```sh
-    npm run dev
-    ```
-
-4. Set up and start the backend server:
+1. Set up and start the backend server:
     - Clone the repository:
       ```sh
         git clone Backend https://github.com/AbrahamEsc1911/FSD-API-SOCIAL-NETWORK.git
@@ -68,10 +52,33 @@ To install and run the project locally, follow these steps:
     - Use the CORS library to allow connections between the frontend and backend.
     - Navigate to the backend directory and execute the following commands:
     ```sh
-    cd ../your-repo-backend
     npm install
+    npm run db:seed
     npm run dev
     ```
+
+2. Clone the repository:
+    ```sh
+    git clone https://github.com/AbrahamEsc1911/FSD-FRONTEND-SOCIAL-NETWORK.git
+    ```
+
+3. Install project dependencies:
+    ```sh
+    npm install
+    ```
+
+4. Start the frontend development server:
+    ```sh
+    npm run dev
+    ```
+
+##### Note
+You can either register as a new user on the platform or log in with an existing user in the database:
+    ```sh
+        user: admin@admin.com
+        password: 12345678
+    ```
+
 
 ## Screenshots
 
