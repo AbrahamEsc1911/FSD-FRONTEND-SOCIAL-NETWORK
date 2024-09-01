@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1085.6 150" style="enable-background:new 0 0 1085.6 150;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);fill:none;}
+	.st1{clip-path:url(#SVGID_2_);fill:#008BEB;}
+	.st2{clip-path:url(#SVGID_2_);fill:#0077E3;}
+	.st3{clip-path:url(#SVGID_2_);}
+	.st4{fill:#0077E3;}
+	.st5{clip-path:url(#SVGID_2_);fill:#FFFFFF;}
+	.st6{clip-path:url(#SVGID_2_);fill:#FFCBDB;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="0" y="17.3" width="1085.6" height="117.5"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g style="opacity:0.33;clip-path:url(#SVGID_2_);enable-background:new    ;">
+		
+			<image style="overflow:visible;" width="1119" height="567" xlink:href="92221EFF.png"  transform="matrix(1.068 0 0 1.068 -47.5786 -203.6935)">
+		</image>
+	</g>
+	<path class="st0" d="M1012,339.4H73.6C32.9,339.4,0,306.4,0,265.8V-83c0-40.6,32.9-73.6,73.6-73.6H1012c40.6,0,73.6,32.9,73.6,73.6
+		v348.8C1085.6,306.4,1052.6,339.4,1012,339.4z"/>
+	<rect x="-65.1" y="-414.3" class="st1" width="1194.9" height="1690"/>
+	<path class="st0" d="M1012,339.4H73.6C32.9,339.4,0,306.4,0,265.8V-83c0-40.6,32.9-73.6,73.6-73.6H1012c40.6,0,73.6,32.9,73.6,73.6
+		v348.8C1085.6,306.4,1052.6,339.4,1012,339.4z"/>
+	<polygon class="st2" points="871.5,-24.6 237.5,609.4 1505.6,609.4 	"/>
+	<g class="st3">
+		<polygon class="st4" points="-46.3,91 850.4,91 -46.3,-805.6 		"/>
+	</g>
+	<path class="st5" d="M963.1-390.2L963.1-390.2L963.1-390.2c-162.5,162.5-162.5,426,0,588.5l0,0l294.3-294.3l294.3-294.3l0,0
+		C1389.1-552.7,1125.6-552.7,963.1-390.2z"/>
+	<path class="st6" d="M21.4,4.9L21.4,4.9L21.4,4.9c-229.8,0-416.2,186.3-416.2,416.2l0,0H21.4h416.2l0,0
+		C437.6,191.2,251.2,4.9,21.4,4.9z"/>
+</g>
+</svg>

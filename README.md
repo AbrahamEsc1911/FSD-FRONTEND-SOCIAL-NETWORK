@@ -8,7 +8,6 @@ This project involves the frontend development of an existing backend system, im
     <li><a href="#Objective">Objetive</a></li>
     <li><a href="#project-description">Project Description</a></li>
     <li><a href="#stack">Stack</a></li>
-    <li><a href="#deploy">Deploy</a></li>
     <li><a href="#local-installation">Local Installation</a></li>
     <li><a href="#future-features">Future Features</a></li>
     <li><a href="#contributions">Contributions</a></li>
@@ -74,7 +73,7 @@ To install and run the project locally, follow these steps:
 
 ##### Note
 You can either register as a new user on the platform or log in with an existing user in the database:
-    ```sh
+    ``
     user: admin@admin.com
     password: 12345678
     ```
@@ -130,3 +129,5 @@ You can do it in two ways:
 <a href = "mailto:abrancho1908@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
 <a href="https://www.linkedin.com/in/abraham-escobar-angola-237a20224/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
+
+!['banner'](./images/banner1.svg)
