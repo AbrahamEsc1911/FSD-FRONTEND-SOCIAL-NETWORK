@@ -5,19 +5,30 @@ This project involves the frontend development of an existing backend system, im
 
 ## Contents
   <ol>
-    <li><a href="#about-the-project">About the Project</a></li>
+    <li><a href="#Objective">Objetive</a></li>
+    <li><a href="#project-description">Project Description</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#deploy">Deploy</a></li>
-    <li><a href="#database-diagram">Diagram</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#endpoints">Endpoints</a></li>
-    <li><a href="#future-features">Future Functionalities</a></li>
+    <li><a href="#local-installation">Local Installation</a></li>
+    <li><a href="#future-features">Future Features</a></li>
     <li><a href="#contributions">Contributions</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact ">Contact</a></li>
   </ol>
 
-  ## About the Project
+  ## Objetive
 This project focuses on the frontend implementation of a social network, following the completion of the backend development that manages database interactions. The platform, built using React, provides users with key functionalities such as registration, post creation, and social interaction through following other users, commenting on posts, and liking content. Additionally, each user has a customizable profile where they can update and edit their personal information.
+
+## Project Description
+
+This frontend project has been developed using Node.js as the runtime environment and React as the library for integrating JavaScript and HTML. The plataform includes various views, such as:
+
+- **Home**
+- **Login**
+- **Sign Up**
+- **profile**
+- **Single Post**
+- **Timeline**
+- **New Post**
 
 ## Stack
 Technologies used for the development of this project: 
