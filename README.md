@@ -1,8 +1,5 @@
-# React + Vite
+!['banner'](./images/oc%20social%20network.svg)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Social Network (Ocean)
+This project focuses on the frontend implementation of a social network, following the completion of the backend development that manages database interactions. The platform, built using React, provides users with key functionalities such as registration, post creation, and social interaction through following other users, commenting on posts, and liking content. Additionally, each user has a customizable profile where they can update and edit their personal information.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

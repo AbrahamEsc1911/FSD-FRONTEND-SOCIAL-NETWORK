@@ -222,7 +222,7 @@ export const AnyUserProfile = () => {
                             commentCount={posts.comments.length}
                             newCommentProfile={`../${userToken.profile}`}
                             postId={posts._id}
-                            value="comment"
+                            value=""
                             onClickToPostById={postById}
                             onClickToLike={likeThisPosts}
                             onChangeComments={addComments}
