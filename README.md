@@ -91,3 +91,35 @@ To install and run the project locally, follow these steps:
 !['images-screenshot'](./images/sc7.png)
 **Single Post**
 !['images-screenshot'](./images/sc8.png)
+
+## Future Features
+
+- Make the design fully responsive.
+- Allow users to change their passwords.
+- Allow users to upload a profile picture.
+
+## Contributions
+Suggestions and contributions are always welcome.
+
+You can do it in two ways:
+
+1. Opening an issue
+2. Fork the repository
+    - Create a new branch
+        ```
+        $ git checkout -b feature/username-improvement
+        ```
+    - Commit your changes
+        ```
+        $ git commit -m 'feat: improve X feature'
+        ```
+    - Push to the branch
+        ```
+        $ git push origin feature/username-improvement
+        ```
+    - Open a Pull Request
+
+    ## Contact 
+<a href = "mailto:abrancho1908@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/abraham-escobar-angola-237a20224/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+</p>
