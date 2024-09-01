@@ -75,8 +75,8 @@ To install and run the project locally, follow these steps:
 ##### Note
 You can either register as a new user on the platform or log in with an existing user in the database:
     ```sh
-        user: admin@admin.com
-        password: 12345678
+    user: admin@admin.com
+    password: 12345678
     ```
 
 
